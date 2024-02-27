@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>~/.config/nvim/lua/ursusmortiferum/settings.lua.html</title>
+<meta name="Generator" content="Vim/8.1">
+<meta name="plugin-version" content="vim9.0_v1">
+<meta name="syntax" content="none">
+<meta name="settings" content="use_css,no_foldcolumn,prevent_copy=,use_input_for_pc=fallback">
+<meta name="colorscheme" content="tokyonight">
+<style>
+<!--
+pre { font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+* { font-size: 1em; }
+-->
+</style>
+</head>
+<body>
+<pre id='vimCodeElement'>
+-- vim.g.loaded_matchparen = 1
+
+local opt = vim.opt
+
+-- Ignore compile files
+opt.wildignore = &quot;__pycache__&quot;
+opt.wildignore:append({ &quot;*.o&quot;, &quot;*~&quot;, &quot;*.pyc&quot;, &quot;*pycache*&quot; })
+
+-- Floating completion window -&gt; command line
+opt.pumblend = 10
+opt.pumheight = 10
+opt.wildmode = &quot;longest:full,full&quot;
+opt.wildoptions = &quot;pum&quot;
+
+-- Command Bar
+opt.showmode = false
+opt.showcmd = true
+opt.cmdheight = 1
+
+-- Search
+opt.hlsearch = true
+opt.incsearch = true
+opt.ignorecase = true
+opt.smartcase = true
+
+-- Tabs
+opt.autoindent = true
+opt.smartindent = true
+opt.wrap = false
+
+opt.expandtab = true
+
+opt.breakindent = true
+opt.showbreak = string.rep(&quot; &quot;, 3) -- Make it so that long lines wrap smartly
+opt.linebreak = true
+
+opt.belloff = &quot;all&quot; -- Just turn the dang bell off -&gt; best option ever!
+
+-- Living on the edge -&gt; or maybe not
+opt.swapfile = false
+opt.backup = false
+opt.undofile = true
+
+opt.guicursor = &quot;a:block&quot;
+opt.mouse = &quot;a&quot;
+opt.relativenumber = true
+opt.termguicolors = true
+opt.scrollback = 100000
+opt.scrolloff = 8
+opt.signcolumn = &quot;yes&quot;
+opt.colorcolumn = &quot;80&quot;
+opt.splitkeep = &quot;screen&quot;
+opt.splitright = true
+opt.splitbelow = true
+opt.timeoutlen = 300
+opt.updatetime = 250
+opt.timeout = true
+opt.title = true
+opt.inccommand = &quot;split&quot;
+
+opt.formatoptions = opt.formatoptions
+	- &quot;a&quot; -- Auto formatting is BAD.
+	- &quot;t&quot; -- Don't auto format my code. I got linters for that.
+	+ &quot;c&quot; -- In general, I like it when comments respect textwidth
+	+ &quot;q&quot; -- Allow formatting comments w/ gq
+	- &quot;o&quot; -- O and o, don't continue comments
+	+ &quot;r&quot; -- But do continue when pressing enter.
+	+ &quot;n&quot; -- Indent past the formatlistpat, not underneath it.
+	+ &quot;j&quot; -- Auto-remove comments if possible.
+	- &quot;2&quot; -- I'm not in gradeschool anymore
+
+-- opt.list = true
+-- opt.listchars = { tab = &quot;» &quot;, trail = &quot;·&quot;, nbsp = &quot;␣&quot; }
+
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_browse_split = 0
+vim.g.netrw_winsize = 25
+
+-- vim.cmd [[
+-- augroup ProjectDrawer
+--     autocmd!
+--     autocmd VimEnter * :Vexplore
+-- augroup END
+-- ]]
+
+print(&quot;Hello Meow Babe&quot;)
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
