@@ -23,4 +23,28 @@ if vim.loader then
   vim.loader.enable()
 end
 
-require("ursusmortiferum")
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
+require("config.lazy")
+require("config.utils")
+
+-- Define a Lua function to setup autocmds for LazyFile event
+local function lazyFileSetup()
+  vim.cmd([[
+        augroup LazyFile
+            autocmd!
+            autocmd BufReadPost, BufNewFile, BufWritePre * lua print("LazyFile event triggered:", vim.fn.expand('<afile>'))
+        augroup END
+    ]])
+end
+
+-- Call the Lua function to setup LazyFile event
+lazyFileSetup()
+
+-- vim.api.nvim_create_autocmd("User", {
+--    pattern = "VeryLazy",
+--    callback = function()
+--       require("util").version()
+--    end,
+-- })
