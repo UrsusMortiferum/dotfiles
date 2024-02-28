@@ -36,8 +36,8 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    name = "tokyonight",
     lazy = false,
+    name = "tokyonight",
     priority = 1000,
     config = function()
       require("tokyonight").setup({
@@ -123,7 +123,6 @@ return {
     opts = function()
       local lualine_require = require("lualine_require")
       lualine_require.require = require
-
       vim.o.laststatus = vim.g.lualine_laststatus
 
       return {
@@ -140,8 +139,8 @@ return {
         },
         sections = {
           lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
-          lualine_b = { "branch", "diff" },
-          lualine_c = { "buffers" },
+          lualine_b = { { "branch", separator = { right = "" }, left_padding = 2 } },
+          lualine_c = { "diff", "buffers" },
           lualine_x = {
             {
               "diagnostics",

@@ -12,24 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  spec = "ursusmortiferum.lazy",
+  spec = "plugins",
   install = { missing = true, colorscheme = { "tokyonight-night" } },
   change_detection = { notify = false },
-  -- ui = {
-  -- 	icons = {
-  -- 		cmd = "⌘",
-  -- 		config = "🛠",
-  -- 		event = "📅",
-  -- 		ft = "📂",
-  -- 		init = "⚙",
-  -- 		keys = "🗝",
-  -- 		plugin = "🔌",
-  -- 		runtime = "💻",
-  -- 		source = "📄",
-  -- 		start = "🚀",
-  -- 		task = "📌",
-  -- 	},
-  -- },
 })
 
 vim.keymap.set("n", "<leader>ll", "<cmd>:Lazy<CR>", { desc = "[L]aunch [L]azy" })
