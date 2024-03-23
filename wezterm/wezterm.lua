@@ -1,21 +1,45 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
+local sys, home, bg_path
 
--- This will hold the configuration.
+if wezterm.target_triple:find("linux") then
+	home = os.getenv("HOME")
+	sys = "Linux"
+elseif wezterm.target_triple:find("darwin") then
+	home = os.getenv("HOME")
+	sys = "Unix"
+elseif wezterm.target_triple:find("windows") then
+	home = os.getenv("USERPROFILE")
+	sys = "Windows"
+end
+
+local backgrounds = {
+	"rainy_smoke.gif",
+	"endless_walk.gif",
+	"cyberpunk.gif",
+	"pixel_jeff_night_shift.gif",
+	"mario.gif",
+	"witch.gif",
+	"penguins.png",
+}
+local random_index = math.random(1, #backgrounds)
+local random_background = backgrounds[random_index]
+
+if sys == "Unix" or "Linux" then
+	bg_path = home .. "/.config/wezterm/" .. random_background
+elseif sys == "Windows" then
+	bg_path = home .. "\\AppData\\Local\\wezterm\\" .. random_background
+end
+
+local dimmer = { brightness = 0.05 }
+
+-- $XDG_CONFIG_HOME/wezterm/wezterm.lua -- for X11/Wayland
+
 local config = wezterm.config_builder()
 
 config.show_new_tab_button_in_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
-config.window_background_opacity = 0.95
-config.color_scheme = "tokyonight_night"
-config.adjust_window_size_when_changing_font_size = false
-config.font = wezterm.font({
-	family = "VictorMono Nerd Font Mono",
-	weight = "DemiBold",
-})
-config.font_size = 13.6
-
--- config.enable_tab_bar = false
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
 
 config.window_padding = {
 	left = 0,
@@ -24,19 +48,33 @@ config.window_padding = {
 	bottom = 0,
 }
 
-config.use_fancy_tab_bar = false
-config.tab_bar_at_bottom = true
+config.color_scheme = "tokyonight_night"
+config.font = wezterm.font({
+	family = "VictorMono Nerd Font Mono",
+	weight = "DemiBold",
+})
+config.font_size = 13.6
+config.adjust_window_size_when_changing_font_size = false
 
--- config.colors = {}
--- config.colors.background = "#111111"
+config.background = {
+	{
+		source = {
+			File = {
+				path = bg_path,
+				speed = 0.2,
+			},
+		},
+		hsb = dimmer,
+		-- vertical_align = "Middle",
+		-- horizontal_align = "Center",
+		-- opacity = 0.95,
+		-- height = "Contain",
+		-- width = "Contain",
+	},
+}
 
 -- config.default_prog = {
 --     '/opt/homebrew/bin/fish'
 -- }
 
--- config.window_background_image =
--- '/Users/ursusmortiferum/Library/CloudStorage/OneDrive-Personal/01_Project/Python/welp_mua.png'
--- config.font = wezterm.font 'JetBrains Mono'
-
--- and finally, return the configuration to wezterm
 return config
