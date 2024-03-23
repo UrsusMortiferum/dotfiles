@@ -24,24 +24,7 @@ local backgrounds = {
 local random_index = math.random(1, #backgrounds)
 local random_background = backgrounds[random_index]
 
-if sys == "Unix" or "Linux" then
-	-- d_prog = {
-	-- 	"/opt/homebrew/bin/neofetch",
-	-- }
-elseif sys == "Windows" then
-end
-
 local dimmer = { brightness = 0.05 }
-
--- TODO: for windows -> ubuntu on launch
--- config.default_prog = {
---     '/opt/homebrew/bin/fish' -- only as a sample, fish should be selected
---				-- as a main shell (Linux and Unix)
--- }
--- default path should be defined in fish
-
--- TODO: check whether this will work on Windows -> should work, but unfortunately .wezterm.lua is somehow preferred
--- $XDG_CONFIG_HOME/wezterm/wezterm.lua -- for X11/Wayland
 
 local config = wezterm.config_builder()
 
@@ -64,8 +47,6 @@ config.window_padding = {
 	top = "0.5cell",
 	bottom = "0.5cell",
 }
-
--- config.window_background_image = { path = bg_path, speed = 0.2 }
 
 config.background = {
 	{
