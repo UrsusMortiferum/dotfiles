@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local sys, home, domain
+local sys, home
 
 if wezterm.target_triple:find("linux") then
 	home = os.getenv("HOME")
@@ -13,6 +13,7 @@ elseif wezterm.target_triple:find("windows") then
 end
 
 local backgrounds = {
+	"rainy_smoke.gif",
 	"endless_walk.gif",
 	"cyberpunk.gif",
 	"pixel_jeff_night_shift.gif",
@@ -28,7 +29,6 @@ if sys == "Unix" or "Linux" then
 	-- 	"/opt/homebrew/bin/neofetch",
 	-- }
 elseif sys == "Windows" then
-	domain = "WSL:Ubuntu-22.04"
 end
 
 local dimmer = { brightness = 0.05 }
@@ -84,6 +84,8 @@ config.background = {
 	},
 }
 
-config.default_domain = domain
+if sys == "Windows" then
+	config.default_domain = "WSL:Ubuntu"
+end
 
 return config
