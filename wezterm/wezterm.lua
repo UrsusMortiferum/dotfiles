@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local sys, home, bg_path, d_prog, domain
+local sys, home, d_prog, domain
 
 if wezterm.target_triple:find("linux") then
 	home = os.getenv("HOME")
@@ -25,12 +25,10 @@ local random_index = math.random(1, #backgrounds)
 local random_background = backgrounds[random_index]
 
 if sys == "Unix" or "Linux" then
-	bg_path = home .. "/.config/wezterm/" .. random_background
 	-- d_prog = {
 	-- 	"/opt/homebrew/bin/neofetch",
 	-- }
 elseif sys == "Windows" then
-	bg_path = home .. "\\AppData\\Local\\wezterm\\" .. random_background
 	domain = "WSL:Ubuntu-22.04"
 end
 
@@ -74,7 +72,7 @@ config.background = {
 	{
 		source = {
 			File = {
-				path = bg_path,
+				path = home .. "/.config/wezterm/" .. random_background,
 				speed = 0.2,
 			},
 		},
