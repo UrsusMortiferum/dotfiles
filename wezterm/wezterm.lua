@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local sys, home, d_prog, domain
+local sys, home, domain
 
 if wezterm.target_triple:find("linux") then
 	home = os.getenv("HOME")
@@ -13,7 +13,6 @@ elseif wezterm.target_triple:find("windows") then
 end
 
 local backgrounds = {
-	"rainy_smoke.gif",
 	"endless_walk.gif",
 	"cyberpunk.gif",
 	"pixel_jeff_night_shift.gif",
