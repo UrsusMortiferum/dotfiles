@@ -33,7 +33,7 @@ keymap(
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Substitute word under cursor" }
 )
-keymap("n", "<leader>ff", vim.lsp.buf.format, { desc = "[F]ile [F]ormat" })
+-- keymap("n", "<leader>ff", vim.lsp.buf.format, { desc = "[F]ile [F]ormat" })
 keymap("n", "<leader>fn", "<:new<CR>", { desc = "Create an empty buffer" })
 
 keymap({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy selection to OS clipboard" })

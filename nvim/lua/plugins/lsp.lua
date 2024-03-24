@@ -207,7 +207,18 @@ return {
   -- },
   {
     "stevearc/conform.nvim",
-    event = "VeryLazy",
+    event = "BufWritePre",
+    cmd = "ConformInfo",
+    keys = {
+      {
+        "<leader>f",
+        function()
+          require("conform").format({ async = true, lsp_fallback = true })
+        end,
+        mode = "",
+        desc = "[F]ormat with Conform",
+      },
+    },
     opts = {
       format_on_save = {
         timeout_ms = 500,
@@ -224,6 +235,7 @@ return {
         end,
         ["*"] = { "codespell" },
       },
+      formatters = {},
     },
   },
 }

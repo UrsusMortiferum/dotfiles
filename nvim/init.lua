@@ -32,11 +32,11 @@ require("config.utils")
 -- Define a Lua function to setup autocmds for LazyFile event
 local function lazyFileSetup()
   vim.cmd([[
-        augroup LazyFile
-            autocmd!
-            autocmd BufReadPost, BufNewFile, BufWritePre * lua print("LazyFile event triggered:", vim.fn.expand('<afile>'))
-        augroup END
-    ]])
+  augroup LazyFile
+  autocmd!
+  autocmd BufReadPost, BufNewFile, BufWritePre * lua print("LazyFile event triggered:", vim.fn.expand('<afile>'))
+  augroup END
+  ]])
 end
 
 -- Call the Lua function to setup LazyFile event
