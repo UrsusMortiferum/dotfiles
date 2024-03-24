@@ -192,6 +192,7 @@ return {
       -- })
     end,
   },
+  -- TODO: check it later
   -- 		vim.diagnostic.config({
   -- 			-- update_in_insert = true,
   -- 			float = {

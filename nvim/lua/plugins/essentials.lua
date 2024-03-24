@@ -1,13 +1,6 @@
 return {
-  -- TODO: Why is it still here? + think about something not using curl and more proxy/vpn resilant
-  --     {
-  --         "https://gitlab.com/code-stats/code-stats-vim",
-  --         config = function()
-  --             vim.g.codestats_api_key =
-  --             "SFMyNTY.VlhKemRYTmZUVzl5ZEdsbVpYSjFiUT09IyNNakEwT0RRPQ.4Eg9Lr8VH94F9SP1Ul7IYGnMEr-fdKfxw1kZjvEmey8"
-  --         end,
-  --     },
   {
+    -- TODO: Move token somewhere else to not store in the repo
     "YannickFricke/codestats.nvim",
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
