@@ -1,9 +1,15 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "LazyFile",
+    -- event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason.nvim",
+      {
+        "williamboman/mason.nvim",
+        cmd = "Mason",
+        keys = { { "<leader>sm", "<cmd>Mason<cr>", desc = "[S]how [M]ason" } },
+        build = ":MasonUpdate",
+      },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "folke/neodev.nvim", opts = {} },
@@ -14,6 +20,11 @@ return {
         vim.keymap.set("n", "<leader>rn", function()
           return ":IncRename " .. vim.fn.expand("<cword>")
         end, { expr = true, desc = "[R]e[n]ame with Inc Rename" }),
+
+        vim.cmd([[
+        highlight NoiceCmdlinePopupBorderIncRename blend=0
+        highlight NoiceCmdlineIconIncRename blend=0
+        ]])
       },
     },
     config = function()
@@ -208,7 +219,9 @@ return {
   -- },
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre",
+    dependencies = { "mason.nvim" },
+    lazy = true,
+    -- event = "BufWritePre",
     cmd = "ConformInfo",
     keys = {
       {

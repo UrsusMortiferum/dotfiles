@@ -27,20 +27,23 @@ require("config.options")
 require("config.keymaps")
 require("config.autocmds")
 require("config.lazy")
-require("config.utils")
 
--- Define a Lua function to setup autocmds for LazyFile event
-local function lazyFileSetup()
-  vim.cmd([[
-  augroup LazyFile
-  autocmd!
-  autocmd BufReadPost, BufNewFile, BufWritePre * lua print("LazyFile event triggered:", vim.fn.expand('<afile>'))
-  augroup END
-  ]])
+-- vim.cmd([[
+-- highlight lualine_c_normal guibg=NONE ctermbg=NONE blend=0
+-- highlight lualine_x_normal guibg=NONE ctermbg=NONE blend=0
+-- ]])
+
+local highlight_output = vim.api.nvim_exec(":highlight", true)
+print(highlight_output)
+
+for line in highlight_output:gmatch("[^\r\n]+") do
+  if line:match("lualine_c") then
+    -- local highlight = line:gsub(".*%s", "")
+    local highlight = line:gsub("^(%S+)%s*", "")
+    vim.cmd("highlight " .. highlight .. " guibg=NONE ctermbg=NONE blend=0")
+  end
 end
-
--- Call the Lua function to setup LazyFile event
-lazyFileSetup()
+-- local group = line:
 
 -- vim.api.nvim_create_autocmd("User", {
 --    pattern = "VeryLazy",

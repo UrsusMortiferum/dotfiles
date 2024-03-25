@@ -31,7 +31,7 @@ local config = wezterm.config_builder()
 
 config.color_scheme = "tokyonight_night"
 config.font = wezterm.font({
-  family = "VictorMono Nerd Font Mono",
+  family = "VictorMono Nerd Font",
   weight = "DemiBold",
 })
 config.font_size = 13.6

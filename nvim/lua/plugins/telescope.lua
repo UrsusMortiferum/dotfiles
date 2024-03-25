@@ -43,6 +43,7 @@ return {
           },
           file_browser = { theme = "dropdown", hijack_netrw = true },
           ["ui-select"] = { require("telescope.themes").get_dropdown({}) },
+          harpoon = { theme = "dropdown" },
         },
       })
 
@@ -73,6 +74,11 @@ return {
       end, { desc = "[S]each [N]eovim files" })
       vim.keymap.set("n", "<leader>fb", ":Telescope file_browser<cr>", { desc = "[F]ile [B]rowser" })
       vim.keymap.set("n", "<leader><tab>", "<cmd>lua require('telescope.builtin').commands()<cr>")
+
+      vim.cmd([[
+      highlight TelescopeNormal guibg=NONE ctermbg=NONE blend=0
+      highlight TelescopeBorder guibg=NONE ctermbg=NONE blend=0
+      ]])
     end,
   },
 }

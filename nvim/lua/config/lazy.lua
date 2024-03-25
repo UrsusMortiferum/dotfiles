@@ -11,6 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("config.utils").lazy_file()
+
 require("lazy").setup({
   spec = "plugins",
   install = { missing = true, colorscheme = { "tokyonight-night" } },

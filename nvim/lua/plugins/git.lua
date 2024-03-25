@@ -1,15 +1,26 @@
+local icons = require("config.utils").icons
+
 return {
   {
     "lewis6991/gitsigns.nvim",
-    -- event = "LazyFile",
-    event = LazyFile,
+    event = "LazyFile",
     opts = {
       signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
+        --   -- add = { require("config.utils").icons.git.added },
+        add = { text = icons.git.added },
+        change = { text = icons.git.modified },
+        delete = { text = icons.git.removed },
+        -- add = { text = "+" },
+        --   topdelete = { text = "‾" },
+        --   changedelete = { text = "~" },
+        -- },
+        --     signs = {
+        -- add = { text = "▎" },
+        -- change = { text = "▎" },
+        -- delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+        untracked = { text = "▎" },
       },
     },
     --         signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`

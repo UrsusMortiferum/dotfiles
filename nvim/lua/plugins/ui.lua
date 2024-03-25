@@ -19,7 +19,12 @@
 -- 	[[       .cooc,.    .,coup:.]],
 -- }
 
+local icons = require("config.utils").icons
+
 return {
+  { "nvim-tree/nvim-web-devicons", lazy = true },
+  { "MunifTanjim/nui.nvim", lazy = true },
+  { "nvim-lua/plenary.nvim", lazy = true },
   -- auto-resize windows
   {
     "anuvyklack/windows.nvim",
@@ -53,15 +58,15 @@ return {
   {
     -- TODO: make it beautiful and useful if not -> let's get rid of it
     "lukas-reineke/indent-blankline.nvim",
+    event = "LazyFile",
+    opts = {
+      indent = { char = "|", tab_char = "|" },
+      scope = { enabled = false },
+      exclude = {
+        filetypes = { "help", "Trouble", "trouble", "lazy", "mason" },
+      },
+    },
     main = "ibl",
-    event = "BufReadPre",
-    config = function()
-      require("ibl").setup({
-        indent = {
-          char = "┆",
-        },
-      })
-    end,
   },
   {
     "folke/noice.nvim",
@@ -103,6 +108,7 @@ return {
     end,
   },
   -- TODO: check later mini + statusline plugin from tj -> express line
+  -- Finalize current setup - buffers + final review
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -130,42 +136,56 @@ return {
           theme = "auto",
           globalstatus = true,
           disabled_filetypes = { statusline = { "dashboard", "lazy" } },
-          -- component_separators = "|",
+          component_separators = icons.misc.light_bar,
           -- section_separators = { left = "", right = "" },
-          component_separators = { left = "", right = "" },
-          section_separators = { left = "", right = "" },
+          -- component_separators = { left = "", right = "" },
+          -- section_separators = { left = "", right = "" },
           -- section_separators = { left = "", right = "" },
           -- component_separators = { left = "", right = "" },
         },
         sections = {
           lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
           lualine_b = { { "branch", separator = { right = "" }, left_padding = 2 } },
-          lualine_c = { "diff", "buffers" },
+          lualine_c = {
+            {
+              "diff",
+              symbols = {
+                added = icons.git.added,
+                modified = icons.git.modified,
+                removed = icons.git.removed,
+              },
+              source = function()
+                local gitsigns = vim.b.gitsigns_status_dict
+                if gitsigns then
+                  return {
+                    added = gitsigns.added,
+                    modified = gitsigns.changed,
+                    removed = gitsigns.removed,
+                  }
+                end
+              end,
+            },
+            "buffers",
+          },
           lualine_x = {
             {
               "diagnostics",
+              symbols = {
+                error = icons.diagnostics.Error,
+                warn = icons.diagnostics.Warn,
+                info = icons.diagnostics.Info,
+                hint = icons.diagnostics.Hint,
+              },
               -- Table of diagnostic sources, available sources are:
               --   "nvim_lsp", "nvim_diagnostic", "nvim_workspace_diagnostic", "coc", "ale", "vim_lsp'.
+              sources = { "nvim_diagnostic", "coc", "nvim_lsp" },
               -- or a function that returns a table as such:
               --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
-              sources = { "nvim_diagnostic", "coc", "nvim_lsp" },
-              -- Displays diagnostics for the defined severity types
               sections = { "error", "warn", "info", "hint" },
-              diagnostics_color = {
-                -- Same values as the general color option can be used here.
-                error = "DiagnosticError", -- Changes diagnostics" error color.
-                warn = "DiagnosticWarn", -- Changes diagnostics" warn color.
-                info = "DiagnosticInfo", -- Changes diagnostics" info color.
-                hint = "DiagnosticHint", -- Changes diagnostics" hint color.
-              },
-              --
-              symbols = { error = "E ", warn = "W ", info = "I ", hint = "H " },
               colored = true, -- Displays diagnostics status in color if set to true.
               update_in_insert = false, -- Update diagnostics in insert mode.
-              always_visible = true, -- Show diagnostics even if there are none.
+              always_visible = false, -- Show diagnostics even if there are none.
             },
-            -- "encoding",
-            -- "fileformat",
             {
               "filename",
               file_status = true, -- Displays file status (readonly status, modified status)
@@ -175,8 +195,6 @@ return {
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
               -- 4: Filename and parent dir, with tilde as the home directory
-
-              -- for other components. (terrible name, any suggestions?)
               symbols = {
                 modified = "[+]", -- Text to show when the file is modified.
                 readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
@@ -184,59 +202,44 @@ return {
                 newfile = "[New]", -- Text to show for newly created file before first write
               },
             },
-            {
-              "diff",
-              colored = true, -- Displays a colored diff status if set to true
-              diff_color = {
-                -- Same color values as the general color option can be used here.
-                added = "LuaLineDiffAdd", -- Changes the diff"s added color
-                modified = "LuaLineDiffChange", -- Changes the diff"s modified color
-                removed = "LuaLineDiffDelete", -- Changes the diff"s removed color you
-              },
-              symbols = { added = "+", modified = "~", removed = "-" }, -- Changes the symbols used by the diff.
-              source = nil, -- A function that works as a data source for diff.
-              -- It must return a table as such:
-              --   { added = add_count, modified = modified_count, removed = removed_count }
-              -- or nil on failure. count <= 0 won"t be displayed.
-            },
-            --                        {
-            --                            "buffers",
-            --                            show_filename_only = true,       -- Shows shortened relative path when set to false.
-            --                            hide_filename_extension = false, -- Hide filename extension when set to true.
-            --                            show_modified_status = true,     -- Shows indicator when the buffer is modified.
+            -- {
+            --   "buffers",
+            --   show_filename_only = true, -- Shows shortened relative path when set to false.
+            --   hide_filename_extension = false, -- Hide filename extension when set to true.
+            --   show_modified_status = true, -- Shows indicator when the buffer is modified.
             --
-            --                            mode = 0,                        -- 0: Shows buffer name
-            --                            -- 1: Shows buffer index
-            --                            -- 2: Shows buffer name + buffer index
-            --                            -- 3: Shows buffer number
-            --                            -- 4: Shows buffer name + buffer number
+            --   mode = 0, -- 0: Shows buffer name
+            --   -- 1: Shows buffer index
+            --   -- 2: Shows buffer name + buffer index
+            --   -- 3: Shows buffer number
+            --   -- 4: Shows buffer name + buffer number
             --
-            --                            max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
-            --                            -- it can also be a function that returns
-            --                            -- the value of `max_length` dynamically.
-            --                            filetype_names = {
-            --                                TelescopePrompt = "Telescope",
-            --                                dashboard = "Dashboard",
-            --                                packer = "Packer",
-            --                                fzf = "FZF",
-            --                                alpha = "Alpha"
-            --                            }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+            --   max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+            --   -- it can also be a function that returns
+            --   -- the value of `max_length` dynamically.
+            --   filetype_names = {
+            --     TelescopePrompt = "Telescope",
+            --     dashboard = "Dashboard",
+            --     packer = "Packer",
+            --     fzf = "FZF",
+            --     alpha = "Alpha",
+            --   }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
             --
-            --                            -- Automatically updates active buffer color to match color of other components (will be overridden if buffers_color is set)
-            --                            use_mode_colors = false,
+            --   -- Automatically updates active buffer color to match color of other components (will be overridden if buffers_color is set)
+            --   use_mode_colors = false,
             --
-            --                            buffers_color = {
-            --                                -- Same values as the general color option can be used here.
-            --                                active = "lualine_{section}_normal",     -- Color for active buffer.
-            --                                inactive = "lualine_{section}_inactive", -- Color for inactive buffer.
-            --                            },
+            --   buffers_color = {
+            --     -- Same values as the general color option can be used here.
+            --     active = "lualine_{section}_normal", -- Color for active buffer.
+            --     inactive = "lualine_{section}_inactive", -- Color for inactive buffer.
+            --   },
             --
-            --                            symbols = {
-            --                                modified = " ●", -- Text to show when the buffer is modified
-            --                                alternate_file = "#", -- Text to show to identify the alternate file
-            --                                directory = "", -- Text to show when the buffer is a directory
-            --                            },
-            --                        },
+            --   symbols = {
+            --     modified = " ●", -- Text to show when the buffer is modified
+            --     alternate_file = "#", -- Text to show to identify the alternate file
+            --     directory = "", -- Text to show when the buffer is a directory
+            --   },
+            -- },
             {
               function()
                 local message = "No Treesitter"
@@ -267,7 +270,15 @@ return {
             },
           },
           lualine_y = { { "location", separator = { left = "" }, right_padding = 2 } },
-          lualine_z = { { "datetime", style = "%H:%M:%S", separator = { right = "" }, left_padding = 2 } },
+          lualine_z = {
+            {
+              function()
+                return "  " .. os.date("%H:%M:%S")
+              end,
+              separator = { right = "" },
+              left_padding = 2,
+            },
+          },
         },
       }
     end,
