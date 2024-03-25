@@ -111,11 +111,11 @@ return {
   -- Finalize current setup - buffers + final review
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    -- lazy = false,
+    -- event = "VeryLazy",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+
     init = function()
       vim.g.lualine_laststatus = vim.o.laststatus
       if vim.fn.argc(-1) > 0 then

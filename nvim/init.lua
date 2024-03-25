@@ -25,25 +25,8 @@ end
 
 require("config.options")
 require("config.keymaps")
-require("config.autocmds")
 require("config.lazy")
-
--- vim.cmd([[
--- highlight lualine_c_normal guibg=NONE ctermbg=NONE blend=0
--- highlight lualine_x_normal guibg=NONE ctermbg=NONE blend=0
--- ]])
-
-local highlight_output = vim.api.nvim_exec(":highlight", true)
-print(highlight_output)
-
-for line in highlight_output:gmatch("[^\r\n]+") do
-  if line:match("lualine_c") then
-    -- local highlight = line:gsub(".*%s", "")
-    local highlight = line:gsub("^(%S+)%s*", "")
-    vim.cmd("highlight " .. highlight .. " guibg=NONE ctermbg=NONE blend=0")
-  end
-end
--- local group = line:
+require("config.autocmds")
 
 -- vim.api.nvim_create_autocmd("User", {
 --    pattern = "VeryLazy",
