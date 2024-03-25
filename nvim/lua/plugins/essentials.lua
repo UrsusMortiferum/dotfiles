@@ -133,105 +133,25 @@ return {
           { border = "rounded", title_pos = "center", ui_width_ratio = 0.50 }
         )
       end, "File Menu")
-      -- call nvim_win_set_option(win, 'winhighlight',)
-      -- vim.api.nvim_create_autocmd({ "FileType" }, {
-      --   pattern = "harpoon",
-      --   callback = function()
-      -- vim.opt.winblend = 10 -- 0 ~ 100
-      -- vim.opt.cursorline = true
-      -- vim.api.nvim_set_hl(0,'HarpoonWindow', {link = 'Normal'})
-      -- vim.api.nvim_set_hl(0,'HarpoonBorder', {link = 'Normal'})
+      map("<leader>1", function()
+        harpoon:list():select(1)
+      end, "File 1")
+      map("<leader>2", function()
+        harpoon:list():select(2)
+      end, "File 2")
+      map("<leader>3", function()
+        harpoon:list():select(3)
+      end, "File 3")
+      map("<leader>4", function()
+        harpoon:list():select(4)
+      end, "File 4")
+
       vim.cmd([[
       highlight HarpoonCurrentFile guibg=NONE ctermbg=NONE blend=0
+      highlight NormalFloat guibg=NONE ctermbg=NONE blend=0
+      highlight FloatBorder guibg=NONE ctermbg=NONE blend=0
+      highlight FloatTitle guibg=NONE ctermbg=NONE blend=0
       ]])
-      --   end,
-      -- })
     end,
-    -- local harpoon = require("harpoon")
-    --
-    -- harpoon:setup()
-    --
-    -- vim.keymap.set("n", "<leader>
-
-    -- options = { global_settings = { save_on_toggle = true, enter_on_sendcmd = true } },
-    -- keys = {
-    --   {
-    --     "<leader>a",
-    --     function()
-    --       require("harpoon.mark").add_file()
-    --     end,
-    --     desc = "[H] Add File",
-    --   },
-    --   {
-    --     "<leader>h",
-    --     function()
-    --       require("harpoon.ui").toggle_quick_menu()
-    --     end,
-    --     desc = "[H] File Menu",
-    --   },
-    --   {
-    --     "<leader>1",
-    --     function()
-    --       require("harpoon.ui").nav_file(1)
-    --     end,
-    --     desc = "[H] File 1",
-    --   },
-    --   {
-    --     "<leader>2",
-    --     function()
-    --       require("harpoon.ui").nav_file(2)
-    --     end,
-    --     desc = "[H] File 2",
-    --   },
-    --   {
-    --     "<leader>3",
-    --     function()
-    --       require("harpoon.ui").nav_file(3)
-    --     end,
-    --     desc = "[H] File 3",
-    --   },
-    --   {
-    --     "<leader>4",
-    --     function()
-    --       require("harpoon.ui").nav_file(4)
-    --     end,
-    --     desc = "[H] File 4",
-    --   },
-    --   {
-    --     "<leader>hc",
-    --     function()
-    --       require("harpoon.cmd-ui").toggle_quick_menu()
-    --     end,
-    --     desc = "[H] Terminal Menu",
-    --   },
-    --   {
-    --     "<leader>h1",
-    --     function()
-    --       require("harpoon.term").gotoTerminal(1)
-    --     end,
-    --     desc = "[H] Terminal 1",
-    --   },
-    --   {
-    --     "<leader>h2",
-    --     function()
-    --       require("harpoon.term").gotoTerminal(2)
-    --     end,
-    --     desc = "[H] Terminal 2",
-    --   },
-    --   {
-    --     "<leader>h3",
-    --     function()
-    --       require("harpoon.term").gotoTerminal(3)
-    --     end,
-    --     desc = "[H] Terminal 3",
-    --   },
-    --   {
-    --     "<leader>h4",
-    --     function()
-    --       require("harpoon.term").gotoTerminal(4)
-    --     end,
-    --     desc = "[H] Terminal 4",
-    --   },
-    -- },
   },
 }
