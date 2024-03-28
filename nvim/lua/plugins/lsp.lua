@@ -24,30 +24,30 @@ return {
         vim.cmd([[
         highlight NoiceCmdlinePopupBorderIncRename blend=0
         highlight NoiceCmdlineIconIncRename blend=0
-        ]])
+        ]]),
       },
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc)
+          local nmap = function(keys, func, desc)
             vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-          map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-          map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-          map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-          map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]symbols")
-          map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]symbols")
-          map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-          map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-          map("<leader>ca", function()
+          nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+          nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+          nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+          nmap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+          nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]symbols")
+          nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]symbols")
+          nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+          nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+          nmap("<leader>ca", function()
             vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
           end, "[C]ode [A]ction")
-          map("K", vim.lsp.buf.hover, "Hover Documentation")
-          map("<c-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+          nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+          nmap("<c-k>", vim.lsp.buf.signature_help, "Signature Documentation")
         end,
       })
 
@@ -219,9 +219,7 @@ return {
   -- },
   {
     "stevearc/conform.nvim",
-    dependencies = { "mason.nvim" },
-    lazy = true,
-    -- event = "BufWritePre",
+    event = "BufWritePre",
     cmd = "ConformInfo",
     keys = {
       {
@@ -234,10 +232,6 @@ return {
       },
     },
     opts = {
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
       formatters_by_ft = {
         lua = { "stylua" },
         python = function(bufnr)
@@ -250,6 +244,10 @@ return {
         ["*"] = { "codespell" },
       },
       formatters = {},
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_fallback = true,
+      },
     },
   },
 }

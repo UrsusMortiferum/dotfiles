@@ -1,72 +1,81 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local keymap = vim.keymap.set
+-- local keymap = vim.keymap.set
+
+-- local nmap = function(keys, func, desc)
+--   vim.keymap.set("n", keys, func, { desc = desc })
+-- end
+
+local map = function(mode, keys, func, opts)
+  if type(opts) == "string" then
+    opts = { desc = opts }
+  end
+
+  vim.keymap.set(mode, keys, func, opts)
+end
 
 -- User Friendly Base
-keymap("n", "<Esc>", "<esc>:nohlsearch<cr>", { silent = true })
-keymap("n", "Q", "<Nop>")
-keymap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+map("n", "<esc>", "<esc>:nohlsearch<cr>", { silent = true })
+map("n", "Q", "<nop>")
+map({ "n", "v" }, "<space>", "<nop>", { silent = true })
 
 -- Remap for dealing with word wrap
-keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-keymap("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+map("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
+map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
+map("n", "<leader>e", vim.diagnostic.open_float, "Open floating diagnostic message")
+map("n", "<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
 
-keymap("n", "<leader>pv", vim.cmd.Ex, { desc = "Explore" })
+map("n", "<leader>pv", vim.cmd.Ex, "Explore")
 
-keymap("n", "<C-d>", "<C-d>zz", { desc = "Jump Down & Center" })
-keymap("n", "<C-u>", "<C-u>zz", { desc = "Jump Up & Center" })
+map("n", "<C-d>", "<C-d>zz", "Jump Down & Center")
+map("n", "<C-u>", "<C-u>zz", "Jump Up & Center")
 
-keymap("n", "n", "nzzzv", { desc = "Jump Next & Center" })
-keymap("n", "N", "Nzzzv", { desc = "Jump Previous & Center" })
+map("n", "n", "nzzzv", "Jump Next & Center")
+map("n", "N", "Nzzzv", "Jump Previous & Center")
 
-keymap("n", "<leader>Y", [["+Y]], { desc = "Copy line to OS clipboard" })
-keymap(
-  "n",
-  "<leader>ws",
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Substitute word under cursor" }
-)
--- keymap("n", "<leader>ff", vim.lsp.buf.format, { desc = "[F]ile [F]ormat" })
-keymap("n", "<leader>fn", "<:new<CR>", { desc = "Create an empty buffer" })
+map("n", "<leader>Y", [["+Y]], "Copy line to OS clipboard")
+map("n", "<leader>ws", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Substitute word under cursor")
+map("n", "<leader>fn", "<:new<CR>", "Create an empty buffer")
 
-keymap({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy selection to OS clipboard" })
-keymap({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete selection" })
+map({ "n", "v" }, "<leader>y", [["+y]], "Copy selection to OS clipboard")
+map({ "n", "v" }, "<leader>d", [["_d]], "Delete selection")
 
-keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
-keymap("v", "<leader>p", [["_dP]], { desc = "Paste over selection" })
+map("v", "J", ":m '>+1<CR>gv=gv", "Move selection down")
+map("v", "K", ":m '<-2<CR>gv=gv", "Move selection up")
+map("v", "<leader>p", [["_dP]], "Paste over selection")
 
 -- Files Management + other useful things
-keymap("n", "<leader>cf", "<cmd>let @+ = fnamemodify(expand('%'), ':t')<cr>", { desc = "Copy File Name" })
-keymap("n", "<leader>cp", "<cmd>let @+ = expand('%:p')<cr>", { desc = "Copy File Path" })
-keymap("n", "QQ", "<cmd>q!<cr>", { desc = "Quit Without Saving" })
+map("n", "<leader>cf", "<cmd>let @+ = fnamemodify(expand('%'), ':t')<cr>", "Copy File Name")
+map("n", "<leader>cp", "<cmd>let @+ = expand('%:p')<cr>", "Copy File Path")
+map("n", "QQ", "<cmd>q!<cr>", "Quit Without Saving")
 
 -- Buffers Management
-keymap("n", "tj", "<cmd>bfirst<cr>", { desc = "First Buffer" })
-keymap("n", "tk", "<cmd>blast<cr>", { desc = "Last Buffer" })
-keymap("n", "th", "<cmd>bprev<cr>", { desc = "Previous buffer" })
-keymap("n", "tl", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("n", "<leader>ot", "<cmd>new<bar>terminal<cr>", "New horizontal windows with terminal")
+map("n", "<c-w>v", "<cmd>vnew<cr>", "New vertical window with an empty buffer")
+map("n", "tj", "<cmd>bprev<cr>", "Previous buffer")
+map("n", "tk", "<cmd>bnext<cr>", "Next buffer")
+-- map("n", "tj", "<cmd>bfirst<cr>", "First Buffer")
+-- map("n", "tk", "<cmd>blast<cr>", "Last Buffer")
+-- map("n", "th", "<cmd>bprev<cr>", "Previous buffer")
+-- map("n", "tl", "<cmd>bnext<cr>", "Next buffer")
 -- keymap('n', '<leader>bc', '<cmd>bdelete<CR>', { desc = 'Close buffer' })
 
 -- keymap('n', '<leader><leader>', function()
 --     vim.cmd('so')
 -- end)
 
-keymap("i", "<C-c>", "<Esc>")
---
---
-keymap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+map("i", "<c-c>", "<esc>")
 
-keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>") --, { silent = true })
-keymap("n", "<leader>x", "<cmd>!python %<CR>")
+map({ "n", "v" }, "<space>", "<nop>", { silent = true })
+map("n", "<c-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
+
+map("n", "<leader>x", "<cmd>!chmod +x %<cr>") --, { silent = true })
+map("n", "<leader>x", "<cmd>!python %<cr>")
 -- Join the current line with the line below it
 -- keymap("n", "J", "mzJ'z")
 -- Opens file in a specified path

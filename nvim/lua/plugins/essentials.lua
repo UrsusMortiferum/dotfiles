@@ -121,37 +121,39 @@ return {
     config = function()
       local harpoon = require("harpoon")
       harpoon:setup({})
-      local map = function(keys, func, desc)
+      local nmap = function(keys, func, desc)
         vim.keymap.set("n", keys, func, { desc = "[H]arpoon " .. desc })
       end
-      map("<leader>a", function()
+      nmap("<leader>a", function()
         harpoon:list():append()
       end, "Add File")
-      map("<leader>h", function()
+      nmap("<leader>h", function()
         harpoon.ui:toggle_quick_menu(
           harpoon:list(),
           { border = "rounded", title_pos = "center", ui_width_ratio = 0.50 }
         )
       end, "File Menu")
-      map("<leader>1", function()
+      nmap("<leader>1", function()
         harpoon:list():select(1)
       end, "File 1")
-      map("<leader>2", function()
+      nmap("<leader>2", function()
         harpoon:list():select(2)
       end, "File 2")
-      map("<leader>3", function()
+      nmap("<leader>3", function()
         harpoon:list():select(3)
       end, "File 3")
-      map("<leader>4", function()
+      nmap("<leader>4", function()
         harpoon:list():select(4)
       end, "File 4")
 
-      vim.cmd([[
-      highlight HarpoonCurrentFile guibg=NONE ctermbg=NONE blend=0
-      highlight NormalFloat guibg=NONE ctermbg=NONE blend=0
-      highlight FloatBorder guibg=NONE ctermbg=NONE blend=0
-      highlight FloatTitle guibg=NONE ctermbg=NONE blend=0
-      ]])
+      -- TODO: probably to be removed, as harpoon lacks hl_groups + "standard"
+      -- are in use by other components
+      -- vim.cmd([[
+      -- highlight HarpoonCurrentFile guibg=NONE ctermbg=NONE blend=0
+      -- highlight NormalFloat guibg=NONE ctermbg=NONE blend=0
+      -- highlight FloatBorder guibg=NONE ctermbg=NONE blend=0
+      -- highlight FloatTitle guibg=NONE ctermbg=NONE blend=0
+      -- ]])
     end,
   },
 }
