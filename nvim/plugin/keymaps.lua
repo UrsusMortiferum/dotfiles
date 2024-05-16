@@ -1,12 +1,3 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
--- local keymap = vim.keymap.set
-
--- local nmap = function(keys, func, desc)
---   vim.keymap.set("n", keys, func, { desc = desc })
--- end
-
 local map = function(mode, keys, func, opts)
   if type(opts) == "string" then
     opts = { desc = opts }
@@ -29,8 +20,6 @@ map("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
 map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
 map("n", "<leader>e", vim.diagnostic.open_float, "Open floating diagnostic message")
 map("n", "<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
-
-map("n", "<leader>pv", vim.cmd.Ex, "Explore")
 
 map("n", "<C-d>", "<C-d>zz", "Jump Down & Center")
 map("n", "<C-u>", "<C-u>zz", "Jump Up & Center")
@@ -55,7 +44,7 @@ map("n", "<leader>cp", "<cmd>let @+ = expand('%:p')<cr>", "Copy File Path")
 map("n", "QQ", "<cmd>q!<cr>", "Quit Without Saving")
 
 -- Buffers Management
-map("n", "<leader>ot", "<cmd>new<bar>terminal<cr>", "New horizontal windows with terminal")
+-- map("n", "<leader>ot", "<cmd>new<bar>terminal<cr>", "New horizontal windows with terminal")
 map("n", "<c-w>v", "<cmd>vnew<cr>", "New vertical window with an empty buffer")
 map("n", "tj", "<cmd>bprev<cr>", "Previous buffer")
 map("n", "tk", "<cmd>bnext<cr>", "Next buffer")
@@ -75,7 +64,6 @@ map({ "n", "v" }, "<space>", "<nop>", { silent = true })
 map("n", "<c-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 
 map("n", "<leader>x", "<cmd>!chmod +x %<cr>") --, { silent = true })
-map("n", "<leader>x", "<cmd>!python %<cr>")
 -- Join the current line with the line below it
 -- keymap("n", "J", "mzJ'z")
 -- Opens file in a specified path

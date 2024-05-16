@@ -58,19 +58,19 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  group = augroup("lualine_clear_hl"),
-  callback = function()
-    local highlight_output = vim.api.nvim_exec(":highlight", true)
-    for line in highlight_output:gmatch("[^\n]+") do
-      if line:find("^lualine_c") or line:find("^lualine_x") then
-        local key = line:match("^([^%s]+)")
-        vim.cmd("highlight " .. key .. " guibg=NONE ctermbg=NONE blend=0")
-        print(key)
-      end
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+--   group = augroup("lualine_clear_hl"),
+--   callback = function()
+--     local highlight_output = vim.api.nvim_exec(":highlight", true)
+--     for line in highlight_output:gmatch("[^\n]+") do
+--       if line:find("^lualine_c") or line:find("^lualine_x") then
+--         local key = line:match("^([^%s]+)")
+--         vim.cmd("highlight " .. key .. " guibg=NONE ctermbg=NONE blend=0")
+--         print(key)
+--       end
+--     end
+--   end,
+-- })
 
 --vim.cmd([[
 --augroup AutoOrderBuffers

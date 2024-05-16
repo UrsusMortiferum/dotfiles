@@ -63,8 +63,12 @@ end
 
 M.icons = {
   misc = {
-    light_bar = '|',
-    heavy_bar = '▋',
+    light_bar = "|",
+    heavy_bar = "▋",
+    moon_first_quarter = "",
+    moon_last_quarter = "",
+    clock = " ",
+    tree = "🌳",
   },
   dap = {
     Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
