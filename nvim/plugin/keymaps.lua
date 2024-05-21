@@ -1,3 +1,10 @@
+local set = vim.keymap.set
+
+set("n", "<c-j>", "<c-w><c-j>")
+set("n", "<c-k>", "<c-w><c-k>")
+set("n", "<c-l>", "<c-w><c-l>")
+set("n", "<c-h>", "<c-w><c-h>")
+
 local map = function(mode, keys, func, opts)
   if type(opts) == "string" then
     opts = { desc = opts }
@@ -44,19 +51,10 @@ map("n", "<leader>cp", "<cmd>let @+ = expand('%:p')<cr>", "Copy File Path")
 map("n", "QQ", "<cmd>q!<cr>", "Quit Without Saving")
 
 -- Buffers Management
--- map("n", "<leader>ot", "<cmd>new<bar>terminal<cr>", "New horizontal windows with terminal")
 map("n", "<c-w>v", "<cmd>vnew<cr>", "New vertical window with an empty buffer")
 map("n", "tj", "<cmd>bprev<cr>", "Previous buffer")
 map("n", "tk", "<cmd>bnext<cr>", "Next buffer")
--- map("n", "tj", "<cmd>bfirst<cr>", "First Buffer")
--- map("n", "tk", "<cmd>blast<cr>", "Last Buffer")
--- map("n", "th", "<cmd>bprev<cr>", "Previous buffer")
--- map("n", "tl", "<cmd>bnext<cr>", "Next buffer")
 -- keymap('n', '<leader>bc', '<cmd>bdelete<CR>', { desc = 'Close buffer' })
-
--- keymap('n', '<leader><leader>', function()
---     vim.cmd('so')
--- end)
 
 map("i", "<c-c>", "<esc>")
 

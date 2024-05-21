@@ -26,12 +26,18 @@ cmp.setup({
       { "i", "c" }
     ),
   },
+
+  -- Enable luasnip to handle snippet expansion for nvim-cmp
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
     end,
   },
 })
+
+for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/custom/snippets/*.lua", true)) do
+  loadfile(ft_path)()
+end
 
 -- -- Setup up vim-dadbod
 -- cmp.setup.filetype({ "sql" }, {
@@ -47,17 +53,17 @@ ls.config.set_config({
   updateevents = "TextChanged,TextChangedI",
 })
 
-vim.keymap.set({ "i", "s" }, "<c-k", function()
+vim.keymap.set({ "i", "s" }, "<c-k>", function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
-end, { silent = true })
+end, { silent = true, desc = "Expand snippet or jump to next placeholder" })
 
 vim.keymap.set({ "i", "s" }, "<c-j>", function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end
-end, { silent = true })
+end, { silent = true, desc = "Jump to previous placeholder" })
 
 --     config = function()
 --       local cmp = require("cmp")

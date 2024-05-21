@@ -1,18 +1,22 @@
+-- TODO: clean-up previous options
 local opt = vim.opt
-
+-- Better replace
 opt.inccommand = "split"
-print("whelp whelp")
-
+-- Better search
 opt.smartcase = true
 opt.ignorecase = true -- Case insensitive search UNLESS /C or capital letter in search
-
+-- Line numbers
 opt.number = true
 opt.relativenumber = true
-
+-- Better indentation
 opt.autoindent = true
 opt.smartindent = true
+opt.breakindent = true
+-- opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
+opt.linebreak = true
+-- We say no to wrap
 opt.wrap = false
-
+-- Split defaults
 opt.splitbelow = true
 opt.splitright = true
 
@@ -26,6 +30,10 @@ opt.swapfile = false
 opt.backup = false
 opt.undofile = true
 
+-- Shorter updatetime
+opt.updatetime = 250
+opt.timeoutlen = 300
+opt.title = true
 -- -- Floating completion window -> command line
 -- opt.pumblend = 10
 -- opt.pumheight = 10
@@ -46,12 +54,7 @@ opt.undofile = true
 --
 -- opt.expandtab = true
 --
--- opt.breakindent = true
--- -- opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
--- opt.linebreak = true
---
 -- opt.belloff = "all" -- Just turn the dang bell off -> best option ever!
---
 --
 -- opt.guicursor = "a:block"
 -- opt.mouse = "a"
@@ -64,10 +67,6 @@ opt.undofile = true
 -- opt.splitkeep = "screen"
 -- opt.splitright = true
 -- opt.splitbelow = true
--- opt.timeoutlen = 300
--- opt.updatetime = 250
--- opt.timeout = true
--- opt.title = true
 --
 -- -- formatoptions and great comments -> credits to tjdevries
 -- -- implementation - ursusmortiferum
