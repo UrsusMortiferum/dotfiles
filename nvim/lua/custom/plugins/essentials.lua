@@ -112,47 +112,4 @@ return {
       })
     end,
   },
-  -- {
-  --   "ThePrimeagen/harpoon",
-  --   branch = "harpoon2",
-  --   depends_on = { "nvim-lua/plenary.nvim" },
-  --   opts = { save_on_toggle = true, sync_on_ui_close = true },
-  --   config = function()
-  --     local harpoon = require("harpoon")
-  --     harpoon:setup({})
-  --     local nmap = function(keys, func, desc)
-  --       vim.keymap.set("n", keys, func, { desc = "[H]arpoon " .. desc })
-  --     end
-  --     nmap("<leader>a", function()
-  --       harpoon:list():append()
-  --     end, "Add File")
-  --     nmap("<leader>h", function()
-  --       harpoon.ui:toggle_quick_menu(
-  --         harpoon:list(),
-  --         { border = "rounded", title_pos = "center", ui_width_ratio = 0.50 }
-  --       )
-  --     end, "File Menu")
-  --     nmap("<leader>1", function()
-  --       harpoon:list():select(1)
-  --     end, "File 1")
-  --     nmap("<leader>2", function()
-  --       harpoon:list():select(2)
-  --     end, "File 2")
-  --     nmap("<leader>3", function()
-  --       harpoon:list():select(3)
-  --     end, "File 3")
-  --     nmap("<leader>4", function()
-  --       harpoon:list():select(4)
-  --     end, "File 4")
-  --
-  --     -- TODO: probably to be removed, as harpoon lacks hl_groups + "standard"
-  --     -- are in use by other components
-  --     -- vim.cmd([[
-  --     -- highlight HarpoonCurrentFile guibg=NONE ctermbg=NONE blend=0
-  --     -- highlight NormalFloat guibg=NONE ctermbg=NONE blend=0
-  --     -- highlight FloatBorder guibg=NONE ctermbg=NONE blend=0
-  --     -- highlight FloatTitle guibg=NONE ctermbg=NONE blend=0
-  --     -- ]])
-  --   end,
-  -- },
 }
