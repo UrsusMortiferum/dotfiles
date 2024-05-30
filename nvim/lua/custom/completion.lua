@@ -1,3 +1,5 @@
+-- require("custom.snippets")
+
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.shortmess:append("c")
 
@@ -9,11 +11,12 @@ local cmp = require("cmp")
 cmp.setup({
   sources = {
     { name = "nvim_lsp" },
+    { name = "codeium" },
     { name = "path" },
     { name = "buffer" },
-    { name = "codeium" },
     { name = "luasnip" },
     { name = "emoji" },
+    { name = "obsidian" },
   },
   mapping = {
     ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -31,7 +34,14 @@ cmp.setup({
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
+      -- vim.snippet.expand(args.body)
     end,
+  },
+})
+
+cmp.setup.filetype({ "markdown" }, {
+  sources = {
+    { name = "obsidian.nvim" },
   },
 })
 

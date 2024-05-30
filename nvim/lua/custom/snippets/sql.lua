@@ -17,8 +17,8 @@ ls.add_snippets("sql", {
       FROM
         {}
       WHERE
-        ROWNUM <= 10
-        {}
+        1 = 1
+        AND {}
       ORDER BY
         {}
       ]],
@@ -45,7 +45,8 @@ ls.add_snippets("sql", {
     FROM
       {}
     WHERE
-      {}
+      1 = 1
+      AND {}
     GROUP BY
       {}
   )
