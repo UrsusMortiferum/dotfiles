@@ -22,7 +22,7 @@ ls.add_snippets("sql", {
       ORDER BY
         {}
       ]],
-      { i(1, "*"), i(2, "table"), i(3, "and condition"), i(4, "col") }
+      { i(1, "*"), i(2, "table"), i(3, "condition"), i(4, "col") }
     )
   ),
   s(

@@ -15,8 +15,10 @@ function PythonExecuteSelection()
   local lines = vim.api.nvim_buf_get_lines(0, vim.fn.line("'<") - 1, vim.fn.line("'>"), false)
   local code = table.concat(lines, "\n")
   print(code)
+
   local command = "python -c " .. vim.fn.shellescape(code)
   -- print(command)
+
   local handle = vim.fn.systemlist(command)
   for _, line in ipairs(handle) do
     print(line)
