@@ -15,12 +15,10 @@ local random_background = backgrounds[random_index]
 
 if wezterm.target_triple:find("windows") then
   home = os.getenv("USERPROFILE")
-  -- dir = home .. "/AppData/Local/Temp/WezTerm/" .. random_background
-  dir = nil
-  print("Hey you are using Windows! So specify the proper path here, unless you dont want to use random background!")
+  dir = home .. "/.config/wezterm/gifs/" .. random_background
 else
   home = os.getenv("HOME")
-  dir = home .. "/.config/wezterm/" .. random_background
+  dir = home .. "/.config/wezterm/gifs/" .. random_background
 end
 
 local dimmer = { brightness = 0.10 }
