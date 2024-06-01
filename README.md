@@ -1,13 +1,17 @@
 # dotfiles
 
-### Terminal Of Choice - WezTerm
+My dotfiles, at the same time simple personal config, but also interesting learning path.
 
-#### Why WezTerm?
+Feel free to take a look, perhaps you'll find something interesting.
+
+## Terminal Of Choice - WezTerm
+
+### Why WezTerm?
 
 - cross-platform support
 - simple, well documented configuration using lua
 
-#### Few words about configuration
+### Few words about configuration
 
 My main platform is MacOs, hence everything putted here is focused on it.
 As I also use Windows (WSL), I wanted to also make my config there, and that's
