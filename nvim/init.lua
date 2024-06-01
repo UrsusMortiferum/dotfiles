@@ -20,7 +20,7 @@ require("custom.utils").lazy_file()
 
 -- Set up lazy, and load my 'lua/custom/plugins/' folder
 require("lazy").setup({ import = "custom/plugins" }, {
-  change_detection = {
-    notify = false,
-  },
+  -- change_detection = {
+  --   notify = false,
+  -- },
 })

@@ -21,7 +21,7 @@ else
   dir = home .. "/.config/wezterm/gifs/" .. random_background
 end
 
-local dimmer = { brightness = 0.10 }
+local dimmer = { brightness = 0.03 }
 
 return {
   color_scheme = "tokyonight_night",

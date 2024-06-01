@@ -55,7 +55,7 @@ local ensure_installed = {
 }
 
 vim.list_extend(ensure_installed, servers_to_install)
-require("mason-tool-installer").setup({ ensure_installed == ensure_installed })
+require("mason-tool-installer").setup({ ensure_installed = ensure_installed, auto_update = true })
 
 for name, config in pairs(servers) do
   if config == true then
@@ -67,6 +67,23 @@ for name, config in pairs(servers) do
   lspconfig[name].setup(config)
 end
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MasonToolsStartingInstall",
+  callback = function()
+    vim.schedule(function()
+      print("mason-tool-installer is starting")
+    end)
+  end,
+})
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MasonToolsUpdatedCompleted",
+  callback = function(e)
+    vim.schedule(function()
+      print(vim.inspect(e.data))
+    end)
+  end,
+})
+
 local disable_semantic_tokes = {
   lua = true,
 }
@@ -77,10 +94,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
 
     vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0, desc = "[G]oto [D]efinition" })
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0, desc = "[G]oto [D]definition" })
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = 0, desc = "[G]oto [R]eferences" })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0, desc = "[G]oto [D]eclaration" })
-    vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0, desc = "[G]oto [T]ype [D]efinition" })
+    vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0, desc = "[G]oto [T]ype [D]definition" })
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0, desc = "Hover Documentation" })
 
     vim.keymap.set("n", "<spacer>cr", vim.lsp.buf.rename, { buffer = 0, desc = "[C]ode [R]ename" })

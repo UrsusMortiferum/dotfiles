@@ -15,17 +15,64 @@ require("telescope").setup({
       limit = 100,
     },
   },
-  defaults = { path_display = { "filename_first" } },
+  -- defaults = { path_display = { "filename_first" } },
+  defaults = {
+    layout_config = {
+      height = 0.90,
+      width = 0.90,
+      preview_cutoff = 0,
+      horizontal = { preview_width = 0.60 },
+      vertical = { width = 0.55, height = 0.9, preview_cutoff = 0 },
+      prompt_position = "top",
+    },
+    -- prompt_position = "top",
+    prompt_prefix = " ",
+    selection_caret = " ",
+    sorting_stategy = "ascending",
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--hidden",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--trim", -- add this value
+    },
+  },
   pickers = {
-    oldfiles = { theme = "ivy" },
-    buffers = { theme = "ivy" },
-    -- git_files = { theme = "dropdown" },
-    -- find_files = { theme = "dropdown" },
-    -- help_tags = { theme = "dropdown" },
-    -- grep_string = { theme = "dropdown" },
-    -- live_grep = { theme = "dropdown" },
-    -- resume = { theme = "dropdown" },
-    -- diagnostics = { theme = "dropdown" },
+    buffers = {
+      prompt_prefix = "󰸩 ",
+    },
+    commands = {
+      prompt_prefix = " ",
+      layout_config = {
+        height = 0.63,
+        width = 0.78,
+      },
+    },
+    command_history = {
+      prompt_prefix = " ",
+      layout_config = {
+        height = 0.63,
+        width = 0.58,
+      },
+    },
+    git_files = {
+      prompt_prefix = "󰊢 ",
+      show_untracked = true,
+    },
+    find_files = {
+      prompt_prefix = " ",
+      find_command = { "fd", "-H" },
+    },
+    live_grep = {
+      prompt_prefix = "󰱽 ",
+    },
+    grep_string = {
+      prompt_prefix = "󰱽 ",
+    },
     current_buffer_fuzzy_find = {
       theme = "dropdown",
       previewer = false,
@@ -57,13 +104,3 @@ end)
 vim.keymap.set("n", "<leader>en", function()
   builtin.find_files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]each [N]eovim files" })
-
--- vim.keymap.set("n", "<leader>/", function()
---   builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({ previewer = false }))
--- end, { desc = "[/] Fuzzily search in current buffer" })
--- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
--- vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
--- vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
--- vim.keymap.set("n", "<leader>s/", function()
---   builtin.live_grep({ grep_open_files = true, prompt_title = "Live Grep In Open Files" })
--- end, { desc = "[S]earch [/] in Open Files" })

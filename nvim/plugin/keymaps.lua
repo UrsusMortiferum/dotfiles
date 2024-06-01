@@ -34,7 +34,6 @@ map("n", "<C-u>", "<C-u>zz", "Jump Up & Center")
 map("n", "n", "nzzzv", "Jump Next & Center")
 map("n", "N", "Nzzzv", "Jump Previous & Center")
 
-map("n", "<leader>Y", [["+Y]], "Copy line to OS clipboard")
 map("n", "<leader>ws", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Substitute word under cursor")
 map("n", "<leader>fn", "<:new<CR>", "Create an empty buffer")
 
