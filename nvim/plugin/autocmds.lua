@@ -65,6 +65,13 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
+  pattern = { "tmux-buffer-*" },
+  callback = function()
+    vim.cmd("! rm %")
+  end,
+})
+
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
 --   group = augroup("lualine_clear_hl"),
 --   callback = function()
