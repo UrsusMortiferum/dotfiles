@@ -26,6 +26,3 @@ detect_folders = ["lua"]
 style = "green"
 format = "[ $output ]($style)"
 shell =["bash"]
-
-[[battery.display]]
-threshold = 100
