@@ -23,4 +23,27 @@ return {
       },
     },
   },
+  -- {
+  --   "kndndrj/nvim-dbee",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   build = function()
+  --     require("dbee").install("go")
+  --   end,
+  --   config = function()
+  --     require("dbee").setup(--[[optional config]])
+  --   end,
+  -- },
+  -- "tpope/vim-dadbod",
+  -- "kristijanhusak/vim-dadbod-completion",
+  -- "kristijanhusak/vim-dadbod-ui",
+  -- {
+  --   "xemptuous/sqlua.nvim",
+  --   lazy = true,
+  --   cmd = "SQLua",
+  --   config = function()
+  --     require("sqlua").setup()
+  --   end,
+  -- },
 }

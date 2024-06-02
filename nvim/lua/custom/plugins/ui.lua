@@ -75,7 +75,6 @@ return {
   -- },
   {
     "nvim-lualine/lualine.nvim",
-
     -- init = function()
     --   vim.g.lualine_laststatus = vim.o.laststatus
     --   if vim.fn.argc(-1) > 0 then
@@ -142,19 +141,17 @@ return {
             { "%f" },
             {
               function()
-                local message = "No Treesitter"
                 if vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] == nil then
-                  return message
+                  return icons.misc.fallen_leaf .. " No TS"
                 else
-                  return icons.misc.tree .. " Active TS"
+                  return icons.misc.tree
                 end
               end,
             },
             {
               function()
-                local message = "No Active LSP"
+                local message = "No LSP"
                 local buffer_id = vim.api.nvim_get_current_buf()
-                -- local clients = vim.lsp.get_active_clients({ bufnr = buffer_id })
                 local clients = vim.lsp.get_clients({ bufnr = buffer_id })
                 local clients_names = {}
                 local icon =
@@ -165,7 +162,7 @@ return {
                   for _, client in ipairs(clients) do
                     table.insert(clients_names, client.name)
                   end
-                  return icon .. " LSP: " .. table.concat(clients_names, ", ")
+                  return icon .. " :" .. table.concat(clients_names, ", ")
                 end
               end,
             },

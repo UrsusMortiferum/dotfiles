@@ -70,6 +70,7 @@ M.icons = {
     moon_last_quarter = "",
     clock = " ",
     tree = "🌳",
+    fallen_leaf = "🍂",
   },
   dap = {
     Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
