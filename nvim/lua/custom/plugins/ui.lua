@@ -30,8 +30,9 @@ return {
           sidebars = "transparent",
           floats = "transparent",
         },
+        style = "night",
       })
-      vim.cmd([[colorscheme tokyonight-night]])
+      vim.cmd("colorscheme tokyonight")
     end,
   },
   -- {
