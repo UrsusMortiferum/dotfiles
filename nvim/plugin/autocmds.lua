@@ -58,6 +58,13 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+  pattern = { "*.conf" },
+  callback = function()
+    vim.cmd("set filetype=sh")
+  end,
+})
+
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
 --   group = augroup("lualine_clear_hl"),
 --   callback = function()

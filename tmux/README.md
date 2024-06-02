@@ -15,3 +15,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ## Run, to install TMUX plugins
 `Prefix+I`
+
+## Run, to update TMUX plugins
+`Prefix+U`

@@ -8,7 +8,7 @@ return {
     "anuvyklack/windows.nvim", -- auto-resize windows
     event = "WinNew",
     dependencies = { { "anuvyklack/middleclass" }, { "anuvyklack/animation.nvim", enabled = false } },
-    keys = { { "<leader>m", "<cmd>WindowsMaximize<cr>", desc = "maximize window" } },
+    keys = { { "<leader>z", "<cmd>WindowsMaximize<cr>", desc = "Toggle window zoom" } },
     config = function()
       vim.o.winwidth = 20
       vim.o.equalalways = false
