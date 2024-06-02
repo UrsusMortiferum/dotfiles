@@ -1,0 +1,31 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+
+
+[git_status]
+untracked = '[ $count](bold yellow) '
+staged = '[ $count](bold green) '
+stashed = "[ ](cyan) "
+deleted = '[ $count](bold red) '
+modified= '[ $count](bold blue) '
+behind = '[ ](bold purple) '
+ahead = '[ ](bold purple) '
+format = '([$all_status$ahead_behind]($style))'
+
+[lua]
+detect_folders = []
+symbol = " "
+
+[custom.neovim]
+command = 'bob ls | rg Used | awk "{print \$2}"'  # shows output of command
+detect_folders = ["lua"]
+style = "green"
+format = "[ $output ]($style)"
+shell =["bash"]
+
+[[battery.display]]
+threshold = 100

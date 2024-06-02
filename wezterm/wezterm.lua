@@ -29,8 +29,8 @@ return {
     family = "VictorMono Nerd Font",
     weight = "DemiBold",
   }),
-  font_size = 13.6,
-  -- font_size = 14,
+  -- font_size = 13.6,
+  font_size = 14,
   adjust_window_size_when_changing_font_size = false,
 
   -- Tab bar

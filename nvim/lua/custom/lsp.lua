@@ -27,7 +27,7 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
-  pyright = {},
+  -- pyright = {},
   ruff_lsp = {},
   texlab = {},
 }
@@ -51,6 +51,7 @@ local ensure_installed = {
   "codespell",
   "lemminx",
   "xmlformatter",
+  "shfmt",
   -- TODO: Add formatter for LaTeX
 }
 
@@ -128,6 +129,9 @@ conform.setup({
     end,
     xml = { "xmlformatter" },
     ["*"] = { "codespell" },
+    fish = { "fish_indent" },
+    bash = { "shfmt" },
+    zsh = { "shfmt" },
   },
   -- format_on_save = {
   --   timeout_ms = 500,
