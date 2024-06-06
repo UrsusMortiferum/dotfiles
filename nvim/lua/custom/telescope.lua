@@ -17,6 +17,7 @@ require("telescope").setup({
   },
   -- defaults = { path_display = { "filename_first" } },
   defaults = {
+    sorting_strategy = "ascending",
     layout_config = {
       height = 0.90,
       width = 0.90,
@@ -28,18 +29,17 @@ require("telescope").setup({
     -- prompt_position = "top",
     prompt_prefix = " ",
     selection_caret = " ",
-    sorting_stategy = "ascending",
-    vimgrep_arguments = {
-      "rg",
-      "--color=never",
-      "--no-heading",
-      "--hidden",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
-      "--trim", -- add this value
-    },
+    -- vimgrep_arguments = {
+    -- "rg",
+    --   "--color=never",
+    --   "--no-heading",
+    --   "--hidden",
+    --   "--with-filename",
+    --   "--line-number",
+    --   "--column",
+    --   "--smart-case",
+    --   "--trim", -- add this value
+    -- },
   },
   pickers = {
     buffers = {
@@ -65,7 +65,7 @@ require("telescope").setup({
     },
     find_files = {
       prompt_prefix = " ",
-      find_command = { "fd", "-H" },
+      -- find_command = { "fd", "--hidden" },
     },
     live_grep = {
       prompt_prefix = "󰱽 ",
