@@ -48,7 +48,7 @@ local ensure_installed = {
   "stylua",
   "isort",
   "black",
-  "codespell",
+  -- "codespell",
   "lemminx",
   "xmlformatter",
   "shfmt",
@@ -128,7 +128,7 @@ conform.setup({
       end
     end,
     xml = { "xmlformatter" },
-    ["*"] = { "codespell" },
+    -- ["*"] = { "codespell" },
     fish = { "fish_indent" },
     bash = { "shfmt" },
     zsh = { "shfmt" },

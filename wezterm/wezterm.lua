@@ -58,4 +58,11 @@ return {
   window_decorations = "RESIZE",
   -- TODO: Review key bindings
   -- disable_default_key_bindings = true
+  mouse_bindings = {
+    {
+      event = { Up = { streak = 1, button = "Left" } },
+      mods = "CTRL",
+      action = wezterm.action.OpenLinkAtMouseCursor,
+    },
+  },
 }
