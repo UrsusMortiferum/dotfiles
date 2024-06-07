@@ -12,9 +12,15 @@ function fs -d "Switch tmux session"
 end
 
 starship init fish | source
+enable_transience
 
 # Set up fzf key bindings
 fzf --fish | source
+
+pyenv init - | source
+set -x PYTHON_CONFIGURE_OPTS --enable-framework
+# To avoid a clash between Pyenv and Brew
+alias brew="env PATH=(string replace (pyenv root)/shims '' \"\$PATH\") brew"
 
 fish_config theme choose tokyonight_night
 
@@ -32,3 +38,6 @@ if status --is-interactive
 end
 
 set -U fish_greeting
+
+# Created by `pipx` on 2024-06-06 11:09:35
+set PATH $PATH /Users/ursusmortiferum/.local/bin
