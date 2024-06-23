@@ -27,7 +27,7 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
-  -- pyright = {},
+  pyright = {},
   ruff_lsp = {},
   texlab = {},
 }

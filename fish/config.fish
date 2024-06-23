@@ -18,6 +18,8 @@ enable_transience
 fzf --fish | source
 
 pyenv init - | source
+set -Ux PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
 set -x PYTHON_CONFIGURE_OPTS --enable-framework
 # To avoid a clash between Pyenv and Brew
 alias brew="env PATH=(string replace (pyenv root)/shims '' \"\$PATH\") brew"
