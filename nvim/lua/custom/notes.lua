@@ -2,7 +2,7 @@ require("obsidian").setup({
   workspaces = {
     { name = "notes", path = "~/notes/" },
   },
-  notes_subdir = "$in",
+  notes_subdir = "0_in",
   new_notes_location = "notes_subdir",
   completion = { nvim_cmp = true, min_chars = 2 },
   -- new_notes_location = "current_dir",
