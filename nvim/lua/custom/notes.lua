@@ -1,13 +1,15 @@
 require("obsidian").setup({
   workspaces = {
-    { name = "notes", path = "~/notes/" },
+    {
+      name = "notes",
+      path = "~/Notes/",
+    },
   },
   notes_subdir = "0_in",
   new_notes_location = "notes_subdir",
   completion = { nvim_cmp = true, min_chars = 2 },
-  -- new_notes_location = "current_dir",
   templates = {
-    folder = "~/notes/Templates/",
+    folder = "~/Notes/Templates/",
     date_format = "%Y-%m-%d-%a",
     time_format = "%H:%M",
   },

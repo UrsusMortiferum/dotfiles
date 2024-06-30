@@ -25,7 +25,7 @@ return {
     vim.keymap.set("n", "<leader>sn", "<cmd>ObsidianSearch<cr>", { desc = "[S]earch [N]otes" }),
     vim.keymap.set("n", "<leader>dn", "<cmd>ObsidianToday<cr>", { desc = "[D]aily [N]ote" }),
     vim.keymap.set("n", "<leader>nl", "<cmd>ObsidianLink<cr>", { desc = "[N]ew [L]ink" }),
-    vim.keymap.set("n", "<leader>ln", "<cmd>'<,'>ObsidianLinkNew<cr>", { desc = "[L]ink [N]ew - Creates New Note" }),
+    vim.keymap.set("v", "<leader>ln", "<cmd>'<,'>ObsidianLinkNew<cr>", { desc = "[L]ink [N]ew - Creates New Note" }),
     vim.keymap.set("n", "<leader>bl", "<cmd>ObsidianBacklinks<cr>", { desc = "View [B]ack[L]inks" }),
   },
 }
