@@ -25,13 +25,20 @@ local dimmer = { brightness = 0.03 }
 
 return {
   color_scheme = "tokyonight_night",
+
+  -- Font
   font = wezterm.font({
     family = "VictorMono Nerd Font",
     weight = "DemiBold",
   }),
-  -- font_size = 13.6,
   font_size = 14,
   adjust_window_size_when_changing_font_size = false,
+
+  -- Window
+  window_decorations = "RESIZE",
+  max_fps = 144,
+  animation_fps = 60,
+  cursor_blink_rate = 250,
 
   -- Tab bar
   show_new_tab_button_in_tab_bar = false,
@@ -50,12 +57,11 @@ return {
       hsb = dimmer,
       vertical_align = "Middle",
       horizontal_align = "Center",
-      -- opacity = 0.95,
+      -- opacity = 0.75,
       -- height = "Contain",
       -- width = "Contain",
     },
   },
-  window_decorations = "RESIZE",
   -- TODO: Review key bindings
   -- disable_default_key_bindings = true
   mouse_bindings = {

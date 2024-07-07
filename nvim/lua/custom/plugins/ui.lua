@@ -17,24 +17,6 @@ return {
       })
     end,
   },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("tokyonight").setup({
-        transparent = true,
-        styles = {
-          comments = { italic = false },
-          keywords = { italic = false },
-          sidebars = "transparent",
-          floats = "transparent",
-        },
-        style = "night",
-      })
-      vim.cmd("colorscheme tokyonight")
-    end,
-  },
   -- {
   --   "folke/noice.nvim",
   --   event = "VeryLazy",
@@ -86,6 +68,7 @@ return {
     --     vim.o.laststatus = 0
     --   end
     -- end,
+    event = "VeryLazy",
     opts = function()
       local lualine_require = require("lualine_require")
       lualine_require.require = require
@@ -93,31 +76,60 @@ return {
 
       return {
         options = {
-          globalstatus = true,
           component_separators = icons.misc.light_bar,
+          theme = "auto",
+          globalstatus = true,
+          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
-          lualine_a = { { "mode", separator = { left = icons.misc.moon_last_quarter }, right_padding = 2 } },
-          lualine_b = { { "branch", separator = { right = icons.misc.moon_first_quarter }, left_padding = 2 } },
+          lualine_a = {
+            { "mode", icon = "", separator = { left = icons.misc.moon_last_quarter }, right_padding = 2 },
+          },
+          lualine_b = {
+            { "branch", icon = "", separator = { right = icons.misc.moon_first_quarter }, left_padding = 2 },
+          },
           lualine_c = {
             {
-              "diff",
+              "diagnostics",
               symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
+                error = " ",
+                warn = " ",
+                info = " ",
+                hint = "󰝶 ",
               },
-              source = function()
-                local gitsigns = vim.b.gitsigns_status_dict
-                if gitsigns then
-                  return {
-                    added = gitsigns.added,
-                    modified = gitsigns.changed,
-                    removed = gitsigns.removed,
-                  }
-                end
-              end,
             },
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            { "filename", padding = { left = 1, right = 0 } },
+            -- {
+            --   function()
+            --     local buffer_count = require("core.utils").get_buffer_count()
+            --
+            --     return "+" .. buffer_count - 1 .. " "
+            --   end,
+            --   cond = function()
+            --     return require("core.utils").get_buffer_count() > 1
+            --   end,
+            --   -- color = utils.get_hlgroup("Operator", nil),
+            --   padding = { left = 0, right = 1 },
+            -- },
+            -- {
+            --   "diff",
+            --   symbols = {
+            --     added = icons.git.added,
+            --     modified = icons.git.modified,
+            --     removed = icons.git.removed,
+            --   },
+            --   source = function()
+            --     local gitsigns = vim.b.gitsigns_status_dict
+            --     if gitsigns then
+            --       return {
+            --         added = gitsigns.added,
+            --         modified = gitsigns.changed,
+            --         removed = gitsigns.removed,
+            --       }
+            --     end
+            --   end,
+            -- },
             { "buffers" },
           },
           lualine_x = {
@@ -129,11 +141,7 @@ return {
                 info = icons.diagnostics.Info,
                 hint = icons.diagnostics.Hint,
               },
-              -- Table of diagnostic sources, available sources are:
-              --   "nvim_lsp", "nvim_diagnostic", "nvim_workspace_diagnostic", "coc", "ale", "vim_lsp'.
               sources = { "nvim_diagnostic", "coc", "nvim_lsp" },
-              -- or a function that returns a table as such:
-              --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
               sections = { "error", "warn", "info", "hint" },
               colored = true, -- Displays diagnostics status in color if set to true.
               update_in_insert = false, -- Update diagnostics in insert mode.
@@ -179,6 +187,8 @@ return {
             },
           },
         },
+
+        extensions = { "lazy", "toggleterm", "mason", "neo-tree", "trouble" },
       }
     end,
   },
