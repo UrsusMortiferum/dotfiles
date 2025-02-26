@@ -1,15 +1,4 @@
--- buffers
-vim.api.nvim_set_keymap("n", "bk", ":blast<cr>", { noremap = false })
-vim.api.nvim_set_keymap("n", "bj", ":bfirst<cr>", { noremap = false })
-vim.api.nvim_set_keymap("n", "bh", ":bprev<cr>", { noremap = false })
-vim.api.nvim_set_keymap("n", "bl", ":bnext<cr>", { noremap = false })
--- vim.api.nvim_set_keymap("n", "td", ":bdelete<cr>", { noremap = false })
--- files
-vim.api.nvim_set_keymap("n", "QQ", ":q!<cr>", { noremap = false })
-vim.api.nvim_set_keymap("n", "WW", ":w!<cr>", { noremap = false })
-vim.api.nvim_set_keymap("n", "E", "$", { noremap = false })
-vim.api.nvim_set_keymap("n", "B", "^", { noremap = false })
--- local set = vim.keymap.set
+local set = vim.keymap.set
 
 -- set("n", "<c-j>", "<c-w><c-j>")
 -- set("n", "<c-k>", "<c-w><c-k>")
@@ -68,6 +57,7 @@ map("n", "tk", "<cmd>bnext<cr>", "Next buffer")
 
 map("i", "<c-c>", "<esc>")
 
+map({ "n", "v" }, "<space>", "<nop>", { silent = true })
 map("n", "<c-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 
 map("n", "<leader>x", "<cmd>!chmod +x %<cr>") --, { silent = true })
