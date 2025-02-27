@@ -1,3 +1,5 @@
+-- terminal
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 -- buffers
 vim.api.nvim_set_keymap("n", "bk", ":blast<cr>", { noremap = false })
 vim.api.nvim_set_keymap("n", "bj", ":bfirst<cr>", { noremap = false })
