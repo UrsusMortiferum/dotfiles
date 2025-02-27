@@ -24,6 +24,7 @@ opt.splitbelow = true
 opt.splitright = true
 -- Sign column
 opt.signcolumn = "yes"
+vim.o.statuscolumn = ""
 opt.shada = { "'10", "<0", "s10", "h" }
 
 opt.formatoptions:remove "o"

@@ -3,7 +3,7 @@ local function augroup(name)
 end
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup "highlight_yank",
+  group = augroup "highlight_on_yank",
   callback = function()
     vim.highlight.on_yank()
   end,

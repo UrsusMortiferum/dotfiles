@@ -7,10 +7,9 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "j-hui/fidget.nvim", opts = {} },
-      -- Autoformatting
       "stevearc/conform.nvim",
-      -- Schema information
       "b0o/SchemaStore.nvim",
+      "saghen/blink.cmp",
     },
     config = function()
       require("neodev").setup {
@@ -22,6 +21,9 @@ return {
       local capabilities = nil
       if pcall(require, "cmp_nvim_lsp") then
         capabilities = require("cmp_nvim_lsp").default_capabilities()
+      end
+      if pcall(require, "blink.cmp") then
+        capabilities = require("blink.cmp").get_lsp_capabilities()
       end
 
       local lspconfig = require "lspconfig"
@@ -84,6 +86,9 @@ return {
           },
         },
 
+        ruff = {},
+        basedpyright = {},
+
         clangd = {
           -- TODO: Could include cmd, but not sure those were all relevant flags.
           --    looks like something i would have added while i was floundering
@@ -103,6 +108,8 @@ return {
 
       require("mason").setup()
       local ensure_installed = {
+        "ruff",
+        "basedpyright",
         "shfmt",
         "stylua",
         "lua_ls",
@@ -152,6 +159,7 @@ return {
       require("conform").setup {
         formatters_by_ft = {
           lua = { "stylua" },
+          python = { "ruff" },
           sh = { "shfmt" },
         },
       }
