@@ -1,4 +1,5 @@
 vim.cmd.colorscheme "tokyonight-night"
+
 -- TODO: clean-up previous options
 local opt = vim.opt
 -- Better replace
