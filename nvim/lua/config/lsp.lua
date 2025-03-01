@@ -1,10 +1,15 @@
-local lspconfig = require"lspconfig"
-local mason = require"mason"
-local mason_lspconfig = require"mason-lspconfig"
-local mason_installer = require"mason-tool-installer"
+local conform = require "conform"
+local lspconfig = require "lspconfig"
+local mason = require "mason"
+local mason_lspconfig = require "mason-lspconfig"
+local mason_installer = require "mason-tool-installer"
 
 local servers = {
   lua_ls = {},
+}
+
+local ensure_installed = {
+  "stylua",
 }
 
 local servers_to_install = vim.tbl_filter(function(key)
@@ -17,19 +22,17 @@ local servers_to_install = vim.tbl_filter(function(key)
 end, vim.tbl_keys(servers))
 
 mason.setup()
-local ensure_installed = {
-  "stylua",
-}
-
 vim.list_extend(ensure_installed, servers_to_install)
-mason_installer.setup { ensure_installed = ensure_installed}
+mason_installer.setup { ensure_installed = ensure_installed }
 
 for name, config in pairs(servers) do
-  if config == true then config = {} end
-  config = vim.tbl_deep_extend("force",{},{capabilities = capabilities,},config)
+  if config == true then
+    config = {}
+  end
+  config = vim.tbl_deep_extend("force", {}, { capabilities = capabilities }, config)
   lspconfig[name].setup(config)
 end
---
+
 -- local disable_semantic_tokens = {
 --   lua = true,
 -- }
@@ -40,14 +43,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
 
     vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
---
---     local filetype = vim.bo[bufnr].filetype
---     if disable_semantic_tokens[filetype] then
---       client.server_capabilities.semanticTokensProvider = nil
---     end
+    --
+    --     local filetype = vim.bo[bufnr].filetype
+    --     if disable_semantic_tokens[filetype] then
+    --       client.server_capabilities.semanticTokensProvider = nil
+    --     end
   end,
 })
---
+
+conform.setup {
+  formatters_by_ft = {
+    lua = { "stylua" },
+    python = { "ruff" },
+    bash = { "shfmt" },
+    zsh = { "shfmt" },
+  },
+}
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function(args)
+    conform.format { bufnr = args.buf }
+  end,
+})
+
 --
 --
 --
@@ -90,9 +108,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --     lspconfig.server.setup {}
 --   end,
 -- }
-
-
-
 
 --
 -- vim.api.nvim_create_autocmd('LspAttach', {
