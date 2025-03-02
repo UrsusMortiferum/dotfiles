@@ -16,6 +16,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "stevearc/conform.nvim",
+      { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
       require "config.lsp"
