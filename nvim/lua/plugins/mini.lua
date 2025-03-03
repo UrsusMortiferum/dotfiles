@@ -3,11 +3,70 @@ return {
     "echasnovski/mini.nvim",
     config = function()
       require("mini.ai").setup()
+      require("mini.align").setup()
+      local miniclue = require "mini.clue"
+      miniclue.setup {
+        clues = {
+          { mode = "n", keys = "<leader>b", desc = "+Buffer" },
+          --   { mode = 'n', keys = '<leader>e', desc = '+Explore' },
+          { mode = "n", keys = "<leader>f", desc = "+Find" },
+          { mode = "n", keys = "<leader>s", desc = "+Search" },
+          { mode = "n", keys = "<leader>g", desc = "+Git" },
+          { mode = "n", keys = "<leader>l", desc = "+LSP" },
+          --   { mode = 'n', keys = '<leader>L', desc = '+Lua/Log' },
+          --   { mode = 'n', keys = '<leader>m', desc = '+Map' },
+          --   { mode = 'n', keys = '<leader>o', desc = '+Other' },
+          --   { mode = 'n', keys = '<leader>r', desc = '+R' },
+          --   { mode = 'n', keys = '<leader>t', desc = '+Terminal/Minitest' },
+          --   { mode = 'n', keys = '<leader>T', desc = '+Test' },
+          --   { mode = 'n', keys = '<leader>v', desc = '+Visits' },
+          --   { mode = 'x', keys = '<leader>l', desc = '+LSP' },
+          --   { mode = 'x', keys = '<leader>r', desc = '+R' },
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers { show_contents = true },
+          miniclue.gen_clues.windows { submode_resize = true },
+          miniclue.gen_clues.z(),
+        },
+        triggers = {
+          -- Leader triggers
+          { mode = "n", keys = "<leader>" },
+          { mode = "x", keys = "<leader>" },
+          -- Built-in completion
+          { mode = "i", keys = "<C-x>" },
+          -- `g` key
+          { mode = "n", keys = "g" },
+          { mode = "x", keys = "g" },
+          -- Marks
+          { mode = "n", keys = "'" },
+          { mode = "n", keys = "`" },
+          { mode = "x", keys = "'" },
+          { mode = "x", keys = "`" },
+          -- Registers
+          { mode = "n", keys = '"' },
+          { mode = "x", keys = '"' },
+          { mode = "i", keys = "<C-r>" },
+          { mode = "c", keys = "<C-r>" },
+          -- Window commands
+          { mode = "n", keys = "<C-w>" },
+          -- `z` key
+          { mode = "n", keys = "z" },
+          { mode = "x", keys = "z" },
+          { mode = "n", keys = "[" },
+          { mode = "n", keys = "]" },
+        },
+        window = {
+          delay = 100,
+          config = {
+            width = "auto",
+            border = "rounded",
+          },
+        },
+      }
+      require("mini.cursorword").setup()
       require("mini.diff").setup()
       require("mini.git").setup()
-      -- require("mini.basics").setup()
-      -- require("mini.comment").setup()
-      -- require("mini.cursorword").setup()
       require("mini.files").setup {
         mappings = {
           go_in_plus = "l",
@@ -19,78 +78,19 @@ return {
         },
       }
       vim.keymap.set("n", "-", ":lua MiniFiles.open()<cr>")
+      local hipatterns = require "mini.hipatterns"
+      hipatterns.setup {
+        highlighters = {
+          -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+          fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+          hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+          todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+          note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+          hex_color = hipatterns.gen_highlighter.hex_color(),
+        },
+      }
       require("mini.icons").setup()
-      -- require("mini.pairs").setup()
-      -- require("mini.splitjoin").setup()
-      -- require("mini.surround").setup()
       require("mini.statusline").setup()
-
-      --      local miniclue = require "mini.clue"
-      --      miniclue
-      --        .setup        -- No need to copy this inside `setup()`. Will be used automatically.
-      -- {
-      --          -- Options for how hunks are visualized
-      --          view = {
-      --            -- Visualization style. Possible values are 'sign' and 'number'.
-      --            -- Default: 'number' if line numbers are enabled, 'sign' otherwise.
-      --            style = vim.go.number and "number" or "sign",
-      --
-      --            -- Signs used for hunks with 'sign' view
-      --            signs = { add = "▒", change = "▒", delete = "▒" },
-      --
-      --            -- Priority of used visualization extmarks
-      --            priority = 199,
-      --          },
-      --
-      --          -- Source for how reference text is computed/updated/etc
-      --          -- Uses content from Git index by default
-      --          source = nil,
-      --
-      --          -- Delays (in ms) defining asynchronous processes
-      --          delay = {
-      --            -- How much to wait before update following every text change
-      --            text_change = 200,
-      --          },
-      --
-      --          -- Module mappings. Use `''` (empty string) to disable one.
-      --          mappings = {
-      --            -- Apply hunks inside a visual/operator region
-      --            apply = "gh",
-      --
-      --            -- Reset hunks inside a visual/operator region
-      --            reset = "gH",
-      --
-      --            -- Hunk range textobject to be used inside operator
-      --            -- Works also in Visual mode if mapping differs from apply and reset
-      --            textobject = "gh",
-      --
-      --            -- Go to hunk range in corresponding direction
-      --            goto_first = "[H",
-      --            goto_prev = "[h",
-      --            goto_next = "]h",
-      --            goto_last = "]H",
-      --          },
-      --
-      --          -- Various options
-      --          options = {
-      --            -- Diff algorithm. See `:h vim.diff()`.
-      --            algorithm = "histogram",
-      --            -- Whether to use "indent heuristic". See `:h vim.diff()`.
-      --            indent_heuristic = true,
-      --            -- The amount of second-stage diff to align lines (in Neovim>=0.9)
-      --            linematch = 60,
-      --            -- Whether to wrap around edges during hunk navigation
-      --            wrap_goto = false,
-      --          },
-      --        }
-      --
-      --
-      --      local hipatterns = require "mini.hipatterns"
-      --      hipatterns.setup {
-      --        highlighters = {
-      --          hex_color = hipatterns.gen_highlighter.hex_color(),
-      --        },
-      --      }
     end,
     version = "*",
   },
