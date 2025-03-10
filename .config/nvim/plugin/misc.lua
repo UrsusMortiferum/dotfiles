@@ -1,3 +1,4 @@
+print "previous misc"
 local function augroup(name)
   return vim.api.nvim_create_augroup("um_" .. name, { clear = true })
 end

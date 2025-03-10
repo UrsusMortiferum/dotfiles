@@ -23,22 +23,25 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
-  pylsp = {
-    settings = {
-      pylsp = {
-        plugins = {
-          pyflakes = { enabled = false },
-          pycodestyle = { enabled = false },
-          autopep8 = { enabled = false },
-          yapf = { enabled = false },
-          mccabe = { enabled = false },
-          pylsp_mypy = { enabled = false },
-          pylsp_black = { enabled = false },
-          pylsp_isort = { enabled = false },
-        },
-      },
-    },
-  },
+  -- basedpyright = {},
+  pyright = {},
+  ruff = {},
+  -- pylsp = {
+  --   settings = {
+  --     pylsp = {
+  --       plugins = {
+  --         pyflakes = { enabled = false },
+  --         pycodestyle = { enabled = false },
+  --         autopep8 = { enabled = false },
+  --         yapf = { enabled = false },
+  --         mccabe = { enabled = false },
+  --         pylsp_mypy = { enabled = false },
+  --         pylsp_black = { enabled = false },
+  --         pylsp_isort = { enabled = false },
+  --       },
+  --     },
+  -- },
+  -- },
 }
 
 local ensure_installed = {
@@ -64,8 +67,9 @@ for name, config in pairs(servers) do
   if config == true then
     config = {}
   end
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  config = vim.tbl_deep_extend("force", {}, { capabilities = capabilities }, config)
   config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-  -- config = vim.tbl_deep_extend("force", {}, { capabilities = capabilities }, config)
   lspconfig[name].setup(config)
 end
 
