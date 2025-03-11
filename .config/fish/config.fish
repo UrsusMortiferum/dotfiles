@@ -3,3 +3,5 @@ if status is-interactive
 end
 
 starship init fish | source
+
+fish_config theme choose tokyonight_night
