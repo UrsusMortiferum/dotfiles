@@ -1,0 +1,14 @@
+[user]
+	email = 101043729+UrsusMortiferum@users.noreply.github.com
+	name = UrsusMortiferum
+  gpgSign = true  
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+[tag]
+  gpgSign = true
+[gpg]
+  program = gpg
