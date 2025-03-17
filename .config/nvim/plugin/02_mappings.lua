@@ -93,17 +93,17 @@ end
 -- xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>',  'Show at selection')
 --
 -- l is for 'LSP' (Language Server Protocol)
-local formatting_cmd = '<Cmd>lua require("conform").format({ lsp_fallback = true })<CR>'
+-- local formatting_cmd = '<cmd>lua require("conform").format({ async = true})<CR>'
 nmap_leader("la", "<Cmd>lua vim.lsp.buf.code_action()<CR>", "Actions")
 nmap_leader("ld", "<Cmd>lua vim.diagnostic.open_float()<CR>", "Diagnostics popup")
-nmap_leader("lf", formatting_cmd, "Format file")
+-- nmap_leader("lf", formatting_cmd, "Format file")
 nmap_leader("li", "<Cmd>lua vim.lsp.buf.hover()<CR>", "Information")
 nmap_leader("lj", "<Cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic")
 nmap_leader("lk", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", "Prev diagnostic")
 nmap_leader("lR", "<Cmd>lua vim.lsp.buf.references()<CR>", "References")
-nmap_leader("lr", "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename")
+-- nmap_leader("lr", "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename")
 nmap_leader("ls", "<Cmd>lua vim.lsp.buf.definition()<CR>", "Source definition")
-xmap_leader("lf", formatting_cmd, "Format selection")
+-- xmap_leader("lf", formatting_cmd, "Format selection")
 --
 -- L is for 'Lua'
 -- nmap_leader('Lc', '<Cmd>lua Config.log_clear()<CR>',               'Clear log')

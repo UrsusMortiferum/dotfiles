@@ -2,7 +2,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "saghen/blink.cmp",
       {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -12,11 +11,14 @@ return {
           },
         },
       },
-      "williamboman/mason.nvim",
+      {
+        "williamboman/mason.nvim",
+        opts = {},
+      },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "stevearc/conform.nvim",
       { "j-hui/fidget.nvim", opts = {} },
+      "saghen/blink.cmp",
     },
     config = function()
       require "config.lsp"
