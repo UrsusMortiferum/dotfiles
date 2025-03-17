@@ -41,4 +41,4 @@ SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
 SETUVAR fish_user_paths:/home/ursus/go/bin
-SETUVAR fish_user_paths:/opt/homebrew/bin
+SETUVAR fish_user_paths:/opt/homebrew/opt/rustup/bin\x1e/Users/ursus/go/bin\x1e/opt/homebrew/bin
