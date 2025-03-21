@@ -74,6 +74,7 @@ local servers = {
   basedpyright = { settings = { basedpyright = { analysis = { typeCheckingMode = "standard" } } } },
   -- pyright = {},
   ruff = {},
+  sqls = {},
   -- pylsp = {
   --   settings = {
   --     pylsp = {
@@ -96,6 +97,7 @@ local ensure_installed = {
   "stylua",
   "ruff",
   "shfmt",
+  "sleek",
 }
 
 local servers_to_install = vim.tbl_filter(function(key)

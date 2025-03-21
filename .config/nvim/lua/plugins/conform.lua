@@ -16,8 +16,9 @@ return {
   ---@type conform.setupOpts
   opts = {
     formatters_by_ft = {
-      lua = { "stylua" },
       bash = { "shfmt" },
+      lua = { "stylua" },
+      sql = { "sleek" },
       zsh = { "shfmt" },
     },
     default_format_opts = {
