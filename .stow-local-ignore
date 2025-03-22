@@ -5,7 +5,6 @@ LICENSE
 .git
 .gitignore
 wezterm
-tmux
 nvim_old_1
 nvim_old
 fish_old
