@@ -124,7 +124,7 @@ mason_lspconfig.setup {
         end
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         config = vim.tbl_deep_extend("force", {}, { capabilities = capabilities }, config)
-        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+        -- config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
         lspconfig[name].setup(config)
       end
     end,
