@@ -1,4 +1,3 @@
-print "previous keymaps"
 -- -- terminal
 -- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 -- -- buffers

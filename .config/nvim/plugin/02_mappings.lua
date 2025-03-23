@@ -1,5 +1,3 @@
-print "mappings"
-
 -- -- Basic mappings =============================================================
 -- -- NOTE: Most basic mappings come from 'mini.basics'
 --

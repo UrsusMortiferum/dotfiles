@@ -1,4 +1,3 @@
-print "terminal"
 -- local set = vim.opt_local
 --
 -- vim.api.nvim_create_autocmd("TermOpen", {

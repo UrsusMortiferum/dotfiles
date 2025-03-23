@@ -35,5 +35,20 @@ require("lazy").setup {
     { import = "plugins" },
   },
   install = { colorscheme = { "tokyonight-night" } },
-  checker = { enabled = true },
+  checker = { enabled = true, notify = false },
+  -- performance = {
+  --   rtp = {
+  --     -- disable some rtp plugins
+  --     disabled_plugins = {
+  --       "gzip",
+  --       -- "matchit",
+  --       -- "matchparen",
+  --       -- "netrwPlugin",
+  --       "tarPlugin",
+  --       "tohtml",
+  --       "tutor",
+  --       "zipPlugin",
+  --     },
+  --   },
+  -- },
 }

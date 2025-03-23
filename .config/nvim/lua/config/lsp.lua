@@ -71,8 +71,9 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
-  basedpyright = { settings = { basedpyright = { analysis = { typeCheckingMode = "standard" } } } },
+  -- basedpyright = { settings = { basedpyright = { analysis = { typeCheckingMode = "standard" } } } },
   -- pyright = {},
+  pylyzer = {},
   ruff = {},
   sqls = {},
   -- pylsp = {

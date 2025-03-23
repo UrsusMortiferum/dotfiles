@@ -1,4 +1,3 @@
-print "options"
 vim.cmd "colorscheme tokyonight"
 
 --stylua: ignore start
