@@ -24,17 +24,18 @@ vim.g.maplocalleader = " "
 -- Setup lazy.nvim
 require("lazy").setup {
   spec = {
-    {
-      {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = { style = "night", dim_inactive = true },
-      },
-    },
     { import = "plugins" },
   },
-  install = { colorscheme = { "tokyonight-night" } },
+  -- dev = {
+  --   -- Directory where you store your local plugin projects. If a function is used,
+  --   -- the plugin directory (e.g. `~/projects/plugin-name`) must be returned.
+  --   ---@type string | fun(plugin: LazyPlugin): string
+  --   path = "~/projects",
+  --   ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
+  --   patterns = {}, -- For example {"folke"}
+  --   fallback = false, -- Fallback to git when local plugin doesn't exist
+  -- },
+  install = { colorscheme = { "tokyonight-night", "habamax" } },
   checker = { enabled = true, notify = false },
   -- performance = {
   --   rtp = {
