@@ -1,3 +1,28 @@
+-- Basic keymaps ==============================================================
+
+local map = vim.keymap.set
+
+-- Move by visible lines. Notes:
+-- - Don't map in Operator-pending mode because it severely changes behavior:
+--   like `dj` on non-wrapped line will not delete it.
+-- - Condition on `v:count == 0` to allow easier use of relative line numbers.
+map({ "n", "x" }, "j", [[v:count == 0 ? 'gj' : 'j']], { expr = true })
+map({ "n", "x" }, "k", [[v:count == 0 ? 'gk' : 'k']], { expr = true })
+
+-- Search inside visually highlighted text. Use `silent = false` for it to
+-- make effect immediately.
+map("x", "g/", "<esc>/\\%V", { silent = false, desc = "Search inside visual selection" })
+
+-- -- Move inside completion list
+-- map("i", "<c-n>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
+-- map("i", "<c-p>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
+
+-- Leader Keymaps =============================================================
+-- Create global tables with information about clue groups in certain modes
+-- Structure of tables is taken to be compatible with 'mini.clue'.
+_G.Config.leader_group_clues = {
+  { mode = "n", keys = "<leader>b", desc = "+Buffer" },
+}
 -- -- terminal
 -- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 -- -- buffers
@@ -12,11 +37,6 @@
 -- vim.api.nvim_set_keymap("n", "E", "$", { noremap = false })
 -- vim.api.nvim_set_keymap("n", "B", "^", { noremap = false })
 -- -- local set = vim.keymap.set
---
--- -- set("n", "<c-j>", "<c-w><c-j>")
--- -- set("n", "<c-k>", "<c-w><c-k>")
--- -- set("n", "<c-l>", "<c-w><c-l>")
--- -- set("n", "<c-h>", "<c-w><c-h>")
 --
 -- local map = function(mode, keys, func, opts)
 --   if type(opts) == "string" then
