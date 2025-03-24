@@ -5,12 +5,49 @@ local mason_installer = require "mason-tool-installer"
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
   callback = function(args)
-    local map = function(keys, func, desc, mode)
+    local map = function(lhs, rhs, desc, mode)
       mode = mode or "n"
-      vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
+      vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, desc = "LSP: " .. desc })
+    end
+    local diagnostic_jump = function(next, severity)
+      local opts = {
+        count = next and 1 or -1,
+        -- severity = severity,
+      }
+      -- if severity then
+      --   opts.severity = vim.diagnostic.severity[severity]
+      -- end
+      return function()
+        vim.diagnostic.jump(opts)
+      end
     end
 
     map("<leader>lr", vim.lsp.buf.rename, "Rename")
+    map("<leader>la", vim.lsp.buf.code_action, "Actions")
+    map("<leader>ld", vim.diagnostic.open_float, "Diagnostics popup")
+    map("gd", vim.lsp.buf.definition, "Goto Definition")
+    map("gr", vim.lsp.buf.references, "Goto References")
+    map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+    map("gI", vim.lsp.buf.implementation, "Goto implementation")
+    map("K", vim.lsp.buf.hover, "Hover")
+    map("]d", function()
+      vim.diagnostic.jump { count = 1 }
+    end, "Next Diagnostics")
+    map("[d", function()
+      vim.diagnostic.jump { count = -1 }
+    end, "Previous Diagnostics")
+    map("]e", function()
+      vim.diagnostic.jump { count = 1, severity = "ERROR" }
+    end, "Next Error")
+    map("[e", function()
+      vim.diagnostic.jump { count = -1, severity = "ERROR" }
+    end, "Previous Error")
+    map("]w", function()
+      vim.diagnostic.jump { count = 1, severity = "WARN" }
+    end, "Next Warning")
+    map("[w", function()
+      vim.diagnostic.jump { count = -1, severity = "WARN" }
+    end, "Previous Warning")
 
     -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
     ---@param client vim.lsp.Client

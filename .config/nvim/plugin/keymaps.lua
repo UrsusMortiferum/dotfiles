@@ -23,6 +23,45 @@ map("x", "g/", "<esc>/\\%V", { silent = false, desc = "Search inside visual sele
 _G.Config.leader_group_clues = {
   { mode = "n", keys = "<leader>b", desc = "+Buffer" },
 }
+
+-- Create <leader> keymaps
+local nmap_leader = function(keys, func, desc, opts)
+  opts = opts or {}
+  opts.desc = desc
+  vim.keymap.set("n", "<leader>" .. keys, func, opts)
+end
+local xmap_leader = function(suffix, rhs, desc, opts)
+  opts = opts or {}
+  opts.desc = desc
+  vim.keymap.set("x", "<leader>" .. suffix, rhs, opts)
+end
+
+-- b is for 'buffer'
+nmap_leader("ba", "<cmd>b#<cr>", "Alternate")
+nmap_leader("bd", "<cmd>lua minibufremove.delete()<cr>", "Delete")
+nmap_leader("bD", "<cmd>lua minibufremove.delete(0, true)<cr>", "Delete!")
+nmap_leader("bs", "<cmd>lua config.new_scratch_buffer()<cr>", "Scratch")
+nmap_leader("bw", "<cmd>lua minibufremove.wipeout()<cr>", "Wipeout")
+nmap_leader("bW", "<cmd>lua minibufremove.wipeout(0, true)<cr>", "Wipeout!")
+
+-- e is for 'explore' and 'edit'
+
+-- f is for 'fuzzy find'
+
+-- g is for 'git'
+
+-- l is for 'LSP'
+-- nmap_leader("ld", "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics popup")
+-- nmap_leader("lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next diagnostic")
+-- nmap_leader("lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev diagnostic")
+-- nmap_leader("lr", "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename")
+-- nmap_leader("lf", formatting_cmd, "Format file")
+-- local formatting_cmd = '<cmd>lua require("conform").format({ async = true})<CR>'
+nmap_leader("li", "<Cmd>lua vim.lsp.buf.hover()<CR>", "Information")
+-- xmap_leader("lf", formatting_cmd, "Format selection")
+
+-- L is for 'Lua'
+
 -- -- terminal
 -- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 -- -- buffers

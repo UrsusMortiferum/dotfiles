@@ -152,6 +152,7 @@ local diagnostic_opts = {
   -- Show virtual text only for errors
   -- virtual_text = { severity = { min = 'ERROR', max = 'ERROR' } },
   -- virtual_text = true,
+  jump = { float = true },
   virtual_text = {
     source = "if_many",
     spacing = 2,
