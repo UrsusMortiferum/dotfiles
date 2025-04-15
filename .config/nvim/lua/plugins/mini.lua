@@ -7,6 +7,6 @@ return {
       require("mini.cursorword").setup()
       require("mini.git").setup()
     end,
-    version = "*",
+    version = false,
   },
 }

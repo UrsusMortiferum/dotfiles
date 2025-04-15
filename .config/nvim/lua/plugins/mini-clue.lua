@@ -1,6 +1,6 @@
 return {
   "echasnovski/mini.clue",
-  version = "*",
+  version = false,
   event = "VimEnter",
   config = function()
     local miniclue = require "mini.clue"
