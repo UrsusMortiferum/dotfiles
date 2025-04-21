@@ -15,6 +15,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("config").init() -- default options setup
+
 -- Setup lazy.nvim
 require("lazy").setup {
   spec = {
@@ -48,3 +50,5 @@ require("lazy").setup {
     },
   },
 }
+
+require("config").setup() -- autocmds + keymaps setup and rest requiring plugins
