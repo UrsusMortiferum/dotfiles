@@ -1,3 +1,4 @@
+print "keymaps"
 -- Basic keymaps ==============================================================
 
 local map = vim.keymap.set
