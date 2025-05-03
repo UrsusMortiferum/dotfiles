@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    -- event = "LazyFile"
+    -- event = "LazyFile",
     dependencies = {
       {
         "williamboman/mason.nvim",
@@ -9,7 +9,7 @@ return {
       },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      { "j-hui/fidget.nvim", opts = {} },
+      -- { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
       require "config.lsp"
