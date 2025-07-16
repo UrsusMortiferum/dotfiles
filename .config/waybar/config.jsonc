@@ -24,6 +24,7 @@
 		"pulseaudio",
 		"privacy",
 		"tray",
+    "battery",
 		"clock#date",
 		"clock#time",
 		"custom/rofi",
@@ -147,6 +148,26 @@
 		"spacing": 5,
 		"show-passive-items": true,
 	},
+   "battery": {
+       "states": {
+           "good": 80,
+           "warning": 30,
+           "critical": 15
+       },
+       "format": "{capacity}% {icon}",
+       "format-full": "{capacity}% {icon}",
+       "format-charging": "{capacity}% ",
+       "format-plugged": "{capacity}% ",
+       "format-alt": "{time} {icon}",
+       // "format-good": "", // An empty format will hide the module
+       // "format-full": "",
+       "format-icons": ["", "", "", "", ""]
+   },
+  // "battery": {
+  //   // "bat": "BAT1"
+  //   "format": "{capacity}% {icon}",
+  //   "format-icons": ["", "", "", "", ""]
+  // },
 	"clock#date": {
 		"format": "<span color='#8ec07c' >󰃭 </span>{:%a %d %b}",
 		"tooltip-format": "<tt>{calendar}</tt>",
