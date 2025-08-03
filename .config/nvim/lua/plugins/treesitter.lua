@@ -15,6 +15,7 @@ return {
           "go",
           "python",
           "sql",
+          "qmljs",
         },
         auto_install = true,
         highlight = {

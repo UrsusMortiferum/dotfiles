@@ -129,6 +129,7 @@ local servers = {
   --     },
   -- },
   -- },
+  qmlls = {},
 }
 
 local ensure_installed = {
