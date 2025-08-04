@@ -1,8 +1,6 @@
-// import "modules"
 import Quickshell
+import "modules/bar"
 
 Scope {
     Bar {}
 }
-
-// ShellRoot {}
