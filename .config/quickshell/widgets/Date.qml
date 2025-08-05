@@ -2,5 +2,5 @@ import QtQuick
 import "../services/"
 
 Text {
-    text: Time.time
+    text: Time.format("ddd dd MMM")
 }

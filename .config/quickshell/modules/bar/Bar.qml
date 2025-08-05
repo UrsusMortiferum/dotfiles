@@ -18,7 +18,10 @@ Scope {
 
             implicitHeight: 30
 
-            ClockWidget {
+            // Clock {
+            //     anchors.centerIn: parent
+            // }
+            Date {
                 anchors.centerIn: parent
             }
         }
