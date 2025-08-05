@@ -1,5 +1,5 @@
 import Quickshell
-import "modules/bar"
+import qs.modules.bar
 
 Scope {
     Bar {}

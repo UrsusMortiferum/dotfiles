@@ -17,6 +17,7 @@ return {
   opts = {
     formatters_by_ft = {
       bash = { "shfmt" },
+      conf = { "shfmt" },
       lua = { "stylua" },
       sql = { "sleek" },
       zsh = { "shfmt" },

@@ -1,5 +1,5 @@
 import Quickshell
-import "../../widgets/"
+import qs.widgets
 
 Scope {
 
@@ -18,9 +18,9 @@ Scope {
 
             implicitHeight: 30
 
-            // Clock {
-            //     anchors.centerIn: parent
-            // }
+            Clock {
+                anchors.centerIn: parent
+            }
             Date {
                 anchors.centerIn: parent
             }

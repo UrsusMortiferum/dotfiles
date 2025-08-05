@@ -130,6 +130,7 @@ local servers = {
   -- },
   -- },
   qmlls = {},
+  hyprls = {},
 }
 
 local ensure_installed = {

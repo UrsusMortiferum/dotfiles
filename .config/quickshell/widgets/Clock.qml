@@ -1,8 +1,6 @@
 import QtQuick
-import "../services/"
+import qs.services
 
 Text {
-    // text: Time.time
     text: Time.format("hh:mm:ss A")
-    // text: Time.format("hh\nmm")
 }
