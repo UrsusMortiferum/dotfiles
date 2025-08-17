@@ -123,7 +123,9 @@
   programs.hyprland = {
     enable = true;
     withUWSM = true;
-    xwayland.enable = true;
+    xwayland = {
+      enable = true;
+    };
   };
 
   programs.waybar = {
@@ -186,13 +188,15 @@
   system.autoUpgrade.allowReboot = false;
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   services = {
     displayManager = {
       sddm = {
         enable = true;
         wayland.enable = true;
+        enableHidpi = true;
+        theme = "chili";
       };
     };
   };
@@ -214,8 +218,18 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      mesa
+      amdvlk
+    ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.mesa
+      driversi686Linux.amdvlk
+    ];
   };
+  hardware.opengl.driSupport32Bit = true;
   hardware.enableRedistributableFirmware = true;
+  programs.xwayland.enable = true;
   # hardware.firmware.enable = true;
   # extraPackages32 = with pkgs; [
   #   mesa
