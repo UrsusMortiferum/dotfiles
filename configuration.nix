@@ -13,6 +13,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./vial.nix
   ];
 
   # Bootloader.
@@ -75,12 +76,21 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    curl
+    amdvlk
+    amdgpu_top
     protonvpn-gui
     ghostty
     stow
     inputs.zen-browser.packages.${system}.twilight
-    btop
     wl-clipboard
+    wl-screenrec
+    font-awesome
+    uv
+    nerd-fonts.victor-mono
+    jellyfin-media-player
+    docker-compose
+    quickshell
     wofi
     clang
     signal-desktop
@@ -90,6 +100,7 @@
     fzf
     rustup
     nil
+    pavucontrol
   ];
 
   fonts.packages = with pkgs; [
@@ -138,8 +149,16 @@
 
   programs.nano.enable = false;
 
-  home-manager.users.ursus = {
-    home.stateVersion = "25.05";
+  home-manager = {
+    users = {
+      ursus = {
+        home.stateVersion = "25.05";
+        imports = [
+          ./btop.nix
+        ];
+      };
+    };
+    backupFileExtension = "backup";
   };
 
   home-manager.sharedModules = [
@@ -164,11 +183,27 @@
             cache-default = 4000000;
           };
         };
+        services.dunst = {
+          enable = true;
+        };
       }
     )
   ];
 
   # List services that you want to enable:
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+  # services.udev = {
+  #   packages = with pkgs; [
+  #     qmk-udev-rules
+  #     vial
+  #   ];
+  # };
 
   nix.optimise = {
     automatic = true;
@@ -199,6 +234,10 @@
         theme = "chili";
       };
     };
+    dbus = {
+      enable = true;
+      packages = [ pkgs.dunst ];
+    };
   };
 
   # Open ports in the firewall.
@@ -215,6 +254,9 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.cpu.amd.updateMicrocode = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -227,20 +269,7 @@
       driversi686Linux.amdvlk
     ];
   };
-  hardware.opengl.driSupport32Bit = true;
   hardware.enableRedistributableFirmware = true;
   programs.xwayland.enable = true;
-  # hardware.firmware.enable = true;
-  # extraPackages32 = with pkgs; [
-  #   mesa
-  # ];
-  # extraPackages = with pkgs; [
-  #   amdgpu
-  # ];
-  # driSupport32Bit = true;
-  # extraDrivers = [ pkgs.amdgpu ];
-  # boot.initrd.kernelModules = [ "amdgpu" ];
-  # services.xserver.videoDrivers = [ "amdgpu" ];
-  # hardware.firmware.enable = true;
 
 }
