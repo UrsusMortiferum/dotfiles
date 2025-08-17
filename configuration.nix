@@ -2,13 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -55,8 +60,11 @@
   users.users.ursus = {
     isNormalUser = true;
     description = "ursus";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -65,20 +73,23 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-     firefox
-     protonvpn-gui
-     ghostty
-     stow
-     inputs.zen-browser.packages."${system}".twilight
-     btop
-     wl-clipboard
-     wofi
-     clang
-     signal-desktop
-     discord
-     lazygit
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    protonvpn-gui
+    ghostty
+    stow
+    inputs.zen-browser.packages.${system}.twilight
+    btop
+    wl-clipboard
+    wofi
+    clang
+    signal-desktop
+    discord
+    lazygit
+    ripgrep
+    fzf
+    rustup
+    nil
   ];
 
   fonts.packages = with pkgs; [
@@ -106,7 +117,7 @@
       init.defaultBranch = "main";
       # pull.rebase = true;
       # core.editor = "nvim"
-      };
+    };
   };
 
   programs.hyprland = {
@@ -114,7 +125,7 @@
     withUWSM = true;
     xwayland.enable = true;
   };
-   
+
   programs.waybar = {
     enable = true;
   };
@@ -122,8 +133,38 @@
   programs.steam = {
     enable = true;
   };
- 
+
   programs.nano.enable = false;
+
+  home-manager.users.ursus = {
+    home.stateVersion = "25.05";
+  };
+
+  home-manager.sharedModules = [
+    (
+      { config, pkgs, ... }:
+      {
+        programs.mpv = {
+          enable = true;
+          package = (
+            pkgs.mpv-unwrapped.wrapper {
+              scripts = with pkgs.mpvScripts; [
+                uosc
+              ];
+
+              mpv = pkgs.mpv-unwrapped.override {
+                waylandSupport = true;
+              };
+            }
+          );
+          config = {
+            profile = "high-quality";
+            cache-default = 4000000;
+          };
+        };
+      }
+    )
+  ];
 
   # List services that you want to enable:
 
@@ -136,7 +177,10 @@
     dates = "weekly";
     options = "--delete-older-than 15d";
   };
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = false;
@@ -148,7 +192,7 @@
     displayManager = {
       sddm = {
         enable = true;
-	wayland.enable = true;
+        wayland.enable = true;
       };
     };
   };
@@ -173,14 +217,14 @@
   };
   hardware.enableRedistributableFirmware = true;
   # hardware.firmware.enable = true;
-    # extraPackages32 = with pkgs; [
-    #   mesa
-    # ];
-    # extraPackages = with pkgs; [
-    #   amdgpu
-    # ];
-    # driSupport32Bit = true;
-    # extraDrivers = [ pkgs.amdgpu ];
+  # extraPackages32 = with pkgs; [
+  #   mesa
+  # ];
+  # extraPackages = with pkgs; [
+  #   amdgpu
+  # ];
+  # driSupport32Bit = true;
+  # extraDrivers = [ pkgs.amdgpu ];
   # boot.initrd.kernelModules = [ "amdgpu" ];
   # services.xserver.videoDrivers = [ "amdgpu" ];
   # hardware.firmware.enable = true;

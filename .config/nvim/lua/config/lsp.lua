@@ -131,6 +131,7 @@ local servers = {
   -- },
   qmlls = {},
   hyprls = {},
+  nil_ls = {},
 }
 
 local ensure_installed = {
@@ -138,6 +139,7 @@ local ensure_installed = {
   "ruff",
   "shfmt",
   "sleek",
+  "nixfmt",
 }
 
 local servers_to_install = vim.tbl_filter(function(key)
