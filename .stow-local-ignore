@@ -1,9 +1,12 @@
+.*\.nix$
+flake.lock
 .stowrc
 DS_Store
 README.md
 LICENSE
 .git
 .gitignore
+.gitconfig
 wezterm
 nvim_old_1
 nvim_old
@@ -14,6 +17,5 @@ docs
 installer.sh
 zshrc.org
 udevmon.yaml
-nix
 keys
 systems

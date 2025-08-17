@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -67,9 +67,22 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
-     neovim
      firefox
      protonvpn-gui
+     ghostty
+     stow
+     inputs.zen-browser.packages."${system}".twilight
+     btop
+     wl-clipboard
+     wofi
+     clang
+     signal-desktop
+     discord
+     lazygit
+  ];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.victor-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -79,6 +92,11 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   programs.git = {
     enable = true;
@@ -91,6 +109,21 @@
       };
   };
 
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
+   
+  programs.waybar = {
+    enable = true;
+  };
+
+  programs.steam = {
+    enable = true;
+  };
+ 
+  programs.nano.enable = false;
 
   # List services that you want to enable:
 
@@ -111,6 +144,15 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  services = {
+    displayManager = {
+      sddm = {
+        enable = true;
+	wayland.enable = true;
+      };
+    };
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -124,5 +166,23 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  hardware.enableRedistributableFirmware = true;
+  # hardware.firmware.enable = true;
+    # extraPackages32 = with pkgs; [
+    #   mesa
+    # ];
+    # extraPackages = with pkgs; [
+    #   amdgpu
+    # ];
+    # driSupport32Bit = true;
+    # extraDrivers = [ pkgs.amdgpu ];
+  # boot.initrd.kernelModules = [ "amdgpu" ];
+  # services.xserver.videoDrivers = [ "amdgpu" ];
+  # hardware.firmware.enable = true;
 
 }
