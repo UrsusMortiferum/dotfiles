@@ -102,6 +102,7 @@
     rustup
     nil
     pavucontrol
+    element-web
   ];
 
   fonts.packages = with pkgs; [
