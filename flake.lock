@@ -61,7 +61,28 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "vieb-nix": "vieb-nix",
         "zen-browser": "zen-browser"
+      }
+    },
+    "vieb-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753979963,
+        "narHash": "sha256-0EeeEPyJ2PiOYpDmSIOhrfSEFzoE8PYxHO0kf5jBd3k=",
+        "owner": "tejing1",
+        "repo": "vieb-nix",
+        "rev": "0956ebce7e722ef1eb62530f4161c6e9a4ffbd37",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tejing1",
+        "repo": "vieb-nix",
+        "type": "github"
       }
     },
     "zen-browser": {

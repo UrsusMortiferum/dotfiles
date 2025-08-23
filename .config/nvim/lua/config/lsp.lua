@@ -132,6 +132,7 @@ local servers = {
   qmlls = {},
   hyprls = {},
   nil_ls = {},
+  -- nixd = {},
 }
 
 local ensure_installed = {

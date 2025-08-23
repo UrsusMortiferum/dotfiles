@@ -84,6 +84,7 @@
     ghostty
     stow
     inputs.zen-browser.packages.${system}.twilight
+    inputs.vieb-nix.packages.${system}.vieb
     wl-clipboard
     wl-screenrec
     font-awesome
@@ -101,6 +102,7 @@
     fzf
     rustup
     nil
+    nixd
     pavucontrol
     element-web
   ];
@@ -139,6 +141,10 @@
     xwayland = {
       enable = true;
     };
+  };
+
+  programs.fish = {
+    enable = true;
   };
 
   programs.waybar = {
