@@ -216,30 +216,33 @@
     dates = "weekly";
     options = "--delete-older-than 15d";
   };
+  nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
 
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = false;
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = false;
+    dates = "weekly";
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  services = {
-    displayManager = {
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-        enableHidpi = true;
-        theme = "chili";
-      };
-    };
-    dbus = {
+  services.displayManager = {
+    sddm = {
       enable = true;
-      packages = [ pkgs.dunst ];
+      wayland.enable = true;
+      enableHidpi = true;
+      theme = "chili";
     };
+  };
+
+  services.dbus = {
+    enable = true;
+    packages = [ pkgs.dunst ];
   };
 
   # Open ports in the firewall.
