@@ -239,11 +239,13 @@
   #   dates = "weekly";
   #   options = "--delete-older-than 15d";
   # };
-  nix.settings.auto-optimise-store = true;
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
   system.autoUpgrade = {
     enable = true;
