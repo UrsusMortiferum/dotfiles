@@ -12,7 +12,8 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    ./hosts/cave/configuration.nix
+    # ./hardware-configuration.nix
     ./vial.nix
     # ./vpn.nix
   ];
