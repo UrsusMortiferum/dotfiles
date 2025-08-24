@@ -73,6 +73,19 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  environment.sessionVariables = {
+    # FLAKE = "/home/ursus/workspace/github.com/UrsusMortiferum/dotfiles/nixos";
+  };
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/ursus/workspace/github.com/UrsusMortiferum/dotfiles/nixos";
+    # Options only for automatic cleanup.
+    clean.enable = true;
+    clean.dates = "weekly";
+    clean.extraArgs = "--keep-since 15d --keep 15";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -106,6 +119,8 @@
     nixd
     pavucontrol
     element-web
+    tree
+    # nh
   ];
 
   fonts.packages = with pkgs; [
@@ -218,11 +233,11 @@
     automatic = true;
     dates = [ "00:00" ]; # Optional; allows customizing optimisation schedule
   };
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 15d";
-  };
+  # nix.gc = {
+  #   automatic = true;
+  #   dates = "weekly";
+  #   options = "--delete-older-than 15d";
+  # };
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = [
     "nix-command"
