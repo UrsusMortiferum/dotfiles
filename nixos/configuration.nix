@@ -61,15 +61,18 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.ursus = {
-    isNormalUser = true;
-    description = "ursus";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    packages = with pkgs; [ ];
+  users.users = {
+    ursus = {
+      isNormalUser = true;
+      description = "ursus";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+      packages = with pkgs; [ ];
+    };
   };
+  users.defaultUserShell = pkgs.fish;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -123,6 +126,7 @@
     tree
     # nh
     heroic
+    starship
   ];
 
   fonts.packages = with pkgs; [

@@ -22,13 +22,18 @@
   };
 
   outputs =
-    inputs@{ self, ... }:
+    inputs@{
+      self,
+      nixpkgs,
+      ...
+    }:
     let
       systemSettings = {
         system = "x86_64-linux";
         timezone = "Europe/Amsterdam";
       };
-      lib = inputs.nixpkgs.lib;
+      lib = nixpkgs.lib;
+      home-manager = inputs.home-manager.nixosModules.home-manager;
     in
     {
       nixosConfigurations = {
@@ -36,14 +41,14 @@
           inherit (systemSettings) system;
           modules = [
             ./configuration.nix
-            inputs.home-manager.nixosModules.home-manager
+            home-manager
           ];
           specialArgs = { inherit inputs; };
         };
         gpd = lib.nixosSystem {
           modules = [
             ./configuration.nix
-            inputs.home-manager.nixosModules.home-manager
+            home-manager
             inputs.nixos-hardware.nixosModules.gpd-win-max-2-2023
           ];
           specialArgs = { inherit inputs; };
