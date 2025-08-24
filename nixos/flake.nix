@@ -4,8 +4,13 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +37,14 @@
           modules = [
             ./configuration.nix
             inputs.home-manager.nixosModules.home-manager
+          ];
+          specialArgs = { inherit inputs; };
+        };
+        gpd = lib.nixosSystem {
+          modules = [
+            ./configuration.nix
+            inputs.home-manager.nixosModules.home-manager
+            inputs.nixos-hardware.nixosModules.gpd-win-max-2-2023
           ];
           specialArgs = { inherit inputs; };
         };

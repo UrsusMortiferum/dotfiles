@@ -121,6 +121,7 @@
     element-web
     tree
     # nh
+    heroic
   ];
 
   fonts.packages = with pkgs; [
