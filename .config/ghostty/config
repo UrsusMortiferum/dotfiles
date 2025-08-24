@@ -46,7 +46,7 @@
 
 font-family = VictorMono Nerd Font
 font-size = 13
-theme = tokyonight_night
+# theme = tokyonight_night
 mouse-hide-while-typing = true
 window-decoration = auto
 window-theme = ghostty

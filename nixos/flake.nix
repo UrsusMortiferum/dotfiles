@@ -19,6 +19,10 @@
       url = "github:tejing1/vieb-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -34,6 +38,7 @@
       };
       lib = nixpkgs.lib;
       home-manager = inputs.home-manager.nixosModules.home-manager;
+      stylix = inputs.stylix.nixosModules.stylix;
     in
     {
       nixosConfigurations = {
@@ -42,6 +47,7 @@
           modules = [
             ./configuration.nix
             home-manager
+            stylix
           ];
           specialArgs = { inherit inputs; };
         };
@@ -49,6 +55,7 @@
           modules = [
             ./configuration.nix
             home-manager
+            stylix
             inputs.nixos-hardware.nixosModules.gpd-win-max-2-2023
           ];
           specialArgs = { inherit inputs; };
