@@ -191,8 +191,35 @@
 
   programs.nano.enable = false;
 
-  # stylix.enable = true;
-  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  stylix.enable = true;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  # stylix.autoEnable = false;
+  # stylix.targets = {
+  #   btop.enable = true;
+  #   fish.enable = true;
+  #   fzf.enable = true;
+  #   ghostty.enable = true;
+  #   lazygit.enable = true;
+  # };
+  # stylix.base16Scheme = {
+  #   base00 = "15161e";
+  #   base01 = "f7768e";
+  #   base02 = "9ece6a";
+  #   base03 = "e0af68";
+  #   base04 = "7aa2f7";
+  #   base05 = "bb9af7";
+  #   base06 = "7dcfff";
+  #   base07 = "a9b1d6";
+  #   base08 = "414868";
+  #   base09 = "ff899d";
+  #   base0A = "9fe044";
+  #   base0B = "faba4a";
+  #   base0C = "8db0ff";
+  #   base0D = "c7a9ff";
+  #   base0E = "a4daff";
+  #   base0F = "c0caf5";
+  # };
+  stylix.polarity = "dark";
 
   home-manager = {
     users = {
