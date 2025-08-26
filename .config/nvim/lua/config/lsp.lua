@@ -131,7 +131,17 @@ local servers = {
   -- },
   qmlls = {},
   hyprls = {},
-  nil_ls = {},
+  -- nil_ls = { settings { ['nil'] = {formatting {
+  -- command = {"nixfmt"},},},},},
+  nil_ls = {
+     settings = {
+      ['nil'] = {
+         formatting = {
+            command = { "nixfmt" },
+         },
+      },
+   },
+ },
   -- nixd = {},
 }
 

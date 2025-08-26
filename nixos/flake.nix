@@ -3,24 +3,36 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    # Keeping those, in case I would like to have something more "stable" on different host
+    nixpkgs-stable = "nixpkgs/nixos-25.05";
+    nixpkgs-unstable = "nixpkgs/nixos-unstable";
+
+    hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
+    # Declarative partitioning and formatting
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Browser of choice
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    vieb-nix = {
-      url = "github:tejing1/vieb-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Theming
     stylix = {
       url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # Testing random stuff
+    vieb-nix = {
+      url = "github:tejing1/vieb-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -58,7 +70,7 @@
             ./configuration.nix
             home-manager
             stylix
-            inputs.nixos-hardware.nixosModules.gpd-win-max-2-2023
+            inputs.hardware.nixosModules.gpd-win-max-2-2023
           ];
           specialArgs = { inherit inputs outputs; };
         };
