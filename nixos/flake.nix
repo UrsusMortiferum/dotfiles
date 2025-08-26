@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     # Keeping those, in case I would like to have something more "stable" on different host
-    nixpkgs-stable = "nixpkgs/nixos-25.05";
-    nixpkgs-unstable = "nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     hardware = {
       url = "github:NixOS/nixos-hardware/master";
