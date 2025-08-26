@@ -7,6 +7,7 @@
   pkgs,
   lib,
   inputs,
+  outputs,
   ...
 }:
 
@@ -18,6 +19,31 @@
     ./vial.nix
     # ./vpn.nix
   ];
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "00:00" ]; # Optional; allows customizing optimisation schedule
+  };
+  # nix.gc = {
+  #   automatic = true;
+  #   dates = "weekly";
+  #   options = "--delete-older-than 15d";
+  # };
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [
+      "nix-command"
+      "flakes"
+      "pipe-operators"
+    ];
+  };
+
+  nixpkgs.overlays = [
+    outputs.overlays.additions
+  ];
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -83,9 +109,6 @@
     '';
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   environment.sessionVariables = {
     # FLAKE = "/home/ursus/workspace/github.com/UrsusMortiferum/dotfiles/nixos";
   };
@@ -134,6 +157,7 @@
     element-web
     tree
     heroic
+    # banana-cursor-dreams
   ];
 
   fonts.packages = with pkgs; [
@@ -194,9 +218,12 @@
   stylix.enable = true;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
   stylix.cursor = {
-    package = pkgs.banana-cursor;
-    name = "Banana";
-    size = 24;
+    # package = pkgs.banana-cursor;
+    # package = pkgs.inputs.banana-cursor.packages.${system}.banana-cursor;
+    # package = pkgs.banana-cursor-dreams;
+    package = pkgs.banana-cursor-dreams;
+    name = "Banana-Tokyo-Night-Storm";
+    size = 32;
   };
   # stylix.autoEnable = false;
   # stylix.targets = {
@@ -281,24 +308,6 @@
   #     vial
   #   ];
   # };
-
-  nix.optimise = {
-    automatic = true;
-    dates = [ "00:00" ]; # Optional; allows customizing optimisation schedule
-  };
-  # nix.gc = {
-  #   automatic = true;
-  #   dates = "weekly";
-  #   options = "--delete-older-than 15d";
-  # };
-  nix.settings = {
-    auto-optimise-store = true;
-    experimental-features = [
-      "nix-command"
-      "flakes"
-      "pipe-operators"
-    ];
-  };
 
   system.autoUpgrade = {
     enable = true;

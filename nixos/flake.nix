@@ -32,6 +32,7 @@
       ...
     }:
     let
+      inherit (self) outputs;
       systemSettings = {
         system = "x86_64-linux";
         timezone = "Europe/Amsterdam";
@@ -41,6 +42,7 @@
       stylix = inputs.stylix.nixosModules.stylix;
     in
     {
+      overlays = import ./overlays { inherit inputs; };
       nixosConfigurations = {
         cave = lib.nixosSystem {
           inherit (systemSettings) system;
@@ -49,7 +51,7 @@
             home-manager
             stylix
           ];
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs outputs; };
         };
         gpd = lib.nixosSystem {
           modules = [
@@ -58,7 +60,7 @@
             stylix
             inputs.nixos-hardware.nixosModules.gpd-win-max-2-2023
           ];
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs outputs; };
         };
       };
     };
