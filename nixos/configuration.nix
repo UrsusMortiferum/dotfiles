@@ -193,6 +193,11 @@
 
   stylix.enable = true;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  stylix.cursor = {
+    package = pkgs.banana-cursor;
+    name = "Banana";
+    size = 24;
+  };
   # stylix.autoEnable = false;
   # stylix.targets = {
   #   btop.enable = true;
@@ -332,7 +337,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  # boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.cpu.amd.updateMicrocode = true;
   hardware.graphics = {
