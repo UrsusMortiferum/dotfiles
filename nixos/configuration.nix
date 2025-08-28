@@ -43,8 +43,11 @@
   ];
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
+nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
+  
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -134,7 +137,7 @@
     ghostty
     stow
     inputs.zen-browser.packages.${system}.twilight
-    inputs.vieb-nix.packages.${system}.vieb
+    # inputs.vieb-nix.packages.${system}.vieb
     wl-clipboard
     wl-screenrec
     font-awesome
@@ -331,6 +334,7 @@
     enable = true;
     packages = [ pkgs.dunst ];
   };
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

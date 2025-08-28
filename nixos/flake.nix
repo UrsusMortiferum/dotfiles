@@ -31,10 +31,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Testing random stuff
-    vieb-nix = {
-      url = "github:tejing1/vieb-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # vieb-nix = {
+    #   url = "github:tejing1/vieb-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
