@@ -367,5 +367,14 @@
   };
   hardware.enableRedistributableFirmware = true;
   programs.xwayland.enable = true;
+  programs.zoxide ={
+    enable= true;
+  enableBashIntegration = true;
+  enableFishIntegration = true;
+  enableZshIntegration = true;
+  flags = [
+  "--cmd cd"
+  ];
+  };
 
 }
