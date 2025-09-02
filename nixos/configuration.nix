@@ -143,6 +143,8 @@
     tree
     heroic
     # banana-cursor-dreams
+    ranger
+    superfile
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -309,8 +311,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  # boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   hardware.cpu.amd.updateMicrocode = true;
   hardware.graphics = {
     enable = true;
