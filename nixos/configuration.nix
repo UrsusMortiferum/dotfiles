@@ -31,7 +31,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
+  # nixpkgs.config.permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -125,7 +125,7 @@
     font-awesome
     uv
     nerd-fonts.victor-mono
-    jellyfin-media-player
+    # jellyfin-media-player
     docker-compose
     quickshell
     wofi
