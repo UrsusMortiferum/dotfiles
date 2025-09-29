@@ -146,6 +146,7 @@
     ranger
     superfile
     samrewritten
+    heroic
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
