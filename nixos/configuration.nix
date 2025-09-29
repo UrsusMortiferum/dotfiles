@@ -147,6 +147,7 @@
     superfile
     samrewritten
     heroic
+    proton-pass
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
