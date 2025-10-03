@@ -113,7 +113,7 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     curl
-    amdvlk
+    # amdvlk
     amdgpu_top
     protonvpn-gui
     ghostty
@@ -148,6 +148,7 @@
     samrewritten
     heroic
     proton-pass
+    kdePackages.dolphin
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -320,11 +321,16 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [ mesa amdvlk ];
-    extraPackages32 = with pkgs; [
-      driversi686Linux.mesa
-      driversi686Linux.amdvlk
-    ];
+    extraPackages = with pkgs;
+      [
+        mesa
+        # amdvlk 
+      ];
+    extraPackages32 = with pkgs;
+      [
+        driversi686Linux.mesa
+        # driversi686Linux.amdvlk
+      ];
   };
   hardware.enableRedistributableFirmware = true;
   programs.xwayland.enable = true;
