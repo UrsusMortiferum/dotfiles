@@ -149,6 +149,14 @@
     heroic
     proton-pass
     kdePackages.dolphin
+    # protontricks
+    # wine
+    # wine64
+    # wineWowPackages.staging
+    # winetricks
+    # wineWowPackages.waylandFull
+    # protontricks
+    # steamtinkerlaunch
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -187,7 +195,27 @@
 
   programs.waybar = { enable = true; };
 
-  programs.steam = { enable = true; };
+  programs.steam = {
+    enable = true;
+    protontricks.enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+      steamtinkerlaunch
+      protonup-qt
+    ];
+    # extraPackages = with pkgs; [ freetype fontconfig ];
+    # steamtinkerlaunch.enable = true;
+    # package = pkgs.steam.override {
+    #   extraPkgs = pkgs':
+    #     with pkgs'; [
+    #       steamtinkerlaunch
+    #       proton-ge-bin
+    #       protonup-qt
+    #       # protontricks
+    #     ];
+    # };
+  };
+  # programs.steam.protontricks.enable = true;
 
   programs.starship = {
     enable = true;
