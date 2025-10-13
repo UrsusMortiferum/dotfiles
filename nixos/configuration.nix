@@ -2,7 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, inputs, outputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}:
 
 {
   imports = [
@@ -24,7 +31,11 @@
   # };
   nix.settings = {
     auto-optimise-store = true;
-    experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+      "pipe-operators"
+    ];
   };
 
   nixpkgs.overlays = [ outputs.overlays.additions ];
@@ -79,7 +90,10 @@
     ursus = {
       isNormalUser = true;
       description = "ursus";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       packages = with pkgs; [ ];
     };
   };
@@ -188,12 +202,18 @@
   programs.hyprland = {
     enable = true;
     withUWSM = true;
-    xwayland = { enable = true; };
+    xwayland = {
+      enable = true;
+    };
   };
 
-  programs.fish = { enable = true; };
+  programs.fish = {
+    enable = true;
+  };
 
-  programs.waybar = { enable = true; };
+  programs.waybar = {
+    enable = true;
+  };
 
   programs.steam = {
     enable = true;
@@ -225,8 +245,7 @@
   programs.nano.enable = false;
 
   stylix.enable = true;
-  stylix.base16Scheme =
-    "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
   stylix.cursor = {
     # package = pkgs.banana-cursor;
     # package = pkgs.inputs.banana-cursor.packages.${system}.banana-cursor;
@@ -274,21 +293,28 @@
   };
 
   home-manager.sharedModules = [
-    ({ config, pkgs, ... }: {
-      programs.mpv = {
-        enable = true;
-        package = (pkgs.mpv-unwrapped.wrapper {
-          scripts = with pkgs.mpvScripts; [ uosc ];
+    (
+      { config, pkgs, ... }:
+      {
+        programs.mpv = {
+          enable = true;
+          package = (
+            pkgs.mpv-unwrapped.wrapper {
+              scripts = with pkgs.mpvScripts; [ uosc ];
 
-          mpv = pkgs.mpv-unwrapped.override { waylandSupport = true; };
-        });
-        config = {
-          profile = "high-quality";
-          cache-default = 4000000;
+              mpv = pkgs.mpv-unwrapped.override { waylandSupport = true; };
+            }
+          );
+          config = {
+            profile = "high-quality";
+            cache-default = 4000000;
+          };
         };
-      };
-      services.dunst = { enable = true; };
-    })
+        services.dunst = {
+          enable = true;
+        };
+      }
+    )
   ];
 
   # List services that you want to enable:
@@ -349,16 +375,14 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs;
-      [
-        mesa
-        # amdvlk 
-      ];
-    extraPackages32 = with pkgs;
-      [
-        driversi686Linux.mesa
-        # driversi686Linux.amdvlk
-      ];
+    extraPackages = with pkgs; [
+      mesa
+      # amdvlk
+    ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.mesa
+      # driversi686Linux.amdvlk
+    ];
   };
   hardware.enableRedistributableFirmware = true;
   programs.xwayland.enable = true;
