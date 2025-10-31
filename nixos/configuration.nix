@@ -173,6 +173,7 @@
     # ashell
     discord
     nexusmods-app-unfree
+    freetype
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -224,6 +225,7 @@
       proton-ge-bin
       steamtinkerlaunch
       protonup-qt
+      # freetype
     ];
     # extraPackages = with pkgs; [ freetype fontconfig ];
     # steamtinkerlaunch.enable = true;
