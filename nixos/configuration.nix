@@ -145,7 +145,6 @@
     wofi
     clang
     signal-desktop
-    discord
     lazygit
     ripgrep
     fzf
@@ -172,6 +171,8 @@
     # protontricks
     # steamtinkerlaunch
     # ashell
+    discord
+    nexusmods-app-unfree
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
