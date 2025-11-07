@@ -225,16 +225,23 @@
       proton-ge-bin
       steamtinkerlaunch
       protonup-qt
-      # freetype
+      freetype
+      fontconfig
+      protontricks
     ];
     # extraPackages = with pkgs; [ freetype fontconfig ];
     # steamtinkerlaunch.enable = true;
     # package = pkgs.steam.override {
-    #   extraPkgs = pkgs':
-    #     with pkgs'; [
+    #   extraPkgs =
+    #     pkgs': with pkgs'; [
     #       steamtinkerlaunch
     #       proton-ge-bin
     #       protonup-qt
+    #       freetype
+    #       fontconfig
+    #       glib
+    #       libunwind
+    #       libxcb
     #       # protontricks
     #     ];
     # };
