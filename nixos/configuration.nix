@@ -174,6 +174,8 @@
     discord
     nexusmods-app-unfree
     freetype
+    # (python3.withPackages (ps: [ ps.tkinter ]))
+    # firefox
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
