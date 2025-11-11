@@ -93,6 +93,7 @@
       extraGroups = [
         "networkmanager"
         "wheel"
+        "docker"
       ];
       packages = with pkgs; [ ];
     };
@@ -408,5 +409,7 @@
   };
 
   programs.nix-ld.enable = true;
+
+  virtualisation.docker.enable = true;
 
 }
