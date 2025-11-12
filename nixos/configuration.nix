@@ -153,7 +153,7 @@
     nil
     # nixd
     pavucontrol
-    element-web
+    # element-web
     tree
     heroic
     # banana-cursor-dreams
@@ -384,8 +384,10 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   services.xserver.videoDrivers = [ "amdgpu" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  # boot.initrd.kernelModules = [ "amdgpu" ];
+  hardware.amdgpu.initrd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
+  hardware.firmware = [ pkgs.linux-firmware ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
