@@ -162,7 +162,7 @@
     samrewritten
     heroic
     proton-pass
-    kdePackages.dolphin
+    # kdePackages.dolphin
     # protontricks
     # wine
     # wine64
@@ -173,8 +173,8 @@
     # steamtinkerlaunch
     # ashell
     discord
-    nexusmods-app-unfree
-    freetype
+    # nexusmods-app-unfree
+    # freetype
     # (python3.withPackages (ps: [ ps.tkinter ]))
     # firefox
   ];
@@ -232,6 +232,7 @@
       fontconfig
       protontricks
     ];
+
     # extraPackages = with pkgs; [ freetype fontconfig ];
     # steamtinkerlaunch.enable = true;
     # package = pkgs.steam.override {
@@ -346,6 +347,7 @@
   #   ];
   # };
 
+  services.udev.enable = true;
   system.autoUpgrade = {
     enable = true;
     allowReboot = false;
