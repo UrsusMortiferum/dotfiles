@@ -221,8 +221,14 @@
     enable = true;
   };
 
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
   programs.steam = {
     enable = true;
+    gamescopeSession.enable = true;
     protontricks.enable = true;
     extraCompatPackages = with pkgs; [
       proton-ge-bin
@@ -362,7 +368,7 @@
       enable = true;
       wayland.enable = true;
       enableHidpi = true;
-      theme = "chili";
+      theme = "breeze";
     };
   };
 
