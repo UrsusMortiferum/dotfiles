@@ -1,5 +1,6 @@
 import Quickshell
 import qs.widgets
+import QtQuick
 
 Scope {
 
@@ -18,12 +19,13 @@ Scope {
 
             implicitHeight: 30
 
-            Clock {
-                anchors.centerIn: parent
-            }
-            Date {
-                anchors.centerIn: parent
-            }
+            Row {
+              anchors.centerIn: parent
+              spacing: 10
+
+              Clock { }
+              Date { }
+          }
         }
     }
 }
