@@ -36,6 +36,7 @@
     #   url = "github:tejing1/vieb-nix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs =
