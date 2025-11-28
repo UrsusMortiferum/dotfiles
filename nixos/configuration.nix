@@ -185,6 +185,7 @@
     # freetype
     # (python3.withPackages (ps: [ ps.tkinter ]))
     # firefox
+    bootdev-cli
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
