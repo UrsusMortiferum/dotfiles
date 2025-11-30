@@ -433,5 +433,9 @@
   programs.nix-ld.enable = true;
 
   virtualisation.docker.enable = true;
+  systemd.services.docker = {
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+  };
 
 }
