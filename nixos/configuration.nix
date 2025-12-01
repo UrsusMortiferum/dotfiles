@@ -186,6 +186,7 @@
     # (python3.withPackages (ps: [ ps.tkinter ]))
     # firefox
     bootdev-cli
+    hyprpaper
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -223,6 +224,10 @@
     xwayland = {
       enable = true;
     };
+  };
+
+  programs.yazi = {
+    enable = true;
   };
 
   programs.fish = {
@@ -278,6 +283,7 @@
   programs.nano.enable = false;
 
   stylix.enable = true;
+  # stylix.image = /home/ursus/workspace/playground/Wallpapers/retro-room.png;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
   stylix.cursor = {
     # package = pkgs.banana-cursor;
