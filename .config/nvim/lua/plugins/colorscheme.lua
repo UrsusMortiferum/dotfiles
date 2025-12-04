@@ -7,4 +7,5 @@ return {
       -- dim_inactive = true
     },
   },
+  { "rebelot/kanagawa.nvim" },
 }

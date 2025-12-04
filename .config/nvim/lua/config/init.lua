@@ -6,7 +6,8 @@ Config.config = M
 
 local defaults = {
   colorscheme = function()
-    require("tokyonight").load()
+    -- require("tokyonight").load()
+    require("kanagawa").load()
   end,
   defaults = {
     autocmds = true, -- config.autocmds

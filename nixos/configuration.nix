@@ -165,7 +165,7 @@
     tree
     heroic
     # banana-cursor-dreams
-    ranger
+    # ranger
     superfile
     samrewritten
     heroic
@@ -284,7 +284,8 @@
 
   stylix.enable = true;
   # stylix.image = /home/ursus/workspace/playground/Wallpapers/retro-room.png;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
   stylix.cursor = {
     # package = pkgs.banana-cursor;
     # package = pkgs.inputs.banana-cursor.packages.${system}.banana-cursor;

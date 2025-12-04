@@ -50,6 +50,8 @@ font-size = 13
 mouse-hide-while-typing = true
 window-decoration = auto
 window-theme = ghostty
+# background-opacity = 0.1
+# background-blur-radius = 70
 
 # keybind = ctrl+alt+k=unbind
 # keybind = ctrl+alt+k=goto_split:up
