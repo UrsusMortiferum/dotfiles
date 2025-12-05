@@ -47,7 +47,10 @@
     ];
   };
 
-  nixpkgs.overlays = [ outputs.overlays.additions ];
+  nixpkgs.overlays = [
+    outputs.overlays.additions
+    outputs.overlays.modifications
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
