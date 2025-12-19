@@ -65,16 +65,23 @@
             home-manager
             stylix
           ];
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+            hostName = "cave";
+          };
         };
         gpd = lib.nixosSystem {
+          inherit (systemSettings) system;
           modules = [
             ./configuration.nix
             home-manager
             stylix
             inputs.hardware.nixosModules.gpd-win-max-2-2023
           ];
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+            hostName = "gpd";
+          };
         };
       };
     };

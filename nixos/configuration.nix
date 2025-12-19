@@ -8,13 +8,15 @@
   lib,
   inputs,
   outputs,
+  hostName,
   ...
 }:
 
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hosts/cave/configuration.nix
+    # ./hosts/cave/configuration.nix
+    ./hosts/default.nix
     # ./hardware-configuration.nix
     ./vial.nix
     # ./vpn.nix
@@ -63,7 +65,8 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "cave"; # Define your hostname.
+  # networking.hostName = "cave"; # Define your hostname.
+  networking.hostName = hostName;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
