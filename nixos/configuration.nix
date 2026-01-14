@@ -346,10 +346,9 @@
         programs.mpv = {
           enable = true;
           package = (
-            pkgs.mpv-unwrapped.wrapper {
+            pkgs.mpv.override {
               scripts = with pkgs.mpvScripts; [ uosc ];
-
-              mpv = pkgs.mpv-unwrapped.override { waylandSupport = true; };
+              # mpv = pkgs.mpv.override { waylandSupport = true; };
             }
           );
           config = {
