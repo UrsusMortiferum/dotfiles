@@ -194,6 +194,7 @@
     # firefox
     bootdev-cli
     hyprpaper
+    brightnessctl # for gpd brightness adjustment
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
