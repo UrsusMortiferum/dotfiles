@@ -19,6 +19,7 @@ set --global fish_color_error red
 set --global fish_color_escape yellow
 set --global fish_color_history_current --bold
 set --global fish_color_host normal
+set --global fish_color_host_remote yellow
 set --global fish_color_match --background=brblue
 set --global fish_color_normal normal
 set --global fish_color_operator blue
@@ -34,3 +35,4 @@ set --global fish_pager_color_completion normal
 set --global fish_pager_color_description yellow --dim
 set --global fish_pager_color_prefix white --bold
 set --global fish_pager_color_progress brwhite --background=cyan
+set --global fish_pager_color_selected_background -r
