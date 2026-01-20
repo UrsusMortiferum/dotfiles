@@ -403,6 +403,10 @@
     packages = [ pkgs.dunst ];
   };
 
+  services.udisks2.enable = true;
+  programs.thunar.enable = true;
+  services.gvfs.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
