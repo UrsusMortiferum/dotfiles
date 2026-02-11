@@ -195,6 +195,8 @@
     bootdev-cli
     hyprpaper
     brightnessctl # for gpd brightness adjustment
+    rimsort
+    quickemu
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
