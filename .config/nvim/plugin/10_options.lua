@@ -26,6 +26,8 @@ vim.o.mouse       = 'a'            -- Enable mouse
 vim.o.mousescroll = 'ver:25,hor:6' -- Customize mouse scroll
 vim.o.switchbuf   = 'usetab'       -- Use already opened buffers when switching
 vim.o.undofile    = true           -- Enable persistent undo
+vim.o.backup      = false          -- Don't store backup
+vim.o.writebackup = false          -- Don't store backup
 
 vim.o.shada = "'100,<50,s10,:1000,/100,@100,h" -- Limit ShaDa file (for startup)
 
@@ -41,6 +43,7 @@ vim.o.cursorline     = true       -- Enable current line highlighting
 vim.o.linebreak      = true       -- Wrap lines at 'breakat' (if 'wrap' is set)
 vim.o.list           = true       -- Show helpful text indicators
 vim.o.number         = true       -- Show line numbers
+vim.o.relativenumber = true       -- Show the line number relative to cursor position
 vim.o.pumborder      = 'single'   -- Use border in popup menu
 vim.o.pumheight      = 10         -- Make popup menu smaller
 vim.o.pummaxwidth    = 100        -- Make popup menu not too wide

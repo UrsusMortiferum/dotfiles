@@ -1,3 +1,6 @@
+-- Shorter version of the most frequent way of going outside of terminal window
+vim.keymap.set('t', '<C-h>', [[<C-\><C-N><C-w>h]])
+
 -- ┌─────────────────┐
 -- │ Custom mappings │
 -- └─────────────────┘
@@ -18,6 +21,13 @@ end
 -- Usage: `yiw` to yank a word and `]p` to put it on the next line.
 nmap('[p', '<Cmd>exe "iput! " . v:register<CR>', 'Paste Above')
 nmap(']p', '<Cmd>exe "iput "  . v:register<CR>', 'Paste Below')
+
+-- Jump down/up and center cursor line
+nmap('<C-d', '<C-d>zz', 'Jump Down & Center')
+nmap('<C-u', '<C-u>zz', 'Jump Up & Center')
+-- Jump to previous/next item and center cursor line
+nmap('N', 'Nzz', 'Jump Previous & Center')
+nmap('n', 'nzz', 'Jump Next & Center')
 
 -- Many general mappings are created by 'mini.basics'. See 'plugin/30_mini.lua'
 
@@ -169,6 +179,7 @@ nmap_leader('gc', '<Cmd>Git commit<CR>',                    'Commit')
 nmap_leader('gC', '<Cmd>Git commit --amend<CR>',            'Commit amend')
 nmap_leader('gd', '<Cmd>Git diff<CR>',                      'Diff')
 nmap_leader('gD', '<Cmd>Git diff -- %<CR>',                 'Diff buffer')
+nmap_leader('gg', '<Cmd>lua Config.open_lazygit()<CR>',     'Git tab')
 nmap_leader('gl', '<Cmd>' .. git_log_cmd .. '<CR>',         'Log')
 nmap_leader('gL', '<Cmd>' .. git_log_buf_cmd .. '<CR>',     'Log buffer')
 nmap_leader('go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>', 'Toggle overlay')

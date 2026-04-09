@@ -61,9 +61,7 @@ now_if_args(function()
     -- - Visit 'SUPPORTED_LANGUAGES.md' file at
     --   https://github.com/nvim-treesitter/nvim-treesitter/blob/main
   }
-  local isnt_installed = function(lang)
-    return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
-  end
+  local isnt_installed = function(lang) return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0 end
   local to_install = vim.tbl_filter(isnt_installed, languages)
   if #to_install > 0 then require('nvim-treesitter').install(to_install) end
 
@@ -100,9 +98,13 @@ now_if_args(function()
   -- the rules provided by 'nvim-lspconfig'.
   -- Use `:h vim.lsp.config()` or 'after/lsp/' directory to configure servers.
   -- Uncomment and tweak the following `vim.lsp.enable()` call to enable servers.
-  -- vim.lsp.enable({
-  --   -- For example, if `lua-language-server` is installed, use `'lua_ls'` entry
-  -- })
+  vim.lsp.enable({
+    -- For example, if `lua-language-server` is installed, use `'lua_ls'` entry
+    'lua_ls',
+    'ruff',
+    -- 'ty',
+    'gopls'
+  })
 end)
 
 -- Formatting =================================================================
@@ -127,7 +129,7 @@ later(function()
     },
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
-    -- formatters_by_ft = { lua = { 'stylua' } },
+    formatters_by_ft = { lua = { 'stylua' } },
   })
 end)
 
@@ -152,22 +154,23 @@ later(function() add({ 'https://github.com/rafamadriz/friendly-snippets' }) end)
 -- If you need them to work elsewhere, consider using other package managers.
 --
 -- You can use it like so:
--- now_if_args(function()
---   add({ 'https://github.com/mason-org/mason.nvim' })
---   require('mason').setup()
--- end)
+now_if_args(function()
+  add({ 'https://github.com/mason-org/mason.nvim' })
+  require('mason').setup()
+end)
 
 -- Beautiful, usable, well maintained color schemes outside of 'mini.nvim' and
 -- have full support of its highlight groups. Use if you don't like 'miniwinter'
 -- enabled in 'plugin/30_mini.lua' or other suggested 'mini.hues' based ones.
--- Config.now(function()
---  -- Install only those that you need
---  add({
---    'https://github.com/sainnhe/everforest',
---    'https://github.com/Shatur/neovim-ayu',
---    'https://github.com/ellisonleao/gruvbox.nvim',
---  })
---
---   -- Enable only one
---   vim.cmd('color everforest')
--- end)
+Config.now(function()
+  -- Install only those that you need
+  add({
+    -- 'https://github.com/sainnhe/everforest',
+    -- 'https://github.com/Shatur/neovim-ayu',
+    'https://github.com/ellisonleao/gruvbox.nvim',
+    -- 'https://github.com/rebelot/kanagawa.nvim'
+  })
+
+  -- Enable only one
+  vim.cmd('color gruvbox')
+end)
