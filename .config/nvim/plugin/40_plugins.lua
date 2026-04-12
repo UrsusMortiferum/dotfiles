@@ -101,9 +101,10 @@ now_if_args(function()
   vim.lsp.enable({
     -- For example, if `lua-language-server` is installed, use `'lua_ls'` entry
     'lua_ls',
+    'ty',
     'ruff',
-    -- 'ty',
-    'gopls'
+    'gopls',
+    'nil_ls',
   })
 end)
 
@@ -129,7 +130,17 @@ later(function()
     },
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
-    formatters_by_ft = { lua = { 'stylua' } },
+    formatters_by_ft = {
+      lua = { 'stylua' },
+      python = {
+        -- To fix auto-fixable lint errors.
+        'ruff_fix',
+        -- To run the Ruff formatter.
+        'ruff_format',
+        -- To organize the imports.
+        'ruff_organize_imports',
+      },
+    },
   })
 end)
 
@@ -174,3 +185,5 @@ Config.now(function()
   -- Enable only one
   vim.cmd('color gruvbox')
 end)
+
+later(function() vim.cmd('packadd nvim.undotree ') end)

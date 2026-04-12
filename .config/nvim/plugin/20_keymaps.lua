@@ -29,6 +29,8 @@ nmap('<C-u', '<C-u>zz', 'Jump Up & Center')
 nmap('N', 'Nzz', 'Jump Previous & Center')
 nmap('n', 'nzz', 'Jump Next & Center')
 
+nmap('<Leader>u', '<Cmd>Undotree<CR>', 'Toggle Undotree')
+
 -- Many general mappings are created by 'mini.basics'. See 'plugin/30_mini.lua'
 
 -- stylua: ignore start
