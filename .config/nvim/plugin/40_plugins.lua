@@ -105,6 +105,7 @@ now_if_args(function()
     'ruff',
     'gopls',
     'nil_ls',
+    'yamlls',
   })
 end)
 
