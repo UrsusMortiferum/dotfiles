@@ -1,2 +1,4 @@
 .config/tmux/plugins
 .qmlls.ini
+*.qcow2
+*/result/*
