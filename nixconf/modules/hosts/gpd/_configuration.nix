@@ -1,6 +1,24 @@
-{ ... }:
+{ self, inputs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  flake.nixosConfigurations.gpd = inputs.nixpkgs.lib.nixosSystem {
+    modules = [
+      self.nixosModules.hostGpd
+    ];
+  };
+
+  flake.nixosModules.hostGpd =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    {
+      imports = [
+        self.nixosModules.nix
+        self.nixosModules.silentSDDM
+      ];
+    };
 
   hardware.bluetooth = {
     enable = true;
@@ -23,5 +41,4 @@
       };
     };
   };
-
 }

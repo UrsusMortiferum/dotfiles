@@ -14,10 +14,7 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    # ./hosts/cave/configuration.nix
     ./hosts/default.nix
-    # ./hardware-configuration.nix
     ./vial.nix
     # ./vpn.nix
   ];
@@ -56,7 +53,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -109,8 +105,13 @@
         "networkmanager"
         "wheel"
         "docker"
+        "libvirtd"
       ];
       packages = with pkgs; [ ];
+      initialPassword = "nixos";
+    };
+    root = {
+      initialPassword = "nixos";
     };
   };
 
@@ -143,19 +144,16 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     curl
-    # amdvlk
     amdgpu_top
-    protonvpn-gui
+    proton-vpn
     ghostty
     stow
     inputs.zen-browser.packages.${system}.twilight
-    # inputs.vieb-nix.packages.${system}.vieb
     wl-clipboard
     wl-screenrec
     font-awesome
     uv
     nerd-fonts.victor-mono
-    # jellyfin-media-player
     docker-compose
     quickshell
     wofi
@@ -166,37 +164,25 @@
     fzf
     rustup
     nil
-    # nixd
+    nixfmt
     pavucontrol
-    # element-web
     tree
     heroic
-    # banana-cursor-dreams
-    # ranger
     superfile
     samrewritten
     heroic
     proton-pass
-    # kdePackages.dolphin
-    # protontricks
-    # wine
-    # wine64
-    # wineWowPackages.staging
-    # winetricks
-    # wineWowPackages.waylandFull
-    # protontricks
-    # steamtinkerlaunch
-    # ashell
     discord
-    # nexusmods-app-unfree
-    # freetype
-    # (python3.withPackages (ps: [ ps.tkinter ]))
-    # firefox
     bootdev-cli
     hyprpaper
     brightnessctl # for gpd brightness adjustment
     rimsort
     quickemu
+    bat
+    go # think about this once config is rewritten
+    obsidian
+    kitty
+    hyprlauncher
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -295,7 +281,8 @@
   stylix.enable = true;
   # stylix.image = /home/ursus/workspace/playground/Wallpapers/retro-room.png;
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark.yaml";
   stylix.cursor = {
     # package = pkgs.banana-cursor;
     # package = pkgs.inputs.banana-cursor.packages.${system}.banana-cursor;
@@ -390,6 +377,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  programs.ssh.startAgent = true;
 
   services.displayManager = {
     sddm = {
@@ -433,11 +421,13 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
       mesa
-      # amdvlk
+      # libGL
+      # libglvnd
+      # libglvnd
     ];
     extraPackages32 = with pkgs; [
       driversi686Linux.mesa
-      # driversi686Linux.amdvlk
+      # driversi686Linux.libvdpau-va-gl
     ];
   };
   hardware.enableRedistributableFirmware = true;
@@ -451,6 +441,30 @@
   };
 
   programs.nix-ld.enable = true;
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  services.samba = {
+    enable = true;
+    openFirewall = false;
+    settings = {
+      global = {
+        security = "user";
+        "map to guest" = "never";
+        "server min protocol" = "SMB2";
+      };
+
+      ms_slop = {
+        path = "/home/ursus/workspace/local/ms_slop/data";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "valid users" = "ursus";
+        "create mask" = "0664";
+        "directory mask" = "0775";
+      };
+    };
+  };
 
   virtualisation.docker.enable = true;
   systemd.services.docker = {

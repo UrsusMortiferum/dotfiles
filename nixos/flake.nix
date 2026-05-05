@@ -2,11 +2,7 @@
   description = "playing around with nixos";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    # nixpkgs.url = "nixpkgs/nixos-unstable-small";
-    # Keeping those, in case I would like to have something more "stable" on different host
-    nixpkgs-stable.url = "nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     hardware = {
       url = "github:NixOS/nixos-hardware/master";
@@ -31,11 +27,7 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Testing random stuff
-    # vieb-nix = {
-    #   url = "github:tejing1/vieb-nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+
     hyprland.url = "github:hyprwm/Hyprland";
   };
 

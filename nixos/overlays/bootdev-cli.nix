@@ -1,17 +1,21 @@
 final: prev:
-
-# let
-#   version = "1.21.1";
-# in
-
+let
+  versionNew = "1.29.2";
+  inherit (prev) lib stdenv;
+in
 {
   bootdev-cli = prev.bootdev-cli.overrideAttrs (oldAttrs: {
-    version = "1.21.1";
+    version = versionNew;
     src = prev.fetchFromGitHub {
       owner = "bootdotdev";
       repo = "bootdev";
-      tag = "v${oldAttrs.version}";
-      hash = "sha256-1uPI//w8RVqwRO1sVkI3vtdXduyuFp8632CVyAjkaSA=";
+      tag = "v${versionNew}";
+      hash = "sha256-POOxwveDSQ3hiybFKmI2eQQEbxN45ubmfEUkLk7i/ng=";
     };
+    postInstall = lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
+      for shell in bash fish zsh; do
+        installShellCompletion --cmd bootdev --"$shell" <($out/bin/bootdev completion "$shell")
+        done
+    '';
   });
 }

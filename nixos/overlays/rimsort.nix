@@ -8,7 +8,7 @@ final: prev:
       repo = "RimSort";
       # rev = "v${oldAttrs.version}";
       tag = "v${oldAttrs.version}";
-      hash = "sha256-HNeB0W9kqEGQCKKX5Sk8F8ge77kxf0CI8fAlywutsRo=";
+      hash = "sha256-eVKl2xh+Qzg5BrgY7Da8+6ImahmSvP2fTWJsEnIJ2AI=";
     };
   });
 }
