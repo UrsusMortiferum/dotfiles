@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   config,
   pkgs,
@@ -15,19 +11,12 @@
 {
   imports = [
     ./hosts/default.nix
-    ./vial.nix
-    # ./vpn.nix
   ];
 
   nix.optimise = {
     automatic = true;
     dates = [ "00:00" ]; # Optional; allows customizing optimisation schedule
   };
-  # nix.gc = {
-  #   automatic = true;
-  #   dates = "weekly";
-  #   options = "--delete-older-than 15d";
-  # };
   nix.settings = {
     substituters = [
       "https://nix-community.cachix.org"
@@ -167,21 +156,15 @@
     nixfmt
     pavucontrol
     tree
-    heroic
-    superfile
-    samrewritten
-    heroic
     proton-pass
     discord
     bootdev-cli
     hyprpaper
     brightnessctl # for gpd brightness adjustment
-    rimsort
     quickemu
     bat
     go # think about this once config is rewritten
     obsidian
-    kitty
     hyprlauncher
   ];
 
@@ -222,10 +205,6 @@
     };
   };
 
-  programs.yazi = {
-    enable = true;
-  };
-
   programs.fish = {
     enable = true;
   };
@@ -251,25 +230,7 @@
       fontconfig
       protontricks
     ];
-
-    # extraPackages = with pkgs; [ freetype fontconfig ];
-    # steamtinkerlaunch.enable = true;
-    # package = pkgs.steam.override {
-    #   extraPkgs =
-    #     pkgs': with pkgs'; [
-    #       steamtinkerlaunch
-    #       proton-ge-bin
-    #       protonup-qt
-    #       freetype
-    #       fontconfig
-    #       glib
-    #       libunwind
-    #       libxcb
-    #       # protontricks
-    #     ];
-    # };
   };
-  # programs.steam.protontricks.enable = true;
 
   programs.starship = {
     enable = true;
@@ -279,44 +240,14 @@
   programs.nano.enable = false;
 
   stylix.enable = true;
-  # stylix.image = /home/ursus/workspace/playground/Wallpapers/retro-room.png;
-  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark.yaml";
   stylix.cursor = {
-    # package = pkgs.banana-cursor;
-    # package = pkgs.inputs.banana-cursor.packages.${system}.banana-cursor;
-    # package = pkgs.banana-cursor-dreams;
+    # package = pkgs.capitaine-cursors-themed;
+    # name = "Gruvbox";
     package = pkgs.banana-cursor-dreams;
     name = "Banana-Tokyo-Night-Storm";
     size = 32;
   };
-  # stylix.autoEnable = false;
-  # stylix.targets = {
-  #   btop.enable = true;
-  #   fish.enable = true;
-  #   fzf.enable = true;
-  #   ghostty.enable = true;
-  #   lazygit.enable = true;
-  # };
-  # stylix.base16Scheme = {
-  #   base00 = "15161e";
-  #   base01 = "f7768e";
-  #   base02 = "9ece6a";
-  #   base03 = "e0af68";
-  #   base04 = "7aa2f7";
-  #   base05 = "bb9af7";
-  #   base06 = "7dcfff";
-  #   base07 = "a9b1d6";
-  #   base08 = "414868";
-  #   base09 = "ff899d";
-  #   base0A = "9fe044";
-  #   base0B = "faba4a";
-  #   base0C = "8db0ff";
-  #   base0D = "c7a9ff";
-  #   base0E = "a4daff";
-  #   base0F = "c0caf5";
-  # };
   stylix.polarity = "dark";
 
   home-manager = {
@@ -361,12 +292,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  # services.udev = {
-  #   packages = with pkgs; [
-  #     qmk-udev-rules
-  #     vial
-  #   ];
-  # };
 
   services.udev.enable = true;
   system.autoUpgrade = {
@@ -412,7 +337,6 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   services.xserver.videoDrivers = [ "amdgpu" ];
-  # boot.initrd.kernelModules = [ "amdgpu" ];
   hardware.amdgpu.initrd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
   hardware.firmware = [ pkgs.linux-firmware ];
@@ -421,13 +345,9 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
       mesa
-      # libGL
-      # libglvnd
-      # libglvnd
     ];
     extraPackages32 = with pkgs; [
       driversi686Linux.mesa
-      # driversi686Linux.libvdpau-va-gl
     ];
   };
   hardware.enableRedistributableFirmware = true;
@@ -442,34 +362,34 @@
 
   programs.nix-ld.enable = true;
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-  services.samba = {
-    enable = true;
-    openFirewall = false;
-    settings = {
-      global = {
-        security = "user";
-        "map to guest" = "never";
-        "server min protocol" = "SMB2";
-      };
-
-      ms_slop = {
-        path = "/home/ursus/workspace/local/ms_slop/data";
-        browseable = "yes";
-        "read only" = "no";
-        "guest ok" = "no";
-        "valid users" = "ursus";
-        "create mask" = "0664";
-        "directory mask" = "0775";
-      };
-    };
-  };
-
-  virtualisation.docker.enable = true;
-  systemd.services.docker = {
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
-  };
+  # virtualisation.libvirtd.enable = true;
+  # programs.virt-manager.enable = true;
+  # services.samba = {
+  #   enable = true;
+  #   openFirewall = false;
+  #   settings = {
+  #     global = {
+  #       security = "user";
+  #       "map to guest" = "never";
+  #       "server min protocol" = "SMB2";
+  #     };
+  #
+  #     ms_slop = {
+  #       path = "/home/ursus/workspace/local/ms_slop/data";
+  #       browseable = "yes";
+  #       "read only" = "no";
+  #       "guest ok" = "no";
+  #       "valid users" = "ursus";
+  #       "create mask" = "0664";
+  #       "directory mask" = "0775";
+  #     };
+  #   };
+  # };
+  #
+  # virtualisation.docker.enable = true;
+  # systemd.services.docker = {
+  #   after = [ "network-online.target" ];
+  #   wants = [ "network-online.target" ];
+  # };
 
 }
