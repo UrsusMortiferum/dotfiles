@@ -15,36 +15,25 @@
     }:
     {
       imports = [
-        self.nixosModules.nix
-        self.nixosModules.silentSDDM
+        self.nixosModules.core
+        self.nixosModules.graphics
+        self.nixosModules.desktop
+        self.nixosModules.gaming
       ];
 
-      boot = {
-        kernelPackages = pkgs.linuxPackages_latest;
-
-        loader = {
-          systemd-boot.enable = true;
-          efi.canTouchEfiVariables = true;
-        };
-      };
-
-      networking = {
-        hostName = "cave";
-        networkmanager.enable = true;
-      };
-
+      networking.hostName = "cave";
+      hardware.amdgpu.initrd.enable = true;
       hardware.cpu.amd.updateMicrocode = true;
-
-      # Set your time zone.
-      time.timeZone = "Europe/Amsterdam";
-
-      # SSH so you can login after VM boots
-      services.openssh.enable = true;
+      hardware.enableRedistributableFirmware = true;
 
       # User for login test (console + ssh)
       users.users.ursus = {
         isNormalUser = true;
-        extraGroups = [ "wheel" ];
+        extraGroups = [
+          "video"
+          "render"
+          "wheel"
+        ];
         packages = with pkgs; [
           vim
           wget
@@ -57,7 +46,6 @@
       # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
       # Select internationalisation properties.
-      # i18n.defaultLocale = "en_US.UTF-8";
       # console = {
       #   font = "Lat2-Terminus16";
       #   keyMap = "us";
@@ -113,9 +101,6 @@
 
       # List services that you want to enable:
 
-      # Enable the OpenSSH daemon.
-      # services.openssh.enable = true;
-
       # Open ports in the firewall.
       # networking.firewall.allowedTCPPorts = [ ... ];
       # networking.firewall.allowedUDPPorts = [ ... ];
@@ -144,6 +129,6 @@
       # and migrated your data accordingly.
       #
       # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-      system.stateVersion = "26.05"; # Did you read the comment?
+      system.stateVersion = "25.05"; # Did you read the comment?
     };
 }
