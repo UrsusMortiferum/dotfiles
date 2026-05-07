@@ -5,7 +5,7 @@
 -- Set programs that you use
 terminal = "ghostty"
 editor = "nvim"
-browser = "zen-twilight"
+browser = "helium"
 fileManager = "thunar"
 menu = "hyprlauncher"
 vpn = "protonvpn-app"

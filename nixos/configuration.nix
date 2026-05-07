@@ -138,6 +138,7 @@
     ghostty
     stow
     inputs.zen-browser.packages.${system}.twilight
+    inputs.helium.packages.${system}.default
     wl-clipboard
     wl-screenrec
     font-awesome
