@@ -60,6 +60,14 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	name = "Steam - silent updated launch",
+	match = {
+		title = "Steam",
+	},
+	workspace = "9 silent",
+})
+
+hl.window_rule({
 	name = "Steam - base behavior and silent launch",
 	match = {
 		class = "steam",
