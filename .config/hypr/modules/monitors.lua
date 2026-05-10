@@ -20,8 +20,8 @@ hl.monitor({
 hl.monitor({
 	output = "eDP-1",
 	mode = "highres",
-	position = "auto",
-	scale = 2,
+	position = "auto-center-down",
+	scale = 1.67,
 })
 
 -- LG monitor
@@ -31,6 +31,7 @@ hl.monitor({
 	position = "0x0",
 	scale = 1,
 	vrr = 3,
+	supports_wide_color = 1,
 })
 
 -- Random monitors
