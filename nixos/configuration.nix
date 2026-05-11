@@ -167,6 +167,10 @@
     go # think about this once config is rewritten
     obsidian
     hyprlauncher
+    # screenshorts
+    grim
+    slurp
+    swappy
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
