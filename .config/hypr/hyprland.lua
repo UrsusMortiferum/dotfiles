@@ -187,6 +187,9 @@ hl.config({
 			natural_scroll = false,
 		},
 	},
+	scrolling = {
+		column_width = 0.9,
+	},
 })
 
 hl.gesture({

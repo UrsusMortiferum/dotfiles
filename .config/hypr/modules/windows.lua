@@ -5,6 +5,21 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
+hl.workspace_rule({
+	workspace = "1",
+	monitor = "^(HDMI-A-2|DP-2)$",
+	persistent = true,
+	default = true,
+})
+
+hl.workspace_rule({
+	workspace = "10",
+	monitor = "eDP-1",
+	layout = "scrolling",
+	persistent = true,
+	default = true,
+})
+
 -- Example window rules that are useful
 
 local suppressMaximizeRule = hl.window_rule({
