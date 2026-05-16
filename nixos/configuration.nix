@@ -171,6 +171,7 @@
     grim
     slurp
     swappy
+    noctalia-shell
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -214,9 +215,9 @@
     enable = true;
   };
 
-  programs.waybar = {
-    enable = true;
-  };
+  # programs.waybar = {
+  #   enable = true;
+  # };
 
   programs.gamescope = {
     enable = true;
