@@ -172,6 +172,7 @@
     slurp
     swappy
     noctalia-shell
+    proton-pass-cli
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
