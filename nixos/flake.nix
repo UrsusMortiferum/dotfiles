@@ -24,6 +24,11 @@
       url = "github:AlvaroParker/helium-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-wsl = {
+        url = "github:nix-community/NixOS-WSL/main";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -68,6 +73,18 @@
           specialArgs = {
             inherit inputs outputs;
             hostName = "gpd";
+          };
+        };
+        work-wsl = lib.nixosSystem {
+          inherit (systemSettings) system;
+          modules = [
+            ./configuration.nix
+            home-manager
+            stylix
+          ];
+          specialArgs = {
+              inherit inputs outputs;
+              hostName = "work-wsl";
           };
         };
       };
