@@ -1,37 +1,23 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
+
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    hardware.url = "github:NixOS/nixos-hardware/master";
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
-    nix-index-database = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
+    den.url = "github:denful/den";
+    flake-file.url = "github:vic/flake-file";
+    flake-parts = {
+      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
+      url = "github:hercules-ci/flake-parts";
     };
-
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
-
-    hyprland.url = "github:hyprwm/Hyprland";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    silentSDDM = {
-      url = "github:uiriansan/SilentSDDM";
+    hjem = {
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:feel-co/hjem";
     };
+    import-tree.url = "github:vic/import-tree";
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+    nixpkgs-lib.follows = "nixpkgs";
   };
 
-  outputs =
-    inputs:
-    let
-      inherit (inputs.nixpkgs) lib;
-      inherit (lib.fileset) toList fileFilter;
-
-      isNixModule = file: file.hasExt "nix" && file.name != "flake.nix" && !lib.hasPrefix "_" file.name;
-
-      importTree = path: toList (fileFilter isNixModule path);
-
-      mkFlake = inputs.flake-parts.lib.mkFlake { inherit inputs; };
-    in
-    mkFlake { imports = importTree ./.; };
 }

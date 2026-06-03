@@ -126,7 +126,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     curl
     amdgpu_top
@@ -163,12 +162,14 @@
     go # think about this once config is rewritten
     obsidian
     hyprlauncher
-    # screenshorts
+    # screenshots
     grim
     slurp
     swappy
     noctalia-shell
     proton-pass-cli
+    # docker
+    # pcmanfm
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -218,7 +219,7 @@
 
   programs.gamescope = {
     enable = true;
-    capSysNice = true;
+    # capSysNice = true;
   };
 
   programs.steam = {
@@ -253,39 +254,39 @@
   };
   stylix.polarity = "dark";
 
-  home-manager = {
-    users = {
-      ursus = {
-        home.stateVersion = "25.05";
-        imports = [ ./btop.nix ];
-      };
-    };
-    backupFileExtension = "backup";
-  };
+  # home-manager = {
+  #   users = {
+  #     ursus = {
+  #       home.stateVersion = "25.05";
+  #       imports = [ ./btop.nix ];
+  #     };
+  #   };
+  #   backupFileExtension = "backup";
+  # };
 
-  home-manager.sharedModules = [
-    (
-      { config, pkgs, ... }:
-      {
-        programs.mpv = {
-          enable = true;
-          package = (
-            pkgs.mpv.override {
-              scripts = with pkgs.mpvScripts; [ uosc ];
-              # mpv = pkgs.mpv.override { waylandSupport = true; };
-            }
-          );
-          config = {
-            profile = "high-quality";
-            cache-default = 4000000;
-          };
-        };
-        services.dunst = {
-          enable = true;
-        };
-      }
-    )
-  ];
+  # home-manager.sharedModules = [
+  #   (
+  #     { config, pkgs, ... }:
+  #     {
+  #       programs.mpv = {
+  #         enable = true;
+  #         package = (
+  #           pkgs.mpv.override {
+  #             scripts = with pkgs.mpvScripts; [ uosc ];
+  #             # mpv = pkgs.mpv.override { waylandSupport = true; };
+  #           }
+  #         );
+  #         config = {
+  #           profile = "high-quality";
+  #           cache-default = 4000000;
+  #         };
+  #       };
+  #       services.dunst = {
+  #         enable = true;
+  #       };
+  #     }
+  #   )
+  # ];
 
   # List services that you want to enable:
   security.rtkit.enable = true;
@@ -321,9 +322,12 @@
     packages = [ pkgs.dunst ];
   };
 
-  services.udisks2.enable = true;
-  programs.thunar.enable = true;
-  services.gvfs.enable = true;
+  # Thunar + automounting
+  # services.udisks2.enable = true;
+  # programs.thunar.enable = true;
+  # services.gvfs.enable = true;
+  # services.udisks2.enable = true;
+  # services.devmon.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -381,7 +385,14 @@
   #   };
   # };
   #
-  # virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   # systemd.services.docker = {
   #   after = [ "network-online.target" ];
   #   wants = [ "network-online.target" ];

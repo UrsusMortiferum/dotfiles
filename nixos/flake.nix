@@ -1,19 +1,15 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     hardware.url = "github:NixOS/nixos-hardware/master";
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     stylix = {
-      url = "github:nix-community/stylix";
+      url = "github:nix-community/stylix/pull/2337/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     hyprland.url = "github:hyprwm/Hyprland";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -31,6 +27,7 @@
     };
   };
 
+  # outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
   outputs =
     inputs@{
       self,
