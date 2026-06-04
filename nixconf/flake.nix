@@ -16,6 +16,7 @@
       url = "github:feel-co/hjem";
     };
     import-tree.url = "github:vic/import-tree";
+    nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
     nixpkgs-lib.follows = "nixpkgs";
   };

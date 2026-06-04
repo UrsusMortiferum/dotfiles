@@ -5,7 +5,7 @@
 {
 
   # USER TODO: remove this tty-autologin used for the VM
-  den.aspects.igloo.includes = [ (den.batteries.tty-autologin "tux") ];
+  den.aspects.batmobile.includes = [ (den.batteries.tty-autologin "ursus") ];
 
   perSystem =
     { pkgs, ... }:
@@ -14,7 +14,7 @@
         name = "vm";
         text =
           let
-            host = inputs.self.nixosConfigurations.igloo.config;
+            host = inputs.self.nixosConfigurations.batmobile.config;
           in
           ''
             ${host.system.build.vm}/bin/run-${host.networking.hostName}-vm "$@"
