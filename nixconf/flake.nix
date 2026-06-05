@@ -15,6 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:feel-co/hjem";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
     import-tree.url = "github:vic/import-tree";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
