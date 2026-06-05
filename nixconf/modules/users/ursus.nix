@@ -1,14 +1,14 @@
 {
   den,
   lib,
-  shared,
+  gotham,
   ...
 }:
 {
   den.aspects.ursus = {
     includes = [
       den.batteries.primary-user
-      shared.everything
+      gotham.everything
     ];
 
     hjem =

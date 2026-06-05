@@ -170,6 +170,8 @@
     proton-pass-cli
     # docker
     # pcmanfm
+    zellij
+    tmux
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];

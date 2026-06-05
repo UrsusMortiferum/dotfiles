@@ -15,7 +15,6 @@ return {
 
       -- Schema information
       "b0o/SchemaStore.nvim",
-      "smjonas/inc-rename.nvim",
     },
     config = function()
       require("custom.lsp")

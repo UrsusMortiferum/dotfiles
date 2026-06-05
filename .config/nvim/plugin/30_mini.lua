@@ -796,3 +796,5 @@ later(function() require('mini.visits').setup() end)
 -- - 'mini.doc' - needed only for plugin developers.
 -- - 'mini.fuzzy' - not really needed on a daily basis.
 -- - 'mini.test' - needed only for plugin developers.
+
+later(function() require('mini.input').setup() end)

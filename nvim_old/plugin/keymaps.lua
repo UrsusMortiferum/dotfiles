@@ -58,7 +58,6 @@ map("n", "tk", "<cmd>bnext<cr>", "Next buffer")
 map("i", "<c-c>", "<esc>")
 
 map({ "n", "v" }, "<space>", "<nop>", { silent = true })
-map("n", "<c-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 
 map("n", "<leader>x", "<cmd>!chmod +x %<cr>") --, { silent = true })
 -- Join the current line with the line below it

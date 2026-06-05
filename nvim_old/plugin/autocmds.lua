@@ -1,23 +1,23 @@
 local function augroup(name)
-  return vim.api.nvim_create_augroup("um_" .. name, { clear = true })
+	return vim.api.nvim_create_augroup("um_" .. name, { clear = true })
 end
 
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  group = augroup("check_time"),
-  callback = function()
-    if vim.o.buftype ~= "nofile" then
-      vim.cmd("checktime")
-    end
-  end,
+	group = augroup("check_time"),
+	callback = function()
+		if vim.o.buftype ~= "nofile" then
+			vim.cmd("checktime")
+		end
+	end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap_spell"),
-  pattern = { "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
+	group = augroup("wrap_spell"),
+	pattern = { "gitcommit", "markdown" },
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.spell = true
+	end,
 })
 
 -- TODO: Test this autocmd - whether it's needed
@@ -30,28 +30,21 @@ vim.api.nvim_create_autocmd("FileType", {
 -- })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = augroup("auto_create_dir"),
-  callback = function(event)
-    if event.match:match("^%w%w+://") then
-      return
-    end
-    local file = vim.loop.fs_realpath(event.match) or event.match
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-  end,
+	group = augroup("auto_create_dir"),
+	callback = function(event)
+		if event.match:match("^%w%w+://") then
+			return
+		end
+		local file = vim.loop.fs_realpath(event.match) or event.match
+		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+	end,
 })
 
 vim.api.nvim_create_autocmd({ "BufRead" }, {
-  pattern = { "*.conf" },
-  callback = function()
-    vim.cmd("set filetype=sh")
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
-  pattern = { "tmux-buffer-*" },
-  callback = function()
-    vim.cmd("! rm %")
-  end,
+	pattern = { "*.conf" },
+	callback = function()
+		vim.cmd("set filetype=sh")
+	end,
 })
 
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {

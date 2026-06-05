@@ -1,4 +1,4 @@
-print "keymaps"
+print("keymaps")
 -- Basic keymaps ==============================================================
 
 local map = vim.keymap.set
@@ -22,19 +22,19 @@ map("x", "g/", "<esc>/\\%V", { silent = false, desc = "Search inside visual sele
 -- Create global tables with information about clue groups in certain modes
 -- Structure of tables is taken to be compatible with 'mini.clue'.
 _G.Config.leader_group_clues = {
-  { mode = "n", keys = "<leader>b", desc = "+Buffer" },
+	{ mode = "n", keys = "<leader>b", desc = "+Buffer" },
 }
 
 -- Create <leader> keymaps
 local nmap_leader = function(keys, func, desc, opts)
-  opts = opts or {}
-  opts.desc = desc
-  vim.keymap.set("n", "<leader>" .. keys, func, opts)
+	opts = opts or {}
+	opts.desc = desc
+	vim.keymap.set("n", "<leader>" .. keys, func, opts)
 end
 local xmap_leader = function(suffix, rhs, desc, opts)
-  opts = opts or {}
-  opts.desc = desc
-  vim.keymap.set("x", "<leader>" .. suffix, rhs, opts)
+	opts = opts or {}
+	opts.desc = desc
+	vim.keymap.set("x", "<leader>" .. suffix, rhs, opts)
 end
 
 -- b is for 'buffer'
@@ -123,8 +123,6 @@ nmap_leader("li", "<Cmd>lua vim.lsp.buf.hover()<CR>", "Information")
 -- -- keymap('n', '<leader>bc', '<cmd>bdelete<CR>', { desc = 'Close buffer' })
 --
 -- map("i", "<c-c>", "<esc>")
---
--- map("n", "<c-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 --
 -- map("n", "<leader>x", "<cmd>!chmod +x %<cr>") --, { silent = true })
 -- -- Join the current line with the line below it

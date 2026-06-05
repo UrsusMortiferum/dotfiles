@@ -75,6 +75,7 @@ vim.o.expandtab     = true    -- Convert tabs to spaces
 vim.o.formatoptions = 'rqnl1j'-- Improve comment editing
 vim.o.ignorecase    = true    -- Ignore case during search
 vim.o.incsearch     = true    -- Show search matches while typing
+vim.o.inccommand    = 'split'
 vim.o.infercase     = true    -- Infer case in built-in completion
 vim.o.shiftwidth    = 2       -- Use this number of spaces for indentation
 vim.o.smartcase     = true    -- Respect case if search pattern has upper case

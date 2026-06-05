@@ -1,7 +1,7 @@
-{ shared, ... }:
+{ wayne, ... }:
 {
-  shared.everything.includes = [ shared.nvim ];
-  shared.nvim = {
+  wayne.everything.includes = [ wayne.nvim ];
+  wayne.nvim = {
     hjem =
       { pkgs, ... }:
       {

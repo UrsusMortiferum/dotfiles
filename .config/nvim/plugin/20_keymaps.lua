@@ -1,3 +1,4 @@
+vim.keymap.set('n', '<Esc>', ':noh<CR>', { noremap = true, silent = true })
 -- Shorter version of the most frequent way of going outside of terminal window
 vim.keymap.set('t', '<C-h>', [[<C-\><C-N><C-w>h]])
 
@@ -28,8 +29,6 @@ nmap('<C-u', '<C-u>zz', 'Jump Up & Center')
 -- Jump to previous/next item and center cursor line
 nmap('N', 'Nzz', 'Jump Previous & Center')
 nmap('n', 'nzz', 'Jump Next & Center')
-
-nmap('<Leader>u', '<Cmd>Undotree<CR>', 'Toggle Undotree')
 
 -- Many general mappings are created by 'mini.basics'. See 'plugin/30_mini.lua'
 
@@ -210,6 +209,13 @@ nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition
 
 xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format selection')
 
+vim.keymap.set(
+  'n',
+  '<Leader>lI',
+  function() return ':IncRename ' .. vim.fn.expand('<cword>') end,
+  { expr = true, desc = 'IncRename' }
+)
+
 -- m is for 'Map'. Common usage:
 -- - `<Leader>mt` - toggle map from 'mini.map' (closed by default)
 -- - `<Leader>mf` - focus on the map for fast navigation
@@ -224,6 +230,8 @@ nmap_leader('mt', '<Cmd>lua MiniMap.toggle()<CR>',       'Toggle')
 nmap_leader('or', '<Cmd>lua MiniMisc.resize_window()<CR>', 'Resize to default width')
 nmap_leader('ot', '<Cmd>lua MiniTrailspace.trim()<CR>',    'Trim trailspace')
 nmap_leader('oz', '<Cmd>lua MiniMisc.zoom()<CR>',          'Zoom toggle')
+nmap_leader('ou', '<Cmd>Undotree<CR>',                     'Toggle Undotree')
+
 
 -- s is for 'Session'. Common usage:
 -- - `<Leader>sn` - start new session
