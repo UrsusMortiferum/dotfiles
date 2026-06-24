@@ -57,6 +57,13 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  networking.hosts = {
+    "10.108.136.250" = [
+      "synchat.internal"
+      "synchatapi.internal"
+    ];
+  };
+
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
@@ -166,12 +173,15 @@
     grim
     slurp
     swappy
-    noctalia-shell
+    # noctalia-shell
     proton-pass-cli
     # docker
     # pcmanfm
     zellij
     tmux
+    awscli2
+    kubectl
+    minikube
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
@@ -393,7 +403,10 @@
       enable = true;
       setSocketVariable = true;
     };
+    autoPrune.enable = true;
   };
+
+  programs.dms-shell.enable = true;
 
   # systemd.services.docker = {
   #   after = [ "network-online.target" ];

@@ -14,7 +14,10 @@
     hjem =
       { pkgs, ... }:
       {
-        packages = [ pkgs.htop ];
+        packages = [
+          pkgs.htop
+          pkgs.btop
+        ];
       };
   };
 }
