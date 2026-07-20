@@ -6,42 +6,18 @@
   outputs,
   hostName,
   ...
-}:
-
-{
+}: {
   imports = [
-    ./hosts/default.nix
+    ./modules/locale.nix
+    ./modules/nh.nix
+    ./modules/nix.nix
+    ./modules/hosts/default.nix
   ];
-
-  nix.optimise = {
-    automatic = true;
-    dates = [ "00:00" ]; # Optional; allows customizing optimisation schedule
-  };
-  nix.settings = {
-    substituters = [
-      "https://nix-community.cachix.org"
-      "https://hyprland.cachix.org"
-    ];
-    trusted-substituters = [ ];
-    trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-    ];
-    auto-optimise-store = true;
-    experimental-features = [
-      "nix-command"
-      "flakes"
-      "pipe-operators"
-    ];
-  };
 
   nixpkgs.overlays = [
     outputs.overlays.additions
     outputs.overlays.modifications
   ];
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -57,37 +33,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  networking.hosts = {
-    "10.108.136.250" = [
-      "synchat.internal"
-      "synchatapi.internal"
-    ];
-  };
-
-  # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "pl_PL.UTF-8";
-    LC_IDENTIFICATION = "pl_PL.UTF-8";
-    LC_MEASUREMENT = "pl_PL.UTF-8";
-    LC_MONETARY = "pl_PL.UTF-8";
-    LC_NAME = "pl_PL.UTF-8";
-    LC_NUMERIC = "pl_PL.UTF-8";
-    LC_PAPER = "pl_PL.UTF-8";
-    LC_TELEPHONE = "pl_PL.UTF-8";
-    LC_TIME = "pl_PL.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     ursus = {
@@ -99,7 +44,7 @@
         "docker"
         "libvirtd"
       ];
-      packages = with pkgs; [ ];
+      packages = with pkgs; [];
       initialPassword = "nixos";
     };
     root = {
@@ -107,28 +52,15 @@
     };
   };
 
-  programs.bash = {
-    interactiveShellInit = ''
-      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-      then
-        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      fi
-    '';
-  };
-
-  environment.sessionVariables = {
-    # FLAKE = "/home/ursus/workspace/github.com/UrsusMortiferum/dotfiles/nixos";
-  };
-
-  programs.nh = {
-    enable = true;
-    flake = "/home/ursus/workspace/github.com/UrsusMortiferum/dotfiles/nixos";
-    # Options only for automatic cleanup.
-    clean.enable = true;
-    clean.dates = "weekly";
-    clean.extraArgs = "--keep-since 15d --keep 15";
-  };
+  # programs.bash = {
+  #   interactiveShellInit = ''
+  #     if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+  #     then
+  #       shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+  #       exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+  #     fi
+  #   '';
+  # };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -139,8 +71,7 @@
     proton-vpn
     ghostty
     stow
-    # inputs.zen-browser.packages.${system}.twilight
-    inputs.helium.packages.${system}.default
+    inputs.helium.packages.${stdenv.hostPlatform.system}.default
     wl-clipboard
     wl-screenrec
     uv
@@ -180,7 +111,7 @@
     awscli2
     kubectl
     minikube
-    btop
+    # btop
     emacs
   ];
 
@@ -202,17 +133,6 @@
     defaultEditor = true;
   };
 
-  programs.git = {
-    enable = true;
-    config = {
-      user.name = "UrsusMortiferum";
-      user.email = "101043729+UrsusMortiferum@users.noreply.github.com";
-      init.defaultBranch = "main";
-      # pull.rebase = true;
-      # core.editor = "nvim"
-    };
-  };
-
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -224,9 +144,9 @@
     };
   };
 
-  programs.fish = {
-    enable = true;
-  };
+  # programs.fish = {
+  #   enable = true;
+  # };
 
   # programs.waybar = {
   #   enable = true;
@@ -251,10 +171,10 @@
     ];
   };
 
-  programs.starship = {
-    enable = true;
-    presets = [ "jetpack" ];
-  };
+  # programs.starship = {
+  #   enable = true;
+  #   presets = ["jetpack"];
+  # };
 
   programs.nano.enable = false;
 
@@ -268,40 +188,6 @@
     size = 32;
   };
   stylix.polarity = "dark";
-
-  # home-manager = {
-  #   users = {
-  #     ursus = {
-  #       home.stateVersion = "25.05";
-  #       imports = [ ./btop.nix ];
-  #     };
-  #   };
-  #   backupFileExtension = "backup";
-  # };
-
-  # home-manager.sharedModules = [
-  #   (
-  #     { config, pkgs, ... }:
-  #     {
-  #       programs.mpv = {
-  #         enable = true;
-  #         package = (
-  #           pkgs.mpv.override {
-  #             scripts = with pkgs.mpvScripts; [ uosc ];
-  #             # mpv = pkgs.mpv.override { waylandSupport = true; };
-  #           }
-  #         );
-  #         config = {
-  #           profile = "high-quality";
-  #           cache-default = 4000000;
-  #         };
-  #       };
-  #       services.dunst = {
-  #         enable = true;
-  #       };
-  #     }
-  #   )
-  # ];
 
   # List services that you want to enable:
   security.rtkit.enable = true;
@@ -334,7 +220,7 @@
 
   services.dbus = {
     enable = true;
-    packages = [ pkgs.dunst ];
+    packages = [pkgs.dunst];
   };
 
   # Thunar + automounting
@@ -350,10 +236,10 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
   hardware.amdgpu.initrd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
-  hardware.firmware = [ pkgs.linux-firmware ];
+  hardware.firmware = [pkgs.linux-firmware];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -369,12 +255,10 @@
   programs.zoxide = {
     enable = true;
     enableBashIntegration = true;
-    enableFishIntegration = true;
+    # enableFishIntegration = true;
     enableZshIntegration = true;
-    flags = [ "--cmd cd" ];
+    flags = ["--cmd cd"];
   };
-
-  programs.nix-ld.enable = true;
 
   # virtualisation.libvirtd.enable = true;
   # programs.virt-manager.enable = true;
@@ -426,5 +310,4 @@
   #   after = [ "network-online.target" ];
   #   wants = [ "network-online.target" ];
   # };
-
 }

@@ -1,23 +1,25 @@
-
-{ config, lub, pkgs, ... }:
 {
-imports = [
+  config,
+  lub,
+  pkgs,
+  ...
+}:
+{
+  imports = [
     <nixos-wsl/modules>
-    ];
-wsl.enable = true;
-wsl.defaultUser = "ursus";
+  ];
+  wsl.enable = true;
+  wsl.defaultUser = "ursus";
 
-# nix.settings.experimental-features = ["nix-command" "flakes"];
+  # nix.settings.experimental-features = ["nix-command" "flakes"];
 
-# environment.systemPackages = with pkgs; [
-# neovim
-# git
-# coreutils
-# btop
-# curl
-# ];
-
-programs.nix-ld.enable = true;
+  # environment.systemPackages = with pkgs; [
+  # neovim
+  # git
+  # coreutils
+  # btop
+  # curl
+  # ];
 
   networking.proxy.default = "http://zscaler.proxy.int.kn:80";
   networking.proxy.noProxy = "127.0.0.1,localhost,*.int.kn";
@@ -28,15 +30,21 @@ programs.nix-ld.enable = true;
     enable = true;
   };
 
-  nix.settings.trusted-users = [ "root" "@wheel" "ursus" ];
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+    "ursus"
+  ];
 
   users.users.ursus = {
     isNormalUser = true;
     group = "users";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
     # shell = pkgs.zsh;
   };
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

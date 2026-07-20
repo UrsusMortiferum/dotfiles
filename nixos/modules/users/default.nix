@@ -1,0 +1,1 @@
+{...}: {imports = [./ursus/default.nix];}
