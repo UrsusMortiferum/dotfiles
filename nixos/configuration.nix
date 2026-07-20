@@ -139,13 +139,11 @@
     proton-vpn
     ghostty
     stow
-    inputs.zen-browser.packages.${system}.twilight
+    # inputs.zen-browser.packages.${system}.twilight
     inputs.helium.packages.${system}.default
     wl-clipboard
     wl-screenrec
-    font-awesome
     uv
-    nerd-fonts.victor-mono
     docker-compose
     quickshell
     wofi
@@ -176,15 +174,20 @@
     # noctalia-shell
     proton-pass-cli
     # docker
-    # pcmanfm
+    pcmanfm
     zellij
     tmux
     awscli2
     kubectl
     minikube
+    btop
+    emacs
   ];
 
-  fonts.packages = with pkgs; [ nerd-fonts.victor-mono ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.victor-mono
+    font-awesome
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -406,7 +409,18 @@
     autoPrune.enable = true;
   };
 
-  programs.dms-shell.enable = true;
+  programs.dms-shell = {
+    enable = true;
+    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    systemd = {
+      enable = true;
+      restartIfChanged = true;
+    };
+    enableSystemMonitoring = true;
+    enableVPN = true;
+    enableAudioWavelength = true;
+    enableClipboardPaste = true;
+  };
 
   # systemd.services.docker = {
   #   after = [ "network-online.target" ];

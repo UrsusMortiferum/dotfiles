@@ -17,8 +17,8 @@ vpn = "protonvpn-app"
 -- -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 
 hl.on("hyprland.start", function()
-  hl.exec_cmd("noctalia-shell")
+	-- hl.exec_cmd("noctalia-shell")
 	hl.exec_cmd(terminal)
 	hl.exec_cmd(browser)
-	hl.exec_cmd(vpn)
+  hl.exec_cmd("protonvpn-app --start-minimized")
 end)
