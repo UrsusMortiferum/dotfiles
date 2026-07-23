@@ -1,5 +1,5 @@
-{homePath, ...}: {
-  imports = [./git.nix];
+{ homePath, ... }: {
+  imports = [ ./git.nix ];
 
   users.users.ursus = {
     isNormalUser = true;
@@ -14,8 +14,9 @@
     directory = "/home/ursus";
     files = {
       ".config/nvim".source = "${homePath}/nvim";
-  ".config/ghostty".source = "${homePath}/ghostty";
-  ".config/hypr".source = "${homePath}/hypr";
+      ".config/ghostty".source = "${homePath}/ghostty";
+      ".config/hypr".source = "${homePath}/hypr";
+      # ".config/emacs".source = "${homePath}/emacs";
     };
   };
 }

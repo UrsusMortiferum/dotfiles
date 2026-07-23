@@ -113,6 +113,7 @@
     minikube
     # btop
     emacs
+    mpv
   ];
 
   fonts.packages = with pkgs; [
