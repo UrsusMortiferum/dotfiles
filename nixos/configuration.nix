@@ -114,10 +114,12 @@
     # btop
     emacs
     mpv
+    proton-authenticator
   ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.victor-mono
+    nerd-fonts.iosevka
     font-awesome
   ];
 
@@ -225,11 +227,10 @@
   };
 
   # Thunar + automounting
-  # services.udisks2.enable = true;
+  services.udisks2.enable = true;
   # programs.thunar.enable = true;
-  # services.gvfs.enable = true;
-  # services.udisks2.enable = true;
-  # services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.devmon.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
