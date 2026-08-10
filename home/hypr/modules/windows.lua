@@ -20,6 +20,11 @@ hl.workspace_rule({
 	default = true,
 })
 
+hl.workspace_rule({
+	workspace = "9",
+	layout = "scrolling",
+})
+
 -- Example window rules that are useful
 
 local suppressMaximizeRule = hl.window_rule({
@@ -72,6 +77,7 @@ hl.window_rule({
 	pin = true,
 	size = { "monitor_w * 0.2", "monitor_h * 0.2" },
 	move = { 20, "monitor_h - monitor_h * 0.2 - 20" },
+	opacity = "1.0 0.5 1.0",
 })
 
 hl.window_rule({

@@ -12,6 +12,7 @@
     ./modules/nh.nix
     ./modules/nix.nix
     ./modules/hosts/default.nix
+    ./modules/amethyst-mod-manager.nix
   ];
 
   nixpkgs.overlays = [
@@ -82,6 +83,7 @@
     signal-desktop
     lazygit
     ripgrep
+    fd
     fzf
     rustup
     nil
@@ -115,11 +117,15 @@
     emacs
     mpv
     proton-authenticator
+    keyutils
   ];
+
+  programs.amethyst-mod-manager.enable = false;
 
   fonts.packages = with pkgs; [
     nerd-fonts.victor-mono
     nerd-fonts.iosevka
+    nerd-fonts.symbols-only
     font-awesome
   ];
 
@@ -155,10 +161,11 @@
   #   enable = true;
   # };
 
-  programs.gamescope = {
+  programs = {
+  gamescope = {
     enable = true;
-    # capSysNice = true;
-  };
+    capSysNice = true;
+  };};
 
   programs.steam = {
     enable = true;
