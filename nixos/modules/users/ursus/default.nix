@@ -13,9 +13,9 @@
   hjem.users.ursus = {
     directory = "/home/ursus";
     files = {
-      ".config/nvim".source = "${homePath}/nvim";
-      ".config/ghostty".source = "${homePath}/ghostty";
-      ".config/hypr".source = "${homePath}/hypr";
+      # ".config/nvim".source = "${homePath}/nvim";
+      # ".config/ghostty".source = "${homePath}/ghostty";
+      # ".config/hypr".source = "${homePath}/hypr";
       # ".config/emacs".source = "${homePath}/emacs";
     };
   };

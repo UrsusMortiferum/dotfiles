@@ -6,13 +6,16 @@
   outputs,
   hostName,
   ...
-}: {
+}:
+{
   imports = [
     ./modules/locale.nix
     ./modules/nh.nix
     ./modules/nix.nix
     ./modules/hosts/default.nix
     ./modules/amethyst-mod-manager.nix
+    ./modules/gaming.nix
+    ./modules/emacs.nix
   ];
 
   nixpkgs.overlays = [
@@ -45,7 +48,7 @@
         "docker"
         "libvirtd"
       ];
-      packages = with pkgs; [];
+      packages = with pkgs; [ ];
       initialPassword = "nixos";
     };
     root = {
@@ -99,12 +102,10 @@
     bat
     go # think about this once config is rewritten
     obsidian
-    hyprlauncher
     # screenshots
     grim
     slurp
     swappy
-    # noctalia-shell
     proton-pass-cli
     # docker
     pcmanfm
@@ -114,10 +115,10 @@
     kubectl
     minikube
     # btop
-    emacs
     mpv
     proton-authenticator
     keyutils
+    fuzzel
   ];
 
   programs.amethyst-mod-manager.enable = false;
@@ -153,38 +154,22 @@
     };
   };
 
-  # programs.fish = {
-  #   enable = true;
-  # };
-
-  # programs.waybar = {
-  #   enable = true;
-  # };
-
-  programs = {
-  gamescope = {
+  programs.noctalia = {
     enable = true;
-    capSysNice = true;
-  };};
-
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-    protontricks.enable = true;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-      steamtinkerlaunch
-      protonup-qt
-      freetype
-      fontconfig
-      protontricks
-    ];
+    recommendedServices.enable = true;
   };
 
-  # programs.starship = {
-  #   enable = true;
-  #   presets = ["jetpack"];
-  # };
+  programs.noctalia-greeter = {
+  enable = true;
+  settings = {
+    cursor = {
+      theme = "Bibata-Modern-Ice";
+      size = 24;
+      path = "${pkgs.bibata-cursors}/share/icons";
+    };
+  };
+  passwordless-sync-users = [ "ursus" ];
+};
 
   programs.nano.enable = false;
 
@@ -219,18 +204,13 @@
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
 
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-      enableHidpi = true;
-      theme = "breeze";
-    };
-  };
+  # programs.silentSDDM = {
+  #   enable = true;
+  # };
 
   services.dbus = {
     enable = true;
-    packages = [pkgs.dunst];
+    packages = [ pkgs.dunst ];
   };
 
   # Thunar + automounting
@@ -245,10 +225,10 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.amdgpu.initrd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
-  hardware.firmware = [pkgs.linux-firmware];
+  hardware.firmware = [ pkgs.linux-firmware ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -266,7 +246,7 @@
     enableBashIntegration = true;
     # enableFishIntegration = true;
     enableZshIntegration = true;
-    flags = ["--cmd cd"];
+    flags = [ "--cmd cd" ];
   };
 
   # virtualisation.libvirtd.enable = true;
@@ -302,18 +282,18 @@
     autoPrune.enable = true;
   };
 
-  programs.dms-shell = {
-    enable = true;
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    systemd = {
-      enable = true;
-      restartIfChanged = true;
-    };
-    enableSystemMonitoring = true;
-    enableVPN = true;
-    enableAudioWavelength = true;
-    enableClipboardPaste = true;
-  };
+  # programs.dms-shell = {
+  #   enable = true;
+  #   package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  #   systemd = {
+  #     enable = true;
+  #     restartIfChanged = true;
+  #   };
+  #   enableSystemMonitoring = true;
+  #   enableVPN = true;
+  #   enableAudioWavelength = true;
+  #   enableClipboardPaste = true;
+  # };
 
   # systemd.services.docker = {
   #   after = [ "network-online.target" ];

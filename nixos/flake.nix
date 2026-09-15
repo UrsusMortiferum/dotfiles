@@ -1,7 +1,12 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,17 +15,24 @@
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helium = {
+      url = "github:AlvaroParker/helium-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+    };
     stylix = {
       url = "github:nix-community/stylix/pull/2337/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
-    helium = {
-      url = "github:AlvaroParker/helium-nix";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -40,6 +52,8 @@
       inputs.nix-index-database.nixosModules.default
       inputs.hjem.nixosModules.default
       inputs.stylix.nixosModules.stylix
+      inputs.noctalia.nixosModules.default
+      inputs.noctalia-greeter.nixosModules.default
       ./configuration.nix
       ./modules/default.nix
     ];
@@ -59,7 +73,7 @@
         modules =
           sharedModules
           ++ [
-            inputs.hardware.nixosModules.gpd-win-max-2-2023
+            inputs.nixos-hardware.nixosModules.gpd-win-max-2-2023
           ];
         specialArgs = {
           inherit inputs outputs homePath;
