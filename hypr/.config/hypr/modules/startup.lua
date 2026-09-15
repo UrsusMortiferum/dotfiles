@@ -19,7 +19,5 @@ statusBar = "noctalia"
 
 hl.on("hyprland.start", function()
   hl.exec_cmd(statusBar)
-	hl.exec_cmd(terminal)
-	hl.exec_cmd(browser)
   hl.exec_cmd("protonvpn-app --start-minimized")
 end)
